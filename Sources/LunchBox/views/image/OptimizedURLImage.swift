@@ -24,7 +24,7 @@ struct MemorySafeURLImage: View {
                         .scaledToFit()
                         .full()
                         .background(Color.black)
-//                        .pinchToZoom(onDoubleTap: {})
+                        .pinchToZoom(onDoubleTap: {})
                 }
             }.onAppear {
                 self.image = url.toUIImage().resized(withPercentage: 1.0)

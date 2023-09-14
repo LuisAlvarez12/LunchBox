@@ -131,9 +131,9 @@ public extension View {
         modifier(ClearListBackgroundModifier())
     }
 
-//    func pinchToZoom(onDoubleTap: (() -> Void)? = nil) -> some View {
-//        modifier(PinchToZoom(onDoubleTap: onDoubleTap))
-//    }
+    func pinchToZoom(onDoubleTap: (() -> Void)? = nil) -> some View {
+        modifier(PinchToZoom(onDoubleTap: onDoubleTap))
+    }
 
     func animatesIn(offset: CGFloat = 40, duration: Double = 0.7) -> some View {
         modifier(AnimatesIn(offSet: offset, duration: duration))
