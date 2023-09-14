@@ -14,6 +14,10 @@ public struct URLDropDelegate: DropDelegate {
 
     let onDroppedItems: ([NSItemProvider]) -> Void
 
+    public init(onDroppedItems: @escaping ([NSItemProvider]) -> Void) {
+        self.onDroppedItems = onDroppedItems
+    }
+
     public func performDrop(info: DropInfo) -> Bool {
         guard info.hasItemsConforming(to: [URLDropDelegate.CONFORMING_TYPE_DATA]) || info.hasItemsConforming(to: [URLDropDelegate.CONFORMING_TYPE_FOLDER]) else {
             return false

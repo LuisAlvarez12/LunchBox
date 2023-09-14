@@ -92,6 +92,12 @@ public struct IntroRow: View {
     let icon: String
     let text: String
 
+    public init(color: Color, icon: String, text: String) {
+        self.color = color
+        self.icon = icon
+        self.text = text
+    }
+
     public var body: some View {
         HStack(spacing: 16) {
             RoundedRectangle(cornerRadius: 12)
