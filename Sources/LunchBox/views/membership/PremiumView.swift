@@ -8,8 +8,8 @@
 import SwiftUI
 
 @available(iOS 16.0.0, *)
-struct PremiumView: View {
-    var body: some View {
+public struct PremiumView: View {
+    public var body: some View {
         HStack(spacing: 0) {
             Group {
                 Image(systemName: "laurel.leading")

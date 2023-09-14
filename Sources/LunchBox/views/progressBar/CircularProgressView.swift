@@ -8,10 +8,10 @@
 import SwiftUI
 
 @available(iOS 16.0, *)
-struct CircularProgressView: View {
+public struct CircularProgressView: View {
     let progress: Double
 
-    var body: some View {
+    public var body: some View {
         ZStack {
             Circle()
                 .stroke(

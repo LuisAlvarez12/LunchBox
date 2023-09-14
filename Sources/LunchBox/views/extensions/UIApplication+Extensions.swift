@@ -8,8 +8,8 @@
 import SwiftUI
 
 @available(iOS 16.0, *)
-extension UIApplication {
-    var keyWindow: UIWindow? {
+public extension UIApplication {
+    public var keyWindow: UIWindow? {
         // Get connected scenes
         return UIApplication.shared.connectedScenes
             // Keep only active scenes, onscreen and visible to the user

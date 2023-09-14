@@ -15,10 +15,10 @@ private let minOffset: CGFloat = -2
 private let maxOffset = 1 / coverPercentage * abs(minOffset)
 
 @available(iOS 16.0, *)
-struct InfiniteProgressBar: View {
+public struct InfiniteProgressBar: View {
     @State private var offset = minOffset
 
-    var body: some View {
+    public var body: some View {
         Rectangle()
             .foregroundColor(Color.systemSecondary) // change the color as you see fit
             .frame(height: height)

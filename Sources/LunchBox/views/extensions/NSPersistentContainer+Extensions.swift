@@ -9,9 +9,9 @@ import SwiftUI
 import CoreData
 
 @available(iOS 15.0, *)
-extension NSPersistentContainer {
+public extension NSPersistentContainer {
     
-    func save(completion: @escaping (Error?) -> Void = { _ in }) {
+    public func save(completion: @escaping (Error?) -> Void = { _ in }) {
         let context = self.viewContext
         if context.hasChanges {
             do {
@@ -23,7 +23,7 @@ extension NSPersistentContainer {
         }
     }
 
-    func save() async -> AsyncResponse {
+    public func save() async -> AsyncResponse {
         let context = self.viewContext
         do {
             try await context.perform {
@@ -35,7 +35,7 @@ extension NSPersistentContainer {
         }
     }
 
-    func delete(_ object: NSManagedObject) async -> AsyncResponse {
+    public func delete(_ object: NSManagedObject) async -> AsyncResponse {
         let context = self.viewContext
 
         context.delete(object)
@@ -49,7 +49,7 @@ extension NSPersistentContainer {
         }
     }
 
-    func delete(_ object: NSManagedObject, completion: @escaping (Error?) -> Void = { _ in }) {
+    public func delete(_ object: NSManagedObject, completion: @escaping (Error?) -> Void = { _ in }) {
         let context = self.viewContext
         context.delete(object)
         save(completion: completion)

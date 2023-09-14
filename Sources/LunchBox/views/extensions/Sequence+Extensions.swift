@@ -8,15 +8,15 @@
 import SwiftUI
 
 /// Extension to extract an array of only the unique values
-extension Sequence where Iterator.Element: Hashable {
-    func unique() -> [Iterator.Element] {
+public extension Sequence where Iterator.Element: Hashable {
+    public func unique() -> [Iterator.Element] {
         var seen: Set<Iterator.Element> = []
         return filter { seen.insert($0).inserted }
     }
 }
 
 @available(iOS 16.0, *)
-func asyncCallback<T>(_ context: String = "callback", start: @escaping (@escaping (T?, Error?) -> Void) -> Void) async throws -> T {
+public func asyncCallback<T>(_ context: String = "callback", start: @escaping (@escaping (T?, Error?) -> Void) -> Void) async throws -> T {
     try await withCheckedThrowingContinuation { continuation in
         start { result, error in
             guard let result = result else {
@@ -32,21 +32,21 @@ func asyncCallback<T>(_ context: String = "callback", start: @escaping (@escapin
     }
 }
 
-extension Collection {
-    var indexedDictionary: [Int: Element] {
+public extension Collection {
+    public var indexedDictionary: [Int: Element] {
         return Dictionary(uniqueKeysWithValues: enumerated().map { ($0, $1) })
     }
 }
 
 @available(iOS 16.0, *)
-class AsyncCallbackAdaptor<T> {
+public class AsyncCallbackAdaptor<T> {
     private let task: Task<T, Error>
 
-    init(context: String = "callback", start: @escaping (@escaping (T?, Error?) -> Void) -> Void) {
+    public init(context: String = "callback", start: @escaping (@escaping (T?, Error?) -> Void) -> Void) {
         task = Task { try await asyncCallback(context, start: start) }
     }
 
-    func await() async throws -> T {
+    public  func await() async throws -> T {
         try await task.value
     }
 }
@@ -62,14 +62,14 @@ private struct IndexedItem<T> {
 }
 
 public extension Sequence {
-    func collect() -> [Element] {
+    public func collect() -> [Element] {
         reduce(into: []) { $0.append($1) }
     }
 }
 
 @available(iOS 16.0.0, *)
 public extension Sequence {
-    func mapAsync<T>(task: @escaping (Element) async throws -> T) async rethrows -> [T] {
+    public func mapAsync<T>(task: @escaping (Element) async throws -> T) async rethrows -> [T] {
         try await withThrowingTaskGroup(of: IndexedItem<T>.self, returning: [T].self) { group in
             for (index, item) in enumerated() {
                 group.addTask {
@@ -80,7 +80,7 @@ public extension Sequence {
         }
     }
 
-    func asyncForEach(
+    public func asyncForEach(
         _ operation: (Element) async throws -> Void
     ) async rethrows {
         for element in self {

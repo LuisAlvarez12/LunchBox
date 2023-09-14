@@ -8,7 +8,7 @@
 import SwiftUI
 
 @available(iOS 16.0, *)
-protocol MembershipFeatureRow {
+public protocol MembershipFeatureRow {
     var feature: String { get }
     var icon: String { get }
     var featureName: LocalizedStringKey  { get }
@@ -17,11 +17,11 @@ protocol MembershipFeatureRow {
 }
 
 @available(iOS 16.0.0, *)
-struct MembershipRow: View {
+public struct MembershipRow: View {
     let membershipRow: MembershipFeatureRow
     var forceDark: Bool = false
 
-    var body: some View {
+    public var body: some View {
         HStack(spacing: 16) {
             RoundedRectangle(cornerRadius: 12)
                 .fill(membershipRow.color.opacity(0.2))

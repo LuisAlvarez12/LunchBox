@@ -80,10 +80,7 @@ extension UIColor {
 // }
 
 @available(iOS 16.0, *)
-extension Color {
-    func themeAccent() -> Color {
-        Color.blue
-    }
+public extension Color {
 
     init(hex: String) {
         @available(iOS 13.0, *)

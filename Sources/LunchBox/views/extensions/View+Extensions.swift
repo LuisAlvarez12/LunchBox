@@ -9,7 +9,7 @@ import SwiftUI
 
 @available(iOS 13.0, *)
 public extension View {
-    func geoHeight(proxy: GeometryProxy, ratio: Double, fullWidth: Bool = false) -> some View {
+    public func geoHeight(proxy: GeometryProxy, ratio: Double, fullWidth: Bool = false) -> some View {
         let r = proxy.size.height * ratio
 
         if fullWidth {
@@ -33,7 +33,7 @@ public extension View {
     }
 
     @available(iOS 16.0, *)
-    func withTrueBackground() -> some View {
+    public func withTrueBackground() -> some View {
         background {
             Color.trueBackground.ignoresSafeArea()
         }
@@ -43,7 +43,7 @@ public extension View {
 //        modifier(SpringsIn(offSet: offset, duration: duration))
 //    }
 
-    func geoWidth(proxy: GeometryProxy, ratio: Double, fullHeight: Bool = false) -> some View {
+    public func geoWidth(proxy: GeometryProxy, ratio: Double, fullHeight: Bool = false) -> some View {
         let r = proxy.size.width * ratio
 
         if fullHeight {
@@ -54,54 +54,54 @@ public extension View {
     }
 
     @available(iOS 15.0, *)
-    func hideTopSeperator() -> some View {
+    public func hideTopSeperator() -> some View {
         listRowSeparator(.hidden, edges: .top)
     }
 
     @available(iOS 15.0, *)
-    func hideBottomSeperator() -> some View {
+    public  func hideBottomSeperator() -> some View {
         listRowSeparator(.hidden, edges: .bottom)
     }
 
-    func aligned() -> some View {
+    public  func aligned() -> some View {
         frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    func horPadding(_ value: CGFloat = 16) -> some View {
+    public func horPadding(_ value: CGFloat = 16) -> some View {
         padding([.leading, .trailing], value)
     }
 
-    func vertPadding(_ value: CGFloat = 16) -> some View {
+    public func vertPadding(_ value: CGFloat = 16) -> some View {
         padding([.top, .bottom], value)
     }
 
-    func triPad(_ value: CGFloat = 16) -> some View {
+    public func triPad(_ value: CGFloat = 16) -> some View {
         padding([.top, .leading, .trailing], value)
     }
 
-    func embedInNavigationView() -> some View {
+    public  func embedInNavigationView() -> some View {
         NavigationView {
             self
         }
     }
 
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+    public  func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape(RoundedCorner(radius: radius, corners: corners))
     }
 
-    func full() -> some View {
+    public  func full() -> some View {
         frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    func fullWidth() -> some View {
+    public  func fullWidth() -> some View {
         frame(maxWidth: .infinity)
     }
 
-    func fullWidth(alignment: Alignment) -> some View {
+    public  func fullWidth(alignment: Alignment) -> some View {
         frame(maxWidth: .infinity, alignment: alignment)
     }
 
-    func fullHeight() -> some View {
+    public  func fullHeight() -> some View {
         frame(idealHeight: .infinity, maxHeight: .infinity)
     }
 
@@ -109,37 +109,37 @@ public extension View {
         frame(width: length, height: length)
     }
 
-    func withTitle(_ title: String) -> some View {
+    public  func withTitle(_ title: String) -> some View {
         VStack {
             Text(title).font(.system(size: 32, weight: .heavy, design: .default)).aligned().padding(.top, 24).padding(.leading, 16)
             self
         }
     }
 
-    func bottomGravity() -> some View {
+    public func bottomGravity() -> some View {
         VStack(spacing: 0) {
             Spacer()
             self
         }
     }
 
-    func autoFit(size: CGFloat = 1000, weight: Font.Weight = .regular, design: Font.Design = .default) -> some View {
+    public func autoFit(size: CGFloat = 1000, weight: Font.Weight = .regular, design: Font.Design = .default) -> some View {
         font(.system(size: size, weight: weight, design: design)).minimumScaleFactor(0.01)
     }
 
-    func clearListBackground() -> some View {
+    public func clearListBackground() -> some View {
         modifier(ClearListBackgroundModifier())
     }
 
-    func pinchToZoom(onDoubleTap: (() -> Void)? = nil) -> some View {
+    public func pinchToZoom(onDoubleTap: (() -> Void)? = nil) -> some View {
         modifier(PinchToZoom(onDoubleTap: onDoubleTap))
     }
 
-    func animatesIn(offset: CGFloat = 40, duration: Double = 0.7) -> some View {
+    public  func animatesIn(offset: CGFloat = 40, duration: Double = 0.7) -> some View {
         modifier(AnimatesIn(offSet: offset, duration: duration))
     }
 
-    func sheetCompat<Content>(isPresented: Binding<Bool>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content: View {
+    public  func sheetCompat<Content>(isPresented: Binding<Bool>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content: View {
         if #available(iOS 16.0, *) {
             return self.sheet(isPresented: isPresented, onDismiss: onDismiss) {
                 content().presentationDetents([.medium, .large])
@@ -151,8 +151,8 @@ public extension View {
 }
 
 @available(iOS 13.0, *)
-struct ClearListBackgroundModifier: ViewModifier {
-    func body(content: Content) -> some View {
+public struct ClearListBackgroundModifier: ViewModifier {
+    public func body(content: Content) -> some View {
         if #available(iOS 16.0, *) {
             content.scrollContentBackground(.hidden)
         } else {
@@ -176,12 +176,12 @@ private struct RoundedCorner: Shape {
 }
 
 @available(iOS 13.0, *)
-struct AnimatesIn: ViewModifier {
+public struct AnimatesIn: ViewModifier {
     var offSet: CGFloat
     var duration: Double
     @State var enabled = false
 
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         content
             .opacity(enabled ? 1.0 : 0.0)
             .transition(.opacity)

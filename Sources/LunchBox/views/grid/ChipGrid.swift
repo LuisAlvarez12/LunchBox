@@ -8,13 +8,13 @@
 import SwiftUI
 
 @available(iOS 16.0, *)
-protocol ChipGridItem {
+public protocol ChipGridItem {
     var chipID: UUID { get }
     var chipName: String { get }
 }
 
 @available(iOS 16.0, *)
-struct ChipGrid: View {
+public struct ChipGrid: View {
     let chipGridItems: [ChipGridItem]
     
     func getArrays() {
@@ -50,7 +50,7 @@ struct ChipGrid: View {
     
     @State var arr = [[ChipGridItem]]()
     
-    var body: some View {
+    public var body: some View {
                  ScrollView(.horizontal) {
                      if arr.isNotEmpty {
                      VStack{
@@ -74,12 +74,12 @@ struct ChipGrid: View {
 }
 
 @available(iOS 16.0, *)
-struct ChipView: View {
+public struct ChipView: View {
     let systemImage: String
     let title: String
     var isSelected = false
     
-    var body: some View {
+    public var body: some View {
         HStack(spacing: 4) {
 //               Image(systemName: systemImage)
 //                .font(.system(size: 18)).lineLimit(1)
@@ -131,8 +131,8 @@ struct ShareSheetScreen_Previews: PreviewProvider {
 }
 
 @available(iOS 16.0, *)
-extension Array {
-    func chunked(into size: Int) -> [[Element]] {
+public extension Array {
+    public func chunked(into size: Int) -> [[Element]] {
         return stride(from: 0, to: count, by: size).map {
             Array(self[$0 ..< Swift.min($0 + size, count)])
         }

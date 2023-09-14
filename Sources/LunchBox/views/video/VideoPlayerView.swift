@@ -9,14 +9,14 @@ import AVKit
 import SwiftUI
 
 @available(iOS 16.0, *)
-struct CabinitVideoScreen: View {
+public struct CabinitVideoScreen: View {
     let url: URL
     var currentTime: CMTime? = nil
     
     @State var avPlayer: AVPlayer? = nil
     @State var videoPlaying = false
 
-    var body: some View {
+    public var body: some View {
         _ = try? AVAudioSession.sharedInstance().setCategory(
             .playback, mode: .default, options: []
         )

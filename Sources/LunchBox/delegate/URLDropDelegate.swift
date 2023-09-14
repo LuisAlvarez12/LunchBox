@@ -8,13 +8,13 @@
 import SwiftUI
 
 @available(iOS 16, *)
-struct URLDropDelegate: DropDelegate {
+public struct URLDropDelegate: DropDelegate {
     static let CONFORMING_TYPE_DATA = "public.data"
     static let CONFORMING_TYPE_FOLDER = "public.folder"
 
     let onDroppedItems: ([NSItemProvider]) -> Void
 
-    func performDrop(info: DropInfo) -> Bool {
+    public func performDrop(info: DropInfo) -> Bool {
         guard info.hasItemsConforming(to: [URLDropDelegate.CONFORMING_TYPE_DATA]) || info.hasItemsConforming(to: [URLDropDelegate.CONFORMING_TYPE_FOLDER]) else {
             return false
         }

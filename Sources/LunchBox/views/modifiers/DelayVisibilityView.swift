@@ -8,14 +8,14 @@
 import SwiftUI
 
 @available(iOS 13.0, *)
-struct DelayVisibilityView<Content>: View where Content: View {
+public struct DelayVisibilityView<Content>: View where Content: View {
     
     let delay: CGFloat
     @ViewBuilder var content: () -> Content
     
     @State var showView = false
 
-    var body: some View {
+    public var body: some View {
         VStack {
             if showView {
                 content()

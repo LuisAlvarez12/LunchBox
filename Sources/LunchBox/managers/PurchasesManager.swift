@@ -8,6 +8,6 @@
 import SwiftUI
 
 @available(iOS 16.0, *)
-class PurchasesManager : ObservableObject {
+public class PurchasesManager : ObservableObject {
     
 }

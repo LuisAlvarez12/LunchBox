@@ -8,7 +8,7 @@
 import SwiftUI
 
 @available(iOS 16.0, *)
-struct TitleHeaderView: View {
+public struct TitleHeaderView: View {
     var subtitle: LocalizedStringKey? = nil
     let title: LocalizedStringKey
 
@@ -17,7 +17,7 @@ struct TitleHeaderView: View {
 
     var primaryColor: Color? = nil
 
-    var body: some View {
+    public var body: some View {
         Text(subtitle ?? "")
             .font(.callout)
             .multilineTextAlignment(.center)
@@ -37,14 +37,14 @@ struct TitleHeaderView: View {
 }
 
 @available(iOS 16.0.0, *)
-struct AlignedTitleHeaderView: View {
+public struct AlignedTitleHeaderView: View {
     var subtitle: String? = nil
     let title: String
 
     var subtitleSize: CGFloat = 28
     var titleSize: CGFloat = 42
 
-    var body: some View {
+    public var body: some View {
         Text(subtitle ?? "")
             .font(.callout)
             .multilineTextAlignment(.center)

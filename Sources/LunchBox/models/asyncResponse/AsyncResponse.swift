@@ -8,14 +8,14 @@
 import SwiftUI
 
 @available(iOS 13.0, *)
-protocol AsyncResponse {}
+public protocol AsyncResponse {}
 
-struct AsyncSuccess: AsyncResponse {}
+public struct AsyncSuccess: AsyncResponse {}
 
-struct AsyncFailure: AsyncResponse, Error {
+public struct AsyncFailure: AsyncResponse, Error {
     var error: ErrorDetails? = nil
 }
 
-struct ErrorDetails {
+public struct ErrorDetails {
     let message: String
 }

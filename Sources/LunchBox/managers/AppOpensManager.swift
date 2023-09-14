@@ -9,7 +9,7 @@ import SwiftUI
 import StoreKit
 
 @available(iOS 16.0, *)
-class AppOpensManager: ObservableObject {
+public class AppOpensManager: ObservableObject {
     
     static let shared = AppOpensManager()
     
@@ -25,7 +25,7 @@ class AppOpensManager: ObservableObject {
     @AppStorage(AppOpensManager.HAS_SEEN_REVIEW_PROMPT) var timesSeenReviewPrompt: Int = 0
    
     @MainActor
-    func onEnteredApp() {
+    public func onEnteredApp() {
         timesLoggedIn += 1
         
         if timesToShowMembership.contains(where: { $0 == timesLoggedIn }) {

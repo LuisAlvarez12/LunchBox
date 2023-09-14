@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-extension Dictionary {
-    func containsKey(_ key: Key) -> Bool {
+public extension Dictionary {
+    public  func containsKey(_ key: Key) -> Bool {
         index(forKey: key) != nil
     }
 }

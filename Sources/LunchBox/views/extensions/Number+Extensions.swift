@@ -7,14 +7,14 @@
 
 import Foundation
 
-extension Int {
-    func nano() -> UInt64 {
+public extension Int {
+    public func nano() -> UInt64 {
         UInt64(self * 1_000_000_000)
     }
 }
 
-extension Double {
-    func nano() -> UInt64 {
+public extension Double {
+    public func nano() -> UInt64 {
         UInt64(self * 1_000_000_000)
     }
 }

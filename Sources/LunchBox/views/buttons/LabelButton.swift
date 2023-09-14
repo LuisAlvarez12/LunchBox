@@ -8,13 +8,13 @@
 import SwiftUI
 
 @available(iOS 16.0, *)
-struct LabelButton: View {
+public struct LabelButton: View {
     let title: LocalizedStringKey
     let systemImage: String
     var role: ButtonRole? = nil
     let onClick: () -> Void
 
-    var body: some View {
+    public var body: some View {
         Button(role: role ?? .none, action: {
             onClick()
         }, label: {

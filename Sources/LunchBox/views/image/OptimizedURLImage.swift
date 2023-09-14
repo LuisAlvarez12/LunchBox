@@ -8,13 +8,13 @@
 import SwiftUI
 
 @available(iOS 16.0, *)
-struct MemorySafeURLImage: View {
+public struct MemorySafeURLImage: View {
     let url: URL
     var onDoubleTap: (() -> Void)? = nil
 
     @State var image: UIImage? = nil
 
-    var body: some View {
+    public var body: some View {
         Color.clear
             .full()
             .overlay {

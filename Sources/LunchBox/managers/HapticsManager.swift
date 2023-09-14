@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-struct HapticsManager {
+public struct HapticsManager {
     static let shared = HapticsManager()
     private let generator = UINotificationFeedbackGenerator()
 
-    func onGeneral() {
+    public  func onGeneral() {
         generator.notificationOccurred(.success)
     }
 
-    func onError() {
+    public func onError() {
         generator.notificationOccurred(.error)
     }
 }

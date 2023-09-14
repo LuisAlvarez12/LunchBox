@@ -8,12 +8,12 @@
 import SwiftUI
 
 @available(iOS 13.0, *)
-extension Text {
-    func semiBold() -> Text {
+public extension Text {
+    public func semiBold() -> Text {
         fontWeight(.semibold)
     }
 
-    func roundFont(_ size: CGFloat = 18, weight: Font.Weight = .regular) -> Text {
+    public func roundFont(_ size: CGFloat = 18, weight: Font.Weight = .regular) -> Text {
         font(.system(size: size, weight: weight, design: .rounded))
     }
 }

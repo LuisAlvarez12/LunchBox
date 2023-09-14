@@ -8,14 +8,14 @@
 import SwiftUI
 
 @available(iOS 16.0, *)
-struct SecondaryButton: View {
+public struct SecondaryButton: View {
     let text: LocalizedStringKey
     let color: Color
     let action: () -> Void
     var transparent = false
     var disabled: Bool = false
 
-    init(text: LocalizedStringKey, color: Color = Color.blue, transparent: Bool = false, disabled: Bool = false, action: @escaping () -> Void) {
+    public init(text: LocalizedStringKey, color: Color = Color.blue, transparent: Bool = false, disabled: Bool = false, action: @escaping () -> Void) {
         self.text = text
         self.color = color
         self.action = action
@@ -23,7 +23,7 @@ struct SecondaryButton: View {
         self.transparent = transparent
     }
 
-    var body: some View {
+    public var body: some View {
         Button(action: {
             action()
         }, label: {

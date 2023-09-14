@@ -8,11 +8,11 @@
 import SwiftUI
 
 @available(iOS 16.0, *)
-struct PagingView<Page: View>: View {
+public struct PagingView<Page: View>: View {
     var pages: [Page]
     @Binding var currentPage: Int
 
-    var body: some View {
+    public var body: some View {
         PageViewController(pages: pages, currentPage: $currentPage)
     }
 }

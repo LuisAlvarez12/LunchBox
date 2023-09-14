@@ -8,7 +8,7 @@
 import SwiftUI
 
 @available(iOS 16.0.0, *)
-struct IntroFeaturesScreen: View {
+public struct IntroFeaturesScreen: View {
     
     let headerImage: String
     let appName: LocalizedStringKey
@@ -18,7 +18,7 @@ struct IntroFeaturesScreen: View {
     let onMembershipClick: () -> Void
     let onDismiss: () -> Void
 
-    var body: some View {
+    public var body: some View {
         VStack {
             Image(headerImage)
                 .resizable()
@@ -83,12 +83,12 @@ struct IntroFeaturesScreen_Previews: PreviewProvider {
 }
 
 @available(iOS 16.0, *)
-struct IntroRow: View {
+public struct IntroRow: View {
     let color: Color
     let icon: String
     let text: String
 
-    var body: some View {
+    public var body: some View {
         HStack(spacing: 16) {
             RoundedRectangle(cornerRadius: 12)
                 .fill(color.opacity(0.2))

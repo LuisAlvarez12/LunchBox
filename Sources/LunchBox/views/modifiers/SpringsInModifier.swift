@@ -8,8 +8,8 @@
 import SwiftUI
 
 @available(iOS 16.0.0, *)
-extension View {
-    func springsIn(offset: CGFloat = 40, duration: Double = 0.7) -> some View {
+public extension View {
+    public  func springsIn(offset: CGFloat = 40, duration: Double = 0.7) -> some View {
         modifier(SpringsIn(offSet: offset, duration: duration))
     }
 }

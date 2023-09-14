@@ -8,14 +8,14 @@
 import SwiftUI
 
 @available(iOS 16.0, *)
-struct NoticeView: View {
+public struct NoticeView: View {
     @Environment(\.colorScheme) var colorScheme
 
     let image: String
     let title: LocalizedStringKey
     var bodyText: LocalizedStringKey? = nil
 
-    var body: some View {
+    public var body: some View {
         VStack {
             Spacer()
             Image(image)

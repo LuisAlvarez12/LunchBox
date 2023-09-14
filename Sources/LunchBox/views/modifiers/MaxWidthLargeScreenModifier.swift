@@ -8,11 +8,11 @@
 import SwiftUI
 
 @available(iOS 13.0, *)
-struct MaxWidthLargeScreenModifier: ViewModifier {
+public struct MaxWidthLargeScreenModifier: ViewModifier {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     let ipadMaxWidth: CGFloat
 
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         if horizontalSizeClass == .compact {
             return content.frame(idealWidth: .infinity, maxWidth: .infinity)
         } else {

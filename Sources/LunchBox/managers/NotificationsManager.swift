@@ -8,7 +8,7 @@
 import SwiftUI
 
 @available(iOS 16.0, *)
-class NotificationsManager: ObservableObject {
+public class NotificationsManager: ObservableObject {
     @Published var isShown = false
     var notificationMessage = AlertMessage(message: "")
 
@@ -16,15 +16,15 @@ class NotificationsManager: ObservableObject {
 
     var currentTask: Task<Void, Never>?
 
-    func showMessage(_ msg: LocalizedStringKey) {
+    public  func showMessage(_ msg: LocalizedStringKey) {
         updateAlert(alertMessage: AlertMessage(message: msg))
     }
 
-    func error(_ msg: LocalizedStringKey) {
+    public  func error(_ msg: LocalizedStringKey) {
         updateAlert(alertMessage: AlertMessage(message: msg, color: Color.red))
     }
 
-    func updateAlert(alertMessage: AlertMessage) {
+    public  func updateAlert(alertMessage: AlertMessage) {
         HapticsManager.shared.onGeneral()
 
         withAnimation(.easeIn(duration: 0.1)) {
@@ -52,18 +52,18 @@ class NotificationsManager: ObservableObject {
 }
 
 @available(iOS 16.0, *)
-struct AlertMessage {
+public struct AlertMessage {
     let message: LocalizedStringKey
     var color: Color = Color.appPrimary
     var imageName: String = "info.circle.fill"
 }
 
 @available(iOS 16.0, *)
-struct FloatingNotice: View {
+public struct FloatingNotice: View {
     @Binding var showingNotice: Bool
     let alertMessage = NotificationsManager.shared.notificationMessage
 
-    var body: some View {
+    public var body: some View {
         SimpleNotificationView(title: alertMessage.message, image: alertMessage.imageName, color: alertMessage.color)
     }
 }
@@ -96,14 +96,14 @@ struct FloatingNotice_Previews: PreviewProvider {
 }
 
 @available(iOS 16.0, *)
-struct SimpleNotificationView: View {
+public struct SimpleNotificationView: View {
     @Environment(\.colorScheme) var colorScheme
 
     let title: LocalizedStringKey
     let image: String
     var color: Color = .appPrimary
 
-    var body: some View {
+    public var body: some View {
         HStack(alignment: .center) {
             Image(systemName: image)
                 .foregroundColor(.white)

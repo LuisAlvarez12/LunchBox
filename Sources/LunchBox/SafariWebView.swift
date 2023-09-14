@@ -8,14 +8,14 @@
 import SafariServices
 import SwiftUI
 
-struct SafariWebView: UIViewControllerRepresentable {
+public struct SafariWebView: UIViewControllerRepresentable {
     let url: URL
 
-    func makeUIViewController(context _: Context) -> SFSafariViewController {
+    public func makeUIViewController(context _: Context) -> SFSafariViewController {
         return SFSafariViewController(url: url)
     }
 
-    func updateUIViewController(_: SFSafariViewController, context _: Context) {}
+    public func updateUIViewController(_: SFSafariViewController, context _: Context) {}
 }
 
 //struct SafariWebView_PreviewProvider : PreviewProvider {

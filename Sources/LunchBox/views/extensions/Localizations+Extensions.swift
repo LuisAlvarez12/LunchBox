@@ -8,15 +8,15 @@
 import SwiftUI
 
 @available(iOS 13.0, *)
-extension View {
+public extension View {
     
     @available(iOS 16.0, *)
-    func withLanguage(_ language: LocalizedLanguages) -> some View {
+    public func withLanguage(_ language: LocalizedLanguages) -> some View {
         self.environment(\.locale, .init(identifier: language.identifier))
     }
 }
 
-enum LocalizedLanguages {
+public enum LocalizedLanguages {
     case Japanese
     case English
     case Spanish
@@ -24,7 +24,7 @@ enum LocalizedLanguages {
     case Korean
     case BrazilianPortuguese
     
-    var identifier: String {
+    public var identifier: String {
         switch self {
         case .Japanese:
            return "jp"

@@ -8,14 +8,14 @@
 import SwiftUI
 
 @available(iOS 16.0.0, *)
-struct SecondaryText: View {
+public struct SecondaryText: View {
     let text: String
 
     init(_ text: String) {
         self.text = text
     }
 
-    var body: some View {
+    public var body: some View {
         Text(text).font(.footnote).foregroundColor(.secondary).aligned()
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 @available(iOS 14.0, *)
-struct AsyncButton<Label: View>: View {
+public struct AsyncButton<Label: View>: View {
     var action: () async -> Void
     var actionOptions = Set(ActionOption.allCases)
     @ViewBuilder var label: () -> Label
@@ -16,7 +16,7 @@ struct AsyncButton<Label: View>: View {
     @State private var isDisabled = false
     @State private var showProgressView = false
 
-    var body: some View {
+    public  var body: some View {
         Button(
             action: {
                 if actionOptions.contains(.disableButton) {
@@ -55,8 +55,8 @@ struct AsyncButton<Label: View>: View {
 }
 
 @available(iOS 14.0, *)
-extension AsyncButton where Label == Text {
-    init(_ label: String,
+public extension AsyncButton where Label == Text {
+    public init(_ label: String,
          actionOptions: Set<ActionOption> = Set(ActionOption.allCases),
          action: @escaping () async -> Void) {
         self.init(action: action) {
@@ -66,8 +66,8 @@ extension AsyncButton where Label == Text {
 }
 
 @available(iOS 14.0, *)
-extension AsyncButton where Label == Image {
-    init(systemImageName: String,
+public extension AsyncButton where Label == Image {
+    public init(systemImageName: String,
          actionOptions: Set<ActionOption> = Set(ActionOption.allCases),
          action: @escaping () async -> Void) {
         self.init(action: action) {
@@ -77,7 +77,7 @@ extension AsyncButton where Label == Image {
 }
 
 @available(iOS 14.0, *)
-extension AsyncButton {
+public extension AsyncButton {
     enum ActionOption: CaseIterable {
         case disableButton
         case showProgressView

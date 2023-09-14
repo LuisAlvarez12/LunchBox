@@ -9,10 +9,10 @@ import LocalAuthentication
 import SwiftUI
 
 @available(iOS 16, *)
-struct BiometricsManager {
+public struct BiometricsManager {
     static let shared = BiometricsManager()
 
-    func faceIDCheck() async -> AuthResult {
+    public func faceIDCheck() async -> AuthResult {
         let context = LAContext()
         var error: NSError?
 
@@ -33,10 +33,10 @@ struct BiometricsManager {
     }
 }
 
-protocol AuthResult {}
+public protocol AuthResult {}
 
-struct AuthSuccess: AuthResult {}
+public struct AuthSuccess: AuthResult {}
 
-struct AuthError: AuthResult {
+public struct AuthError: AuthResult {
     var errorMessage = "Login Failed"
 }
