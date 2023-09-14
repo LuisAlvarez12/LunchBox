@@ -8,19 +8,21 @@
 import SwiftUI
 
 @available(iOS 13.0, *)
+extension View {
+    func emailButton(email: String = "team@rezonating.app", subject: LocalizedStringKey, emailBody: LocalizedStringKey) -> some View {
+        EmailButton(email: email, subject: subject, emailBody: emailBody, content: {
+            self
+        })
+    }
+}
+
+@available(iOS 13.0, *)
 public struct EmailButton<Content>: View where Content: View {
     var email: String = "team@rezonating.app"
     let subject: LocalizedStringKey
     let emailBody: LocalizedStringKey
 
     @ViewBuilder var content: () -> Content
-
-    public init(email: String = "team@rezonating.app", subject: LocalizedStringKey, emailBody: LocalizedStringKey, content: @escaping () -> any View) {
-        self.email = email
-        self.subject = subject
-        self.emailBody = emailBody
-        self.content = content as! () -> Content
-    }
 
     public var body: some View {
         Button(action: {
