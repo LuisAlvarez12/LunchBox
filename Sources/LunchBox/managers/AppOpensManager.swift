@@ -17,8 +17,6 @@ public class AppOpensManager: ObservableObject {
 
     private let timesToShowMembership = [3, 8, 12, 15, 20]
 
-    @Environment(\.requestReview) var requestReview
-
     // Preferences
     @AppStorage(AppOpensManager.TIMES_LOGGED_IN) var timesLoggedIn: Int = 0
     @AppStorage(AppOpensManager.HAS_SEEN_REVIEW_PROMPT) var timesSeenReviewPrompt: Int = 0
@@ -29,9 +27,16 @@ public class AppOpensManager: ObservableObject {
 
         if timesToShowMembership.contains(where: { $0 == timesLoggedIn }) {
         } else if timesSeenReviewPrompt == 0 {
-            if timesLoggedIn == 5 {
+            if timesLoggedIn == 4 {
                 timesSeenReviewPrompt += 1
-                requestReview()
+
+                // try getting current scene
+                guard let currentScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+                    return
+                }
+
+                // show review dialog
+                SKStoreReviewController.requestReview(in: currentScene)
             }
         }
     }
