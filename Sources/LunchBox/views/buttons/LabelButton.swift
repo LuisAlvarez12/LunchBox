@@ -1,6 +1,6 @@
 //
 //  LabelButton.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/14/23.
 //
@@ -24,9 +24,9 @@ public struct LabelButton: View {
 }
 
 @available(iOS 16.0.0, *)
-struct LabelButton_PreviewProvider : PreviewProvider {
+struct LabelButton_PreviewProvider: PreviewProvider {
     static var previews: some View {
-        VStack{
+        VStack {
             LabelButton(title: "Submit", systemImage: "chevron.down", onClick: {})
         }
     }

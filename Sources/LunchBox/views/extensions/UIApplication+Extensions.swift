@@ -1,6 +1,6 @@
 //
 //  UIApplication+Extensions.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/14/23.
 //
@@ -9,7 +9,7 @@ import SwiftUI
 
 @available(iOS 16.0, *)
 public extension UIApplication {
-    public var keyWindow: UIWindow? {
+    var keyWindow: UIWindow? {
         // Get connected scenes
         return UIApplication.shared.connectedScenes
             // Keep only active scenes, onscreen and visible to the user

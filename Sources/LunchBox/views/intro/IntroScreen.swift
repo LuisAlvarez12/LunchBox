@@ -1,6 +1,6 @@
 //
 //  IntroScreen.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/14/23.
 //
@@ -9,7 +9,6 @@ import SwiftUI
 
 @available(iOS 16.0.0, *)
 public struct IntroFeaturesScreen: View {
-    
     let headerImage: String
     let appName: LocalizedStringKey
     let introRows: [IntroRow]
@@ -31,14 +30,14 @@ public struct IntroFeaturesScreen: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 24) {
                     ForEach(introRows, id: \.text) { row in
-                       row
+                        row
                     }
 
                     Image(premiumHeaderImage)
                         .resizable()
                         .frame(width: 240)
                         .scaledToFit()
-                    
+
                     Text("... And with **Premium**")
 
                     ForEach(membershipRows, id: \.feature) { row in
@@ -48,7 +47,7 @@ public struct IntroFeaturesScreen: View {
                     Spacer()
                 }
             }
-            //todo
+            // todo
 //            .fullWidth(ipadWidth: 400)
 
             PrimaryButton(text: "Get Premium", action: {
@@ -56,7 +55,7 @@ public struct IntroFeaturesScreen: View {
             })
 
             SecondaryButton(text: "Dismiss", action: {
-               onDismiss()
+                onDismiss()
             })
             Spacer()
         }.full().horPadding(36)
@@ -71,14 +70,9 @@ struct IntroFeaturesScreen_Previews: PreviewProvider {
 
             IntroRow(color: Color.appGreen, icon: "bookmark", text: "Save those favorite pages with Bookmarks and Bookmark galleries"),
             IntroRow(color: Color.appRed, icon: "lock", text: "Lock your app with a Pin and Face-ID to keep your Library private"),
-            IntroRow(color: Color.appYellow, icon: "folder", text: "Organize your content in folders")
+            IntroRow(color: Color.appYellow, icon: "folder", text: "Organize your content in folders"),
         ], premiumHeaderImage: "", membershipRows: [
-            
-        ], onMembershipClick: {
-            
-        }, onDismiss: {
-            
-        })
+        ], onMembershipClick: {}, onDismiss: {})
     }
 }
 

@@ -1,6 +1,6 @@
 //
 //  HeaderView.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/14/23.
 //
@@ -59,12 +59,11 @@ public struct AlignedTitleHeaderView: View {
 }
 
 @available(iOS 16.0.0, *)
-struct TitleHeaderView_PreviewProvider : PreviewProvider {
+struct TitleHeaderView_PreviewProvider: PreviewProvider {
     static var previews: some View {
-        VStack{
+        VStack {
             TitleHeaderView(subtitle: "Welcome to", title: "Uncover")
             AlignedTitleHeaderView(subtitle: "Welcome to", title: "Uncover")
         }
     }
 }
-

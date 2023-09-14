@@ -1,6 +1,6 @@
 //
 //  SafariWebView.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/13/23.
 //
@@ -18,8 +18,8 @@ public struct SafariWebView: UIViewControllerRepresentable {
     public func updateUIViewController(_: SFSafariViewController, context _: Context) {}
 }
 
-//struct SafariWebView_PreviewProvider : PreviewProvider {
+// struct SafariWebView_PreviewProvider : PreviewProvider {
 //    static var previews: some View {
-//        
+//
 //    }
-//}
+// }

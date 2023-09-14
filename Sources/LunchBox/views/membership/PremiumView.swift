@@ -1,6 +1,6 @@
 //
 //  PremiumView.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/14/23.
 //
@@ -21,9 +21,9 @@ public struct PremiumView: View {
 }
 
 @available(iOS 16.0.0, *)
-struct PremiumView_PreviewProvider : PreviewProvider {
+struct PremiumView_PreviewProvider: PreviewProvider {
     static var previews: some View {
-        VStack{
+        VStack {
             PremiumView()
         }
     }

@@ -1,18 +1,17 @@
 //
 //  NSPersistentContainer+Extensions.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/14/23.
 //
 
-import SwiftUI
 import CoreData
+import SwiftUI
 
 @available(iOS 15.0, *)
 public extension NSPersistentContainer {
-    
-    public func save(completion: @escaping (Error?) -> Void = { _ in }) {
-        let context = self.viewContext
+    func save(completion: @escaping (Error?) -> Void = { _ in }) {
+        let context = viewContext
         if context.hasChanges {
             do {
                 try context.save()
@@ -23,8 +22,8 @@ public extension NSPersistentContainer {
         }
     }
 
-    public func save() async -> AsyncResponse {
-        let context = self.viewContext
+    func save() async -> AsyncResponse {
+        let context = viewContext
         do {
             try await context.perform {
                 try context.save()
@@ -35,8 +34,8 @@ public extension NSPersistentContainer {
         }
     }
 
-    public func delete(_ object: NSManagedObject) async -> AsyncResponse {
-        let context = self.viewContext
+    func delete(_ object: NSManagedObject) async -> AsyncResponse {
+        let context = viewContext
 
         context.delete(object)
         do {
@@ -49,10 +48,9 @@ public extension NSPersistentContainer {
         }
     }
 
-    public func delete(_ object: NSManagedObject, completion: @escaping (Error?) -> Void = { _ in }) {
-        let context = self.viewContext
+    func delete(_ object: NSManagedObject, completion: @escaping (Error?) -> Void = { _ in }) {
+        let context = viewContext
         context.delete(object)
         save(completion: completion)
     }
-    
 }

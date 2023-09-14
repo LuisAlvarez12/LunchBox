@@ -1,5 +1,5 @@
-import XCTest
 @testable import LunchBox
+import XCTest
 
 final class LunchBoxTests: XCTestCase {
     func testExample() throws {

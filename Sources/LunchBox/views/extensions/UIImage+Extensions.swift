@@ -1,6 +1,6 @@
 //
 //  UIImage+Extensions.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/14/23.
 //
@@ -9,7 +9,7 @@ import SwiftUI
 
 @available(iOS 16.0, *)
 public extension UIImage {
-    public func scalePreservingAspectRatio(targetSize: CGSize) -> UIImage {
+    func scalePreservingAspectRatio(targetSize: CGSize) -> UIImage {
         // Determine the scale factor that preserves aspect ratio
         let widthRatio = targetSize.width / size.width
         let heightRatio = targetSize.height / size.height
@@ -38,7 +38,7 @@ public extension UIImage {
         return scaledImage
     }
 
-    public func rotateCameraImageToProperOrientation(maxResolution: CGFloat = 1080)
+    func rotateCameraImageToProperOrientation(maxResolution: CGFloat = 1080)
         -> UIImage?
     {
         guard let imgRef = cgImage else {
@@ -114,7 +114,7 @@ public extension UIImage {
         return imageCopy
     }
 
-    public func resized(withPercentage percentage: CGFloat, isOpaque: Bool = true) -> UIImage? {
+    func resized(withPercentage percentage: CGFloat, isOpaque: Bool = true) -> UIImage? {
         let canvas = CGSize(width: size.width * percentage, height: size.height * percentage)
         let format = imageRendererFormat
         format.opaque = isOpaque
@@ -123,7 +123,7 @@ public extension UIImage {
         }
     }
 
-    public func resized(toWidth width: CGFloat, isOpaque: Bool = true) -> UIImage? {
+    func resized(toWidth width: CGFloat, isOpaque: Bool = true) -> UIImage? {
         let canvas = CGSize(width: width, height: CGFloat(ceil(width / size.width * size.height)))
         let format = imageRendererFormat
         format.opaque = isOpaque
@@ -135,7 +135,7 @@ public extension UIImage {
 
 @available(iOS 16.0, *)
 public extension Image {
-    public func centerCropped(maxHeight: CGFloat) -> some View {
+    func centerCropped(maxHeight: CGFloat) -> some View {
         Color.clear
             .overlay(
                 resizable()

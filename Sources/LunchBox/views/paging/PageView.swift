@@ -1,6 +1,6 @@
 //
 //  PageView.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/14/23.
 //
@@ -30,16 +30,16 @@ struct PageView_Extensions_Previews: PreviewProvider {
  Internal controller
  */
 @available(iOS 16.0, *)
-private struct PageViewController<Page: View>: UIViewControllerRepresentable {
+public struct PageViewController<Page: View>: UIViewControllerRepresentable {
     var pages: [Page]
 
     @Binding var currentPage: Int
 
-    func makeCoordinator() -> Coordinator {
+    public func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
 
-    func makeUIViewController(context: Context) -> UIPageViewController {
+    public func makeUIViewController(context: Context) -> UIPageViewController {
         let pageViewController = UIPageViewController(
             transitionStyle: .scroll,
             navigationOrientation: .horizontal
@@ -54,14 +54,14 @@ private struct PageViewController<Page: View>: UIViewControllerRepresentable {
         return pageViewController
     }
 
-    func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
+    public func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
         let count = pageViewController.viewControllers
         pageViewController.setViewControllers(
             [context.coordinator.controllers[currentPage]], direction: .forward, animated: true
         )
     }
 
-    class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    public class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
         var parent: PageViewController
         var controllers = [UIViewController]()
 
@@ -70,7 +70,7 @@ private struct PageViewController<Page: View>: UIViewControllerRepresentable {
             controllers = parent.pages.map { UIHostingController(rootView: $0) }
         }
 
-        func pageViewController(
+        public func pageViewController(
             _: UIPageViewController,
             viewControllerBefore viewController: UIViewController
         ) -> UIViewController? {
@@ -83,7 +83,7 @@ private struct PageViewController<Page: View>: UIViewControllerRepresentable {
             return controllers[index - 1]
         }
 
-        func pageViewController(
+        public func pageViewController(
             _: UIPageViewController,
             viewControllerAfter viewController: UIViewController
         ) -> UIViewController? {
@@ -96,7 +96,7 @@ private struct PageViewController<Page: View>: UIViewControllerRepresentable {
             return controllers[index + 1]
         }
 
-        func pageViewController(
+        public func pageViewController(
             _ pageViewController: UIPageViewController,
             didFinishAnimating _: Bool,
             previousViewControllers _: [UIViewController],
@@ -113,7 +113,7 @@ private struct PageViewController<Page: View>: UIViewControllerRepresentable {
 }
 
 @available(iOS 16.0, *)
-extension UIPageViewController {
+public extension UIPageViewController {
     func enableSwipeGesture() {
         for view in view.subviews {
             if let subView = view as? UIScrollView {

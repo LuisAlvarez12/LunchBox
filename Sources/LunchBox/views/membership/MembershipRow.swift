@@ -1,6 +1,6 @@
 //
 //  MembershipRow.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/14/23.
 //
@@ -11,7 +11,7 @@ import SwiftUI
 public protocol MembershipFeatureRow {
     var feature: String { get }
     var icon: String { get }
-    var featureName: LocalizedStringKey  { get }
+    var featureName: LocalizedStringKey { get }
     var description: LocalizedStringKey { get }
     var color: Color { get set }
 }
@@ -49,17 +49,17 @@ public struct MembershipRow: View {
 
 @available(iOS 16.0.0, *)
 struct MembershipRedesignRow_Previews: PreviewProvider {
-    struct TestMembershipRow : MembershipFeatureRow {
+    struct TestMembershipRow: MembershipFeatureRow {
         var feature: String = "Test"
         var icon: String = "folder"
         var featureName: LocalizedStringKey = "Full Access"
         var description: LocalizedStringKey = "Get full access to the resources that you need"
-        var color: Color = Color.blue
+        var color: Color = .blue
     }
+
     static var previews: some View {
-        VStack{
+        VStack {
             MembershipRow(membershipRow: TestMembershipRow())
         }
     }
 }
-

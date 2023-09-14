@@ -1,6 +1,6 @@
 //
 //  StatefulPreviewWrapper.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/13/23.
 //
@@ -22,12 +22,11 @@ public struct StatefulPreviewWrapper<Value, Content: View>: View {
     }
 }
 
-
-//@available(iOS 16.0, *)
-//struct StatefulPreviewWrapper_PreviewProvider : PreviewProvider {
+// @available(iOS 16.0, *)
+// struct StatefulPreviewWrapper_PreviewProvider : PreviewProvider {
 //    static var previews: some View {
 //        StatefulPreviewWrapper(1, content: { item in
 //            Text("This is \(item)")
 //        })
 //    }
-//}
+// }

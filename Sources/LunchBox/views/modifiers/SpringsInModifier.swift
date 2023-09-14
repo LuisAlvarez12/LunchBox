@@ -1,6 +1,6 @@
 //
 //  SpringsInModifier.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/14/23.
 //
@@ -9,7 +9,7 @@ import SwiftUI
 
 @available(iOS 16.0.0, *)
 public extension View {
-    public  func springsIn(offset: CGFloat = 40, duration: Double = 0.7) -> some View {
+    func springsIn(offset: CGFloat = 40, duration: Double = 0.7) -> some View {
         modifier(SpringsIn(offSet: offset, duration: duration))
     }
 }
@@ -39,8 +39,8 @@ struct SpringsIn: ViewModifier {
 @available(iOS 16.0.0, *)
 struct SpringsInModifier_Previews: PreviewProvider {
     static var previews: some View {
-        VStack{
-            PrimaryButton(text: "Submit", action: {  })
+        VStack {
+            PrimaryButton(text: "Submit", action: {})
                 .springsIn()
         }
     }

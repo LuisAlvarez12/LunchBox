@@ -1,6 +1,6 @@
 //
 //  PrimaryButton.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/13/23.
 //
@@ -21,7 +21,7 @@ public struct PrimaryButton: View {
         self.disabled = disabled
     }
 
-    public  var body: some View {
+    public var body: some View {
         Button(action: {
             action()
         }, label: {
@@ -45,4 +45,3 @@ struct PrimaryButton_PreviewProvider: PreviewProvider {
         }
     }
 }
-

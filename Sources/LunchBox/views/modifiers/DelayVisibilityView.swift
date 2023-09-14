@@ -1,6 +1,6 @@
 //
 //  DelayVisibilityView.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/14/23.
 //
@@ -9,10 +9,9 @@ import SwiftUI
 
 @available(iOS 13.0, *)
 public struct DelayVisibilityView<Content>: View where Content: View {
-    
     let delay: CGFloat
     @ViewBuilder var content: () -> Content
-    
+
     @State var showView = false
 
     public var body: some View {
@@ -20,12 +19,12 @@ public struct DelayVisibilityView<Content>: View where Content: View {
             if showView {
                 content()
             }
-        }.onAppear{
+        }.onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) { // 1 sec delay
                 withAnimation {
                     showView = true
                 }
-               }
+            }
         }
     }
 }

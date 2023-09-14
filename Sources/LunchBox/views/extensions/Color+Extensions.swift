@@ -1,6 +1,6 @@
 //
 //  Color+Extensions.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/13/23.
 //
@@ -15,8 +15,7 @@ import SwiftUI
 #endif
 
 @available(iOS 15.0, *)
-extension Color {
-  
+public extension Color {
     static let systemSecondary = Color(uiColor: UIColor.secondarySystemBackground)
 
     func toHex() -> String? {
@@ -41,7 +40,7 @@ extension Color {
     }
 }
 
-extension UIColor {
+public extension UIColor {
     var hexString: String? {
         var red: CGFloat = 0
         var green: CGFloat = 0
@@ -81,7 +80,6 @@ extension UIColor {
 
 @available(iOS 16.0, *)
 public extension Color {
-
     init(hex: String) {
         @available(iOS 13.0, *)
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
@@ -114,70 +112,6 @@ public extension Color {
             green: .random(in: 0 ... 1),
             blue: .random(in: 0 ... 1)
         )
-    }
-
-    var name: String {
-        switch self {
-        case Color.themeBlue1: return "theme-blue-1"
-        case Color.themeBlue2: return "theme-blue-2"
-        case Color.themeBlue: return "theme-blue"
-        case Color.themeGold1: return "theme-gold-1"
-        case Color.themeGreen1: return "theme-green-1"
-        case Color.themeOlive: return "theme-olive"
-        case Color.themeOrange2: return "theme-orange-2"
-        case Color.themePink1: return "theme-pink-1"
-        case Color.themePink2: return "theme-pink-2"
-        case Color.themePink: return "theme-pink"
-        case Color.themePurple1: return "theme-purple-1"
-        case Color.themePurple: return "theme-purple"
-        case Color.themeRed: return "theme-red"
-        case Color.themeSalmon1: return "theme-salmon-1"
-        case Color.themeSalmon: return "theme-salmon"
-        case Color.themeTurqoise: return "theme-turqoise"
-        case Color.themeYellow1: return "theme-yellow-1"
-        case Color.themeBlue3: return "theme-blue-3"
-        case Color.themeOrange1: return "theme-orange-1"
-        case Color.themeRed2: return "theme-red-2"
-        case Color.themeMint1: return "theme-mint-1"
-        case Color.themePurple3: return "theme-purple-3"
-        case Color.themeOrange3: return "theme-orange-3"
-        case Color.themePink4: return "theme-pink-4"
-        case Color.themeRed3: return "theme-red-3"
-        case Color.themePink5: return "theme-pink-5"
-        default: return "blue"
-        }
-    }
-
-    static func fromName(colorName: String?) -> Color {
-        switch colorName {
-        case "theme-blue-1": return Color.themeBlue1
-        case "theme-blue-2": return Color.themeBlue2
-        case "theme-blue": return Color.themeBlue
-        case "theme-gold-1": return Color.themeGold1
-        case "theme-green-1": return Color.themeGreen1
-        case "theme-olive": return Color.themeOlive
-        case "theme-orange-2": return Color.themeOrange2
-        case "theme-pink-1": return Color.themePink1
-        case "theme-pink-2": return Color.themePink2
-        case "theme-pink": return Color.themePink
-        case "theme-purple-1": return Color.themePurple1
-        case "theme-purple": return Color.themePurple
-        case "theme-red": return Color.themeRed
-        case "theme-salmon-1": return Color.themeSalmon1
-        case "theme-salmon": return Color.themeSalmon
-        case "theme-turqoise": return Color.themeTurqoise
-        case "theme-yellow-1": return Color.themeYellow1
-        case "theme-blue-3": return Color.themeBlue3
-        case "theme-orange-1": return Color.themeOrange1
-        case "theme-red-2": return Color.themeRed2
-        case "theme-mint-1": return Color.themeMint1
-        case "theme-purple-3": return Color.themePurple3
-        case "theme-orange-3": return Color.themeOrange3
-        case "theme-pink-4": return Color.themePink4
-        case "theme-red-3": return Color.themeRed3
-        case "theme-pink-5": return Color.themePink5
-        default: return Color.appPrimary
-        }
     }
 
     var components: (r: Double, g: Double, b: Double, a: Double) {
@@ -220,36 +154,6 @@ public extension Color {
     static let onboardingSummary = Color("onboarding-summary")
     static let onboardingSuccess = Color("onboarding-success")
 
-    // theme
-    static let themeBlue1 = Color("theme-blue-1")
-    static let themeBlue2 = Color("theme-blue-2")
-    static let themeBlue = Color("theme-blue")
-    static let themeGold1 = Color("theme-gold-1")
-    static let themeGreen1 = Color("theme-green-1")
-    static let themeOlive = Color("theme-olive")
-    static let themeOrange2 = Color("theme-orange-2")
-    static let themePink1 = Color("theme-pink-1")
-    static let themePink2 = Color("theme-pink-2")
-    static let themePink = Color("theme-pink")
-    static let themePurple1 = Color("theme-purple-1")
-    static let themePurple = Color("theme-purple")
-    static let themeRed = Color("theme-red")
-    static let themeSalmon1 = Color("theme-salmon-1")
-    static let themeSalmon = Color("theme-salmon")
-    static let themeTurqoise = Color("theme-turqoise")
-    static let themeYellow1 = Color("theme-yellow-1")
-
-    // MVP 1.0
-    static let themeBlue3 = Color("theme-blue-3")
-    static let themeOrange1 = Color("theme-orange-1")
-    static let themeRed2 = Color("theme-red-2")
-    static let themeMint1 = Color("theme-mint-1")
-    static let themePurple3 = Color("theme-purple-3")
-    static let themeOrange3 = Color("theme-orange-3")
-    static let themePink4 = Color("theme-pink-4")
-    static let themeRed3 = Color("theme-red-3")
-    static let themePink5 = Color("theme-pink-5")
-
     static let offBlack = Color("offblack")
     static let offBlackAccent = Color("offblack-accent")
 
@@ -272,9 +176,9 @@ public extension Color {
 
     static let blueThemeDark = Color.appPrimary
     static let blueThemeLight = Color.appPrimary
-    
+
     static let appPrimary = Color.blue
-    
+
 //    static let appPrimary = Color(hex: "09A8EF")
     static let appSecondary = Color(hex: "C1E9FB")
 
@@ -282,4 +186,3 @@ public extension Color {
     static let appYellow = Color(hex: "FFD077")
     static let appRed = Color(hex: "FF8589")
 }
-

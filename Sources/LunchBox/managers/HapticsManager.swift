@@ -1,6 +1,6 @@
 //
 //  HapticsManager.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/14/23.
 //
@@ -11,7 +11,7 @@ public struct HapticsManager {
     static let shared = HapticsManager()
     private let generator = UINotificationFeedbackGenerator()
 
-    public  func onGeneral() {
+    public func onGeneral() {
         generator.notificationOccurred(.success)
     }
 

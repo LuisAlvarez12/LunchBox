@@ -1,6 +1,6 @@
 //
 //  EmailButton.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/13/23.
 //
@@ -34,6 +34,6 @@ public struct EmailButton<Content>: View where Content: View {
     }
 }
 
-//#Preview {
+// #Preview {
 //    EmailButton(subject: "", emailBody: <#T##LocalizedStringKey#>, content: <#T##() -> _#>)
-//}
+// }

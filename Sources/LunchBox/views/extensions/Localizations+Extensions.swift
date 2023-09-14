@@ -1,6 +1,6 @@
 //
 //  Localizations+Extensions.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/13/23.
 //
@@ -9,10 +9,9 @@ import SwiftUI
 
 @available(iOS 13.0, *)
 public extension View {
-    
     @available(iOS 16.0, *)
-    public func withLanguage(_ language: LocalizedLanguages) -> some View {
-        self.environment(\.locale, .init(identifier: language.identifier))
+    func withLanguage(_ language: LocalizedLanguages) -> some View {
+        environment(\.locale, .init(identifier: language.identifier))
     }
 }
 
@@ -23,22 +22,21 @@ public enum LocalizedLanguages {
     case SimplifiedChinese
     case Korean
     case BrazilianPortuguese
-    
+
     public var identifier: String {
         switch self {
         case .Japanese:
-           return "jp"
+            return "jp"
         case .English:
             return "en"
         case .Spanish:
-            return  "es"
+            return "es"
         case .SimplifiedChinese:
             return "zh-Hans"
         case .Korean:
-            return  "ko"
+            return "ko"
         case .BrazilianPortuguese:
             return "pt-BR"
         }
     }
 }
-

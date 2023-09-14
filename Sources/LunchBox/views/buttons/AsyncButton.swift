@@ -1,6 +1,6 @@
 //
 //  AsyncButton.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/14/23.
 //
@@ -16,13 +16,13 @@ public struct AsyncButton<Label: View>: View {
     @State private var isDisabled = false
     @State private var showProgressView = false
 
-    public  var body: some View {
+    public var body: some View {
         Button(
             action: {
                 if actionOptions.contains(.disableButton) {
                     isDisabled = true
                 }
-            
+
                 Task {
                     var progressViewTask: Task<Void, Error>?
 
@@ -56,9 +56,10 @@ public struct AsyncButton<Label: View>: View {
 
 @available(iOS 14.0, *)
 public extension AsyncButton where Label == Text {
-    public init(_ label: String,
-         actionOptions: Set<ActionOption> = Set(ActionOption.allCases),
-         action: @escaping () async -> Void) {
+    init(_ label: String,
+         actionOptions _: Set<ActionOption> = Set(ActionOption.allCases),
+         action: @escaping () async -> Void)
+    {
         self.init(action: action) {
             Text(label)
         }
@@ -67,9 +68,10 @@ public extension AsyncButton where Label == Text {
 
 @available(iOS 14.0, *)
 public extension AsyncButton where Label == Image {
-    public init(systemImageName: String,
-         actionOptions: Set<ActionOption> = Set(ActionOption.allCases),
-         action: @escaping () async -> Void) {
+    init(systemImageName: String,
+         actionOptions _: Set<ActionOption> = Set(ActionOption.allCases),
+         action: @escaping () async -> Void)
+    {
         self.init(action: action) {
             Image(systemName: systemImageName)
         }

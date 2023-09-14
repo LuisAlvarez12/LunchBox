@@ -1,6 +1,6 @@
 //
 //  MaxWidthLargeScreenModifier.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/13/23.
 //
@@ -21,14 +21,12 @@ public struct MaxWidthLargeScreenModifier: ViewModifier {
     }
 }
 
-
 @available(iOS 16.0.0, *)
 struct MaxWidthLargeScreenModifier_PreviewProvider: PreviewProvider {
     static var previews: some View {
         VStack {
-            PrimaryButton(text: "Submit", action: { })
+            PrimaryButton(text: "Submit", action: {})
                 .fullWidth()
         }
     }
 }
-
