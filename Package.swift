@@ -18,6 +18,6 @@ let package = Package(
             name: "LunchBox"),
         .testTarget(
             name: "LunchBoxTests",
-            dependencies: ["LunchBox"]),
+            dependencies: ["LunchBox"])
     ]
 )

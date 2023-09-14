@@ -1,0 +1,30 @@
+//
+//  PremiumView.swift
+//  
+//
+//  Created by Luis Alvarez on 9/14/23.
+//
+
+import SwiftUI
+
+@available(iOS 16.0.0, *)
+struct PremiumView: View {
+    var body: some View {
+        HStack(spacing: 0) {
+            Group {
+                Image(systemName: "laurel.leading")
+                Text("Premium")
+                Image(systemName: "laurel.trailing")
+            }.foregroundStyle(Color.appPrimary.gradient)
+        }
+    }
+}
+
+@available(iOS 16.0.0, *)
+struct PremiumView_PreviewProvider : PreviewProvider {
+    static var previews: some View {
+        VStack{
+            PremiumView()
+        }
+    }
+}
