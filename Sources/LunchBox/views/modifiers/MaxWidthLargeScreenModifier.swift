@@ -8,7 +8,7 @@
 import SwiftUI
 
 @available(iOS 13.0, *)
-extension View {
+public extension View {
     func fullWidth(ipadWidth: CGFloat) -> some View {
         modifier(MaxWidthLargeScreenModifier(ipadMaxWidth: ipadWidth))
     }
