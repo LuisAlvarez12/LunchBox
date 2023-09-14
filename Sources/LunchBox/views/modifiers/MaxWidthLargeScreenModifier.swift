@@ -8,6 +8,13 @@
 import SwiftUI
 
 @available(iOS 13.0, *)
+extension View {
+    func fullWidth(ipadWidth: CGFloat) -> some View {
+        modifier(MaxWidthLargeScreenModifier(ipadMaxWidth: ipadWidth))
+    }
+}
+
+@available(iOS 13.0, *)
 public struct MaxWidthLargeScreenModifier: ViewModifier {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     let ipadMaxWidth: CGFloat

@@ -58,7 +58,7 @@ public struct IntroFeaturesScreen: View {
                 }
             }
             // todo
-//            .fullWidth(ipadWidth: 400)
+            .fullWidth(ipadWidth: 400)
 
             PrimaryButton(text: "Get Premium", action: {
                 onMembershipClick()
