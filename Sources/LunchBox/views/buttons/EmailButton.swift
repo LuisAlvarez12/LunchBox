@@ -15,7 +15,7 @@ public struct EmailButton<Content>: View where Content: View {
 
     @ViewBuilder var content: () -> Content
 
-    public init(email: String, subject: LocalizedStringKey, emailBody: LocalizedStringKey, content: @escaping () -> any View) {
+    public init(email: String = "team@rezonating.app", subject: LocalizedStringKey, emailBody: LocalizedStringKey, content: @escaping () -> any View) {
         self.email = email
         self.subject = subject
         self.emailBody = emailBody
