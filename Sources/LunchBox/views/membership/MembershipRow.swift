@@ -36,7 +36,7 @@ public struct MembershipRow: View {
                         .font(.system(size: 20, weight: .bold, design: .rounded))
                         .foregroundColor(membershipRow.color)
                 }
-//                .springsIn(offset: 20, duration: 0.3)
+                .springsIn(offset: 20, duration: 0.3)
 
             VStack {
                 Text(membershipRow.featureName)

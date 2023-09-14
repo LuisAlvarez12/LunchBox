@@ -102,7 +102,7 @@ public struct IntroRow: View {
                         .font(.system(size: 20, weight: .bold, design: .rounded))
                         .foregroundColor(color)
                 }
-//                .springsIn(offset: 20, duration: 0.3)
+                .springsIn(offset: 20, duration: 0.3)
 
             Text(.init(text))
                 .font(.system(size: 16, weight: .regular, design: .default))

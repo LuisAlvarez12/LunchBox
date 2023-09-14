@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 public extension View {
     func geoHeight(proxy: GeometryProxy, ratio: Double, fullWidth: Bool = false) -> some View {
         let r = proxy.size.height * ratio
@@ -39,10 +39,6 @@ public extension View {
         }
     }
 
-//    func springsIn(offset: CGFloat = 40, duration: Double = 0.7) -> some View {
-//        modifier(SpringsIn(offSet: offset, duration: duration))
-//    }
-
     func geoWidth(proxy: GeometryProxy, ratio: Double, fullHeight: Bool = false) -> some View {
         let r = proxy.size.width * ratio
 
@@ -53,12 +49,10 @@ public extension View {
         }
     }
 
-    @available(iOS 15.0, *)
     func hideTopSeperator() -> some View {
         listRowSeparator(.hidden, edges: .top)
     }
 
-    @available(iOS 15.0, *)
     func hideBottomSeperator() -> some View {
         listRowSeparator(.hidden, edges: .bottom)
     }
