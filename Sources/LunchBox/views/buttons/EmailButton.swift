@@ -8,8 +8,8 @@
 import SwiftUI
 
 @available(iOS 13.0, *)
-extension View {
-    func emailButton(email: String = "team@rezonating.app", subject: LocalizedStringKey, emailBody: LocalizedStringKey) -> some View {
+public extension View {
+    public func emailButton(email: String = "team@rezonating.app", subject: LocalizedStringKey, emailBody: LocalizedStringKey) -> some View {
         EmailButton(email: email, subject: subject, emailBody: emailBody, content: {
             self
         })
