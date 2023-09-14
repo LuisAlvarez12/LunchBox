@@ -10,7 +10,7 @@ import SwiftUI
 
 @available(iOS 16, *)
 public struct BiometricsManager {
-    static let shared = BiometricsManager()
+    public static let shared = BiometricsManager()
 
     public func faceIDCheck() async -> AuthResult {
         let context = LAContext()

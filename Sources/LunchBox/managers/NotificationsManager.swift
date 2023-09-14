@@ -12,7 +12,7 @@ public class NotificationsManager: ObservableObject {
     @Published var isShown = false
     var notificationMessage = AlertMessage(message: "")
 
-    static var shared = NotificationsManager()
+    public static var shared = NotificationsManager()
 
     var currentTask: Task<Void, Never>?
 

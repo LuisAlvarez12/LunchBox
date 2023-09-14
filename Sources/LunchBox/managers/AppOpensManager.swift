@@ -10,7 +10,7 @@ import SwiftUI
 
 @available(iOS 16.0, *)
 public class AppOpensManager: ObservableObject {
-    static let shared = AppOpensManager()
+    public static let shared = AppOpensManager()
 
     private static let TIMES_LOGGED_IN = "timesLoggedIn"
     private static let HAS_SEEN_REVIEW_PROMPT = "timesSeenReviewPrompt"

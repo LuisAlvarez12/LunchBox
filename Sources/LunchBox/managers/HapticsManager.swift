@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct HapticsManager {
-    static let shared = HapticsManager()
+    public static let shared = HapticsManager()
     private let generator = UINotificationFeedbackGenerator()
 
     public func onGeneral() {
