@@ -21,6 +21,11 @@ public struct MembershipRow: View {
     let membershipRow: MembershipFeatureRow
     var forceDark: Bool = false
 
+    public init(membershipRow: MembershipFeatureRow, forceDark: Bool) {
+        self.membershipRow = membershipRow
+        self.forceDark = forceDark
+    }
+
     public var body: some View {
         HStack(spacing: 16) {
             RoundedRectangle(cornerRadius: 12)
@@ -59,7 +64,7 @@ struct MembershipRedesignRow_Previews: PreviewProvider {
 
     static var previews: some View {
         VStack {
-            MembershipRow(membershipRow: TestMembershipRow())
+            MembershipRow(membershipRow: TestMembershipRow(), forceDark: false)
         }
     }
 }

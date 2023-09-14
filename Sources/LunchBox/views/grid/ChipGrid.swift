@@ -17,6 +17,13 @@ public protocol ChipGridItem {
 public struct ChipGrid: View {
     let chipGridItems: [ChipGridItem]
 
+    public init(chipGridItems: [ChipGridItem], onSelect: @escaping (ChipGridItem) -> Void, selected: ChipGridItem? = nil, arr: [[ChipGridItem]] = [[ChipGridItem]]()) {
+        self.chipGridItems = chipGridItems
+        self.onSelect = onSelect
+        self.selected = selected
+        self.arr = arr
+    }
+
     func getArrays() {
         var chunk0 = [ChipGridItem]()
         var chunk1 = [ChipGridItem]()

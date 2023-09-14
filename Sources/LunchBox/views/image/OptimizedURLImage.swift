@@ -14,6 +14,12 @@ public struct MemorySafeURLImage: View {
 
     @State var image: UIImage? = nil
 
+    public init(url: URL, onDoubleTap: (() -> Void)? = nil, image: UIImage? = nil) {
+        self.url = url
+        self.onDoubleTap = onDoubleTap
+        self.image = image
+    }
+
     public var body: some View {
         Color.clear
             .full()

@@ -9,6 +9,8 @@ import SwiftUI
 
 @available(iOS 16.0.0, *)
 public struct PremiumView: View {
+    public init() {}
+
     public var body: some View {
         HStack(spacing: 0) {
             Group {

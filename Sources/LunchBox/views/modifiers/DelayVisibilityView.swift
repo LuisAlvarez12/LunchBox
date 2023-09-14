@@ -8,7 +8,16 @@
 import SwiftUI
 
 @available(iOS 13.0, *)
-public struct DelayVisibilityView<Content>: View where Content: View {
+extension View {
+    func delayVisibility(delay: CGFloat = 1.0) -> some View {
+        DelayVisibilityView(delay: delay, content: {
+            self
+        })
+    }
+}
+
+@available(iOS 13.0, *)
+private struct DelayVisibilityView<Content>: View where Content: View {
     let delay: CGFloat
     @ViewBuilder var content: () -> Content
 

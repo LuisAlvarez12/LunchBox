@@ -16,6 +16,11 @@ public struct CabinitVideoScreen: View {
     @State var avPlayer: AVPlayer? = nil
     @State var videoPlaying = false
 
+    public init(url: URL, currentTime: CMTime? = nil) {
+        self.url = url
+        self.currentTime = currentTime
+    }
+
     public var body: some View {
         _ = try? AVAudioSession.sharedInstance().setCategory(
             .playback, mode: .default, options: []

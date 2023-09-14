@@ -14,6 +14,13 @@ public struct LabelButton: View {
     var role: ButtonRole? = nil
     let onClick: () -> Void
 
+    public init(title: LocalizedStringKey, systemImage: String, role: ButtonRole? = nil, onClick: @escaping () -> Void) {
+        self.title = title
+        self.systemImage = systemImage
+        self.role = role
+        self.onClick = onClick
+    }
+
     public var body: some View {
         Button(role: role ?? .none, action: {
             onClick()

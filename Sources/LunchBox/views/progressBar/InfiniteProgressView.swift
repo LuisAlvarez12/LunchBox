@@ -18,6 +18,8 @@ private let maxOffset = 1 / coverPercentage * abs(minOffset)
 public struct InfiniteProgressBar: View {
     @State private var offset = minOffset
 
+    public init() {}
+
     public var body: some View {
         Rectangle()
             .foregroundColor(Color.systemSecondary) // change the color as you see fit

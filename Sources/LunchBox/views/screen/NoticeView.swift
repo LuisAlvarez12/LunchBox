@@ -15,6 +15,12 @@ public struct NoticeView: View {
     let title: LocalizedStringKey
     var bodyText: LocalizedStringKey? = nil
 
+    public init(image: String, title: LocalizedStringKey, bodyText: LocalizedStringKey? = nil) {
+        self.image = image
+        self.title = title
+        self.bodyText = bodyText
+    }
+
     public var body: some View {
         VStack {
             Spacer()

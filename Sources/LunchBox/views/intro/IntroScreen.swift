@@ -17,6 +17,16 @@ public struct IntroFeaturesScreen: View {
     let onMembershipClick: () -> Void
     let onDismiss: () -> Void
 
+    public init(headerImage: String, appName: LocalizedStringKey, introRows: [IntroRow], premiumHeaderImage: String, membershipRows: [MembershipFeatureRow], onMembershipClick: @escaping () -> Void, onDismiss: @escaping () -> Void) {
+        self.headerImage = headerImage
+        self.appName = appName
+        self.introRows = introRows
+        self.premiumHeaderImage = premiumHeaderImage
+        self.membershipRows = membershipRows
+        self.onMembershipClick = onMembershipClick
+        self.onDismiss = onDismiss
+    }
+
     public var body: some View {
         VStack {
             Image(headerImage)
@@ -41,7 +51,7 @@ public struct IntroFeaturesScreen: View {
                     Text("... And with **Premium**")
 
                     ForEach(membershipRows, id: \.feature) { row in
-                        MembershipRow(membershipRow: row)
+                        MembershipRow(membershipRow: row, forceDark: false)
                     }
 
                     Spacer()

@@ -17,6 +17,14 @@ public struct TitleHeaderView: View {
 
     var primaryColor: Color? = nil
 
+    public init(subtitle: LocalizedStringKey? = nil, title: LocalizedStringKey, subtitleSize: CGFloat = 28, titleSize: CGFloat = 42, primaryColor: Color? = nil) {
+        self.subtitle = subtitle
+        self.title = title
+        self.subtitleSize = subtitleSize
+        self.titleSize = titleSize
+        self.primaryColor = primaryColor
+    }
+
     public var body: some View {
         Text(subtitle ?? "")
             .font(.callout)
@@ -43,6 +51,13 @@ public struct AlignedTitleHeaderView: View {
 
     var subtitleSize: CGFloat = 28
     var titleSize: CGFloat = 42
+
+    public init(subtitle: String? = nil, title: String, subtitleSize: CGFloat = 28, titleSize: CGFloat = 42) {
+        self.subtitle = subtitle
+        self.title = title
+        self.subtitleSize = subtitleSize
+        self.titleSize = titleSize
+    }
 
     public var body: some View {
         Text(subtitle ?? "")

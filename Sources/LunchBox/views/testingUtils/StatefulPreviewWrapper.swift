@@ -21,12 +21,3 @@ public struct StatefulPreviewWrapper<Value, Content: View>: View {
         self.content = content
     }
 }
-
-// @available(iOS 16.0, *)
-// struct StatefulPreviewWrapper_PreviewProvider : PreviewProvider {
-//    static var previews: some View {
-//        StatefulPreviewWrapper(1, content: { item in
-//            Text("This is \(item)")
-//        })
-//    }
-// }

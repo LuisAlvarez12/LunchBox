@@ -15,6 +15,13 @@ public struct EmailButton<Content>: View where Content: View {
 
     @ViewBuilder var content: () -> Content
 
+    public init(email: String, subject: LocalizedStringKey, emailBody: LocalizedStringKey, content: @escaping () -> any View) {
+        self.email = email
+        self.subject = subject
+        self.emailBody = emailBody
+        self.content = content as! () -> Content
+    }
+
     public var body: some View {
         Button(action: {
             let coded = "mailto:\(email)?subject=\(subject)&body=\(emailBody)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
