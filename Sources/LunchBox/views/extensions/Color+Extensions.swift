@@ -81,7 +81,7 @@ public extension UIColor {
 @available(iOS 16.0, *)
 public extension Color {
     init(hex: String) {
-        @available(iOS 13.0, *)
+        
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0
         Scanner(string: hex).scanHexInt64(&int)
