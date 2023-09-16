@@ -76,11 +76,11 @@ public struct IntroFeaturesScreen: View {
 struct IntroFeaturesScreen_Previews: PreviewProvider {
     static var previews: some View {
         IntroFeaturesScreen(headerImage: "", appName: "Uncover", introRows: [
-            IntroRow(color: Color.appPrimary, icon: "book", text: "With support for PDF, CBZ, and CBR files, Uncover aims to be your next favorite file reading app"),
+            IntroRow(color: Color.blue, icon: "book", text: "With support for PDF, CBZ, and CBR files, Uncover aims to be your next favorite file reading app"),
 
-            IntroRow(color: Color.appGreen, icon: "bookmark", text: "Save those favorite pages with Bookmarks and Bookmark galleries"),
-            IntroRow(color: Color.appRed, icon: "lock", text: "Lock your app with a Pin and Face-ID to keep your Library private"),
-            IntroRow(color: Color.appYellow, icon: "folder", text: "Organize your content in folders"),
+            IntroRow(color: Color.red, icon: "bookmark", text: "Save those favorite pages with Bookmarks and Bookmark galleries"),
+            IntroRow(color: Color.blue, icon: "lock", text: "Lock your app with a Pin and Face-ID to keep your Library private"),
+            IntroRow(color: Color.blue, icon: "folder", text: "Organize your content in folders"),
         ], premiumHeaderImage: "", membershipRows: [
         ], onMembershipClick: {}, onDismiss: {})
     }

@@ -40,24 +40,24 @@ public struct PinView: View {
                 if hidesPin {
                     ForEach(0 ..< maxDigits, id: \.self) { index in
                         if input.count >= index + 1 {
-                            Circle().foregroundStyle(Color.appPrimary.gradient)
+                            Circle().foregroundStyle(Color.LBIdealBluePrimary.gradient)
                                 .frame(minHeight: 26, idealHeight: 26, maxHeight: 26)
                         } else {
-                            Circle().stroke(Color.appPrimary, lineWidth: 3)
+                            Circle().stroke(Color.LBIdealBluePrimary, lineWidth: 3)
                                 .frame(minHeight: 20, idealHeight: 20, maxHeight: 20)
                         }
                     }
                 } else {
                     ForEach(0 ..< maxDigits, id: \.self) { index in
                         ZStack {
-                            RoundedRectangle(cornerRadius: 12).stroke(Color.appPrimary, lineWidth: 3).full()
+                            RoundedRectangle(cornerRadius: 12).stroke(Color.blue, lineWidth: 3).full()
                             if input.count >= index + 1 {
                                 let strRange = input.index(input.startIndex, offsetBy: index)
                                 let indexedStr = input[strRange]
 
                                 Text(String(indexedStr))
                                     .autoFit(size: 40)
-                                    .foregroundColor(Color.screenTone)
+                                    .foregroundColor(Color.LBMonoSchemeTone)
                                     .full()
                             }
                         }.frame(minWidth: 40, idealWidth: 40, maxWidth: 40, minHeight: 40, idealHeight: 40, maxHeight: 40)
@@ -75,16 +75,16 @@ public struct PinView: View {
                             Text("\(button.identifier())")
                                 .bold()
                                 .autoFit(size: 40)
-                                .foregroundColor(Color.screenTone)
+                                .foregroundColor(Color.LBMonoScreenOffTone)
                                 .full()
                                 .padding(12)
                                 .background {
-                                    Circle().foregroundColor(.whiteLightOffBlackDark).shadow(radius: 2)
+                                    Circle().foregroundColor(Color.LBMonoScreenOffTone).shadow(radius: 2)
                                 }
                         } else if button == .Delete {
                             Image(systemName: button.identifier())
                                 .resizable()
-                                .foregroundColor(Color.screenTone)
+                                .foregroundColor(Color.LBMonoScreenOffTone)
                                 .scaledToFit()
                                 .squareFrame(length: 32)
                                 .padding()
@@ -93,13 +93,13 @@ public struct PinView: View {
                             if onClearEmoji != nil, let _currentEmoji = currentEmoji {
                                 Text(_currentEmoji).autoFit(size: 32).padding(12)
                                     .overlay(alignment: .bottom, content: {
-                                        Text("Edit").font(.system(size: 12, weight: .heavy, design: .rounded)).foregroundColor(Color.screenTone)
+                                        Text("Edit").font(.system(size: 12, weight: .heavy, design: .rounded)).foregroundColor(Color.LBMonoScreenOffTone)
                                             .horPadding(6)
                                             .background(Capsule().fill(Material.thin))
                                     })
                             } else {
                                 Text("Clear").autoFit(size: 18)
-                                    .foregroundColor(Color.screenTone)
+                                    .foregroundColor(Color.LBMonoScreenOffTone)
                                     .padding(12)
                             }
                         }

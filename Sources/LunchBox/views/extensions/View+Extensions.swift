@@ -32,13 +32,6 @@ public extension View {
         }
     }
 
-    @available(iOS 16.0, *)
-    func withTrueBackground() -> some View {
-        background {
-            Color.trueBackground.ignoresSafeArea()
-        }
-    }
-
     func geoWidth(proxy: GeometryProxy, ratio: Double, fullHeight: Bool = false) -> some View {
         let r = proxy.size.width * ratio
 

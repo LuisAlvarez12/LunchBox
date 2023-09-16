@@ -9,15 +9,14 @@ import SwiftUI
 
 @available(iOS 16.0.0, *)
 public struct PremiumView: View {
-    public init() {}
-
+    
     public var body: some View {
         HStack(spacing: 0) {
             Group {
                 Image(systemName: "laurel.leading")
                 Text("Premium")
                 Image(systemName: "laurel.trailing")
-            }.foregroundStyle(Color.appPrimary.gradient)
+            }
         }
     }
 }
@@ -27,6 +26,9 @@ struct PremiumView_PreviewProvider: PreviewProvider {
     static var previews: some View {
         VStack {
             PremiumView()
+                .foregroundStyle(.blue)
+            PremiumView()
+                .foregroundStyle(.red)
         }
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RevenueCat
 
 @available(iOS 16.0, *)
 public class PurchasesManager: ObservableObject {}

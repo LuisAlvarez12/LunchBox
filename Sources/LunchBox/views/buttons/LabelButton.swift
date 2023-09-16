@@ -26,7 +26,7 @@ public struct LabelButton: View {
             onClick()
         }, label: {
             Label(title, systemImage: systemImage)
-        }).foregroundStyle(Color.appPrimary)
+        }).foregroundStyle(Color.LBIdealBluePrimary)
     }
 }
 

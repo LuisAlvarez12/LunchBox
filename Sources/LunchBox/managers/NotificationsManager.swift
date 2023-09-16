@@ -54,7 +54,7 @@ public class NotificationsManager: ObservableObject {
 @available(iOS 16.0, *)
 public struct AlertMessage {
     let message: LocalizedStringKey
-    var color: Color = .appPrimary
+    var color: Color = Color.LBIdealBluePrimary
     var imageName: String = "info.circle.fill"
 }
 
@@ -101,7 +101,7 @@ public struct SimpleNotificationView: View {
 
     let title: LocalizedStringKey
     let image: String
-    var color: Color = .appPrimary
+    var color: Color = Color.LBIdealBluePrimary
 
     public var body: some View {
         HStack(alignment: .center) {
@@ -114,7 +114,7 @@ public struct SimpleNotificationView: View {
 
             Text(title)
                 .autoFit(size: 16, weight: .medium, design: .rounded)
-                .foregroundColor(.screenTone)
+                .foregroundColor(Color.LBMonoScreenOffTone)
                 .vertPadding(10)
 
         }.horPadding(16).background {

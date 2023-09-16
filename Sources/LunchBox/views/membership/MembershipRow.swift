@@ -46,7 +46,7 @@ public struct MembershipRow: View {
                 Text(membershipRow.description)
                     .font(.system(size: 16, weight: .regular, design: .default))
                     .aligned()
-                    .foregroundStyle(forceDark ? .white : .screenTone)
+                    .foregroundStyle(forceDark ? .white : Color.LBMonoScreenOffTone)
             }
         }.padding(.top, 8)
     }

@@ -136,59 +136,30 @@ public extension Color {
 
         return (Double(r), Double(g), Double(b), Double(a))
     }
+    
+    static let lunchBoxColors = [
+        Color.LBMonoScreenOffTone,
+        Color.LBMonoSchemeTone,
+        Color.LBMonoSheetBackground,
+        Color.LBMonoSheetAccent,
+        Color.LBUtilityErrorRed,
+        Color.LBUtilityBrightYellow,
+        Color.LBIdealBluePrimary,
+        Color.LBIdealBlueSecondary
+    ]
+    
+    // Mono
+    static let LBMonoScreenOffTone = Color(UIColor(named: "lightOffBlackDarkOffWhite", in: Bundle.module, compatibleWith: nil)!)
+    static let LBMonoSchemeTone = Color(UIColor(named: "lightWhiteDarkBlack", in: Bundle.module, compatibleWith: nil)!)
+    static let LBMonoSheetBackground = Color(UIColor(named: "sheet-background", in: Bundle.module, compatibleWith: nil)!)
+    static let LBMonoSheetAccent = Color(UIColor(named: "sheet-background-reverse", in: Bundle.module, compatibleWith: nil)!)
 
-    // Sheets
-    static let sheetBackgroundReverse = Color("sheet-background-reverse")
-    static let trueBackground = Color("background")
-    static let trueBackgroundReverse = Color("tone-screen")
-    static let whiteLightOffBlackDark = Color("whiteOnLight-offBlackOnDark")
+    // Utils
+    static let LBUtilityErrorRed = Color(UIColor(named: "deep-red", in: Bundle.module, compatibleWith: nil)!)
+    static let LBUtilityBrightYellow = Color(UIColor(named: "favorite-yellow", in: Bundle.module, compatibleWith: nil)!)
 
-    // Share sheet
-    static let shareSheetBackground = Color("share-sheet-background")
-    static let shareSheetAccent = Color("share-sheet-accents")
+    // Palette
+    static let LBIdealBluePrimary = Color(UIColor(named: "idealBluePrimary", in: Bundle.module, compatibleWith: nil)!)
+    static let LBIdealBlueSecondary = Color(UIColor(named: "idealBlueSecondary", in: Bundle.module, compatibleWith: nil)!)
 
-    static let systemBackground = Color(.systemGroupedBackground)
-
-    // Assets
-    static let mellowYellow = Color("mellow-yellow")
-
-    // Onboarding
-    static let onboardingBlue = Color("onboarding-intro")
-    static let onboardingName = Color("onboarding-name")
-    static let onboardingEmoji = Color("onboarding-emoji")
-    static let onboardingPin = Color("onboarding-pin")
-    static let onboardingSummary = Color("onboarding-summary")
-    static let onboardingSuccess = Color("onboarding-success")
-
-    static let offBlack = Color("offblack")
-    static let offBlackAccent = Color("offblack-accent")
-
-    static let offWhite = Color("off-white")
-
-    static let toneWhite = Color("tone-white")
-    static let screenTone = Color("tone")
-
-    static let trueToneBackground = Color("true-tone-background")
-
-    // Error
-    static let deepRed = Color("deep-red")
-
-    // Favoriting
-    static let favoriteYellow = Color("favorite-yellow")
-
-    // Blue theme
-//    static let blueThemeDark = Color("blue-theme-dark")
-//    static let blueThemeLight = Color("blue-theme-light")
-
-    static let blueThemeDark = Color.appPrimary
-    static let blueThemeLight = Color.appPrimary
-
-    static let appPrimary = Color.blue
-
-//    static let appPrimary = Color(hex: "09A8EF")
-    static let appSecondary = Color(hex: "C1E9FB")
-
-    static let appGreen = Color(hex: "00BD96")
-    static let appYellow = Color(hex: "FFD077")
-    static let appRed = Color(hex: "FF8589")
 }

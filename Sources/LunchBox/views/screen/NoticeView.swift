@@ -30,7 +30,7 @@ public struct NoticeView: View {
                 .frame(width: 100)
 
             Text(title).font(.system(size: 18, weight: .bold, design: .default))
-                .foregroundColor(Color.screenTone)
+                .foregroundColor(Color.LBMonoScreenOffTone)
                 .multilineTextAlignment(.center)
 
             if let bodyText {

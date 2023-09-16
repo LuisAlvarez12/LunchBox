@@ -96,9 +96,9 @@ public struct ChipView: View {
         }
         .horPadding(12)
         .vertPadding(8)
-        .foregroundColor(isSelected ? .white : .screenTone)
+        .foregroundColor(isSelected ? Color.white : Color.LBMonoScreenOffTone)
         .background {
-            let bgColor = isSelected ? Color.blueThemeDark : Color.shareSheetAccent
+            let bgColor = isSelected ? Color.LBIdealBluePrimary : Color.LBMonoScreenOffTone
 
             Capsule().fill(bgColor)
         }

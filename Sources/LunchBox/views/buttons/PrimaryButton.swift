@@ -14,7 +14,7 @@ public struct PrimaryButton: View {
     let action: () -> Void
     var disabled: Bool = false
 
-    public init(text: LocalizedStringKey, color: Color = Color.appPrimary, disabled: Bool = false, action: @escaping () -> Void) {
+    public init(text: LocalizedStringKey, color: Color = Color.LBIdealBluePrimary, disabled: Bool = false, action: @escaping () -> Void) {
         self.text = text
         self.color = color
         self.action = action
