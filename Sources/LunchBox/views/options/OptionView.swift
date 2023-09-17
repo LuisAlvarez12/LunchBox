@@ -32,7 +32,7 @@ struct OptionView: View {
                     }
             } else {
                 Circle()
-                    .foregroundStyle(Color.white)
+                    .foregroundStyle(Color.secondary)
                     .squareFrame(length: 20)
             }
 
@@ -40,12 +40,12 @@ struct OptionView: View {
                 Text(title)
                     .font(.title3)
                     .bold()
-                    .foregroundStyle(Color.LBMonoSchemeTone)
+                    .foregroundStyle(Color.LBMonoScreenOffTone)
 
                 if let desc = bodyText {
                     Text(desc)
                         .font(.footnote)
-                        .foregroundStyle(Color.LBMonoSchemeTone)
+                        .foregroundStyle(Color.LBMonoScreenOffTone)
                         .multilineTextAlignment(.leading)
                 }
 
@@ -55,7 +55,7 @@ struct OptionView: View {
 
             VStack {
                 Text(price).bold()
-                    .foregroundStyle(Color.LBMonoSchemeTone)
+                    .foregroundStyle(Color.LBMonoScreenOffTone)
             }
         }.padding().background {
             RoundedRectangle(cornerRadius: 12)
@@ -63,7 +63,7 @@ struct OptionView: View {
                 .overlay {
                     if isSelected {
                         RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color.green, lineWidth: 3)
+                            .stroke(Color.green.gradient, lineWidth: 3)
                     }
                 }
         }.horPadding()

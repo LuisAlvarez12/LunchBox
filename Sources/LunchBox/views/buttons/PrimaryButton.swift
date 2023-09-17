@@ -13,17 +13,49 @@ public struct PrimaryButton: View {
     let color: Color
     let action: () -> Void
     var disabled: Bool = false
-
+    
     public init(text: LocalizedStringKey, color: Color = Color.LBIdealBluePrimary, disabled: Bool = false, action: @escaping () -> Void) {
         self.text = text
         self.color = color
         self.action = action
         self.disabled = disabled
     }
-
+    
     public var body: some View {
         Button(action: {
             action()
+        }, label: {
+            Text(text)
+                .foregroundStyle(.white)
+                .font(.system(size: 18, weight: .medium, design: .default))
+                .fullWidth()
+                .padding()
+                .background(RoundedRectangle(cornerRadius: 12).fill(disabled ? Color.secondary : color))
+        })
+        .disabled(disabled)
+        .horPadding()
+        
+        
+    }
+}
+
+@available(iOS 16.0, *)
+public struct AsyncPrimaryButton: View {
+    let text: LocalizedStringKey
+    let color: Color
+    var action: () async -> Void
+    var disabled: Bool = false
+    
+    public init(text: LocalizedStringKey, color: Color = Color.LBIdealBluePrimary, disabled: Bool = false, action: @escaping () async -> Void) {
+        self.text = text
+        self.color = color
+        self.action = action
+        self.disabled = disabled
+    }
+    
+    public var body: some View {
+        AsyncButton(action: {
+            await action()
         }, label: {
             Text(text)
                 .foregroundStyle(.white)
@@ -42,6 +74,7 @@ struct PrimaryButton_PreviewProvider: PreviewProvider {
     static var previews: some View {
         VStack {
             PrimaryButton(text: "Dismiss", action: {})
+            AsyncPrimaryButton(text: "Dismiss", action: {})
         }
     }
 }
