@@ -49,7 +49,8 @@ public struct MembershipContainerScreen: View {
     
     let membershipMetaData: MembershipMetaData
     let membershipFeatures: [LocalizedKeyWithPosition]
-    var subscriptionOptions: [SubscriptionMetadata] = []
+    
+    @State var subscriptionOptions: [SubscriptionMetadata] = []
     
     @State var selectedChoice: SubscriptionMetadata? = nil
     
