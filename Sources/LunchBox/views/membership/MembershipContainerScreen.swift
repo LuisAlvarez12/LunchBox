@@ -49,7 +49,7 @@ public struct MembershipContainerScreen: View {
     
     let membershipMetaData: MembershipMetaData
     let membershipFeatures: [LocalizedKeyWithPosition]
-    @State var subscriptionOptions: [SubscriptionMetadata] = []
+    var subscriptionOptions: [SubscriptionMetadata] = []
     
     @State var selectedChoice: SubscriptionMetadata? = nil
     
@@ -122,35 +122,6 @@ public struct MembershipContainerScreen: View {
                 
                 Spacer()
                 
-                if let _choice = selectedChoice as? SubscriptionOptionMetadata {
-                    Text(_choice.getConfirmationString())
-                        .font(.caption)
-                        .foregroundStyle(Color.secondary)
-                        .multilineTextAlignment(.center)
-                        .padding(6)
-                    
-                    AsyncPrimaryButton(text: _choice.eligibleForTrial ? "Try FREE and Subscribe" : "Continue", color: membershipMetaData.primaryMembershipColor, action: {
-                        
-                        let result = await purchasesManager.purchase(selectedChoice: _choice)
-                        
-                        if result is SubscriptionSuccess {
-                            membershipMetaData.onSubscribeSuccess()
-                        } else {
-                            membershipMetaData.onSubscribeFailure()
-                        }
-                        
-                    })
-                    
-                    AsyncSecondaryButton(text: "Restore", action: {
-                        let result = await purchasesManager.restore(acceptableEntitlements: membershipMetaData.acceptedEntitlements)
-                        
-                        if result is SubscriptionSuccess {
-                            membershipMetaData.onSubscribeSuccess()
-                        } else {
-                            membershipMetaData.onSubscribeFailure()
-                        }
-                    }).padding(.top, 4)
-                }
             }.full()
         }
     }
@@ -161,7 +132,38 @@ public struct MembershipContainerScreen: View {
             ScrollView {
                 screen
             }
-        }.task {
+        }.safeAreaInset(edge: .bottom, content: {
+            if let _choice = selectedChoice as? SubscriptionOptionMetadata {
+                Text(_choice.getConfirmationString())
+                    .font(.caption)
+                    .foregroundStyle(Color.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(6)
+                
+                AsyncPrimaryButton(text: _choice.eligibleForTrial ? "Try FREE and Subscribe" : "Continue", color: membershipMetaData.primaryMembershipColor, action: {
+                    
+                    let result = await purchasesManager.purchase(selectedChoice: _choice)
+                    
+                    if result is SubscriptionSuccess {
+                        membershipMetaData.onSubscribeSuccess()
+                    } else {
+                        membershipMetaData.onSubscribeFailure()
+                    }
+                    
+                })
+                
+                AsyncSecondaryButton(text: "Restore", action: {
+                    let result = await purchasesManager.restore(acceptableEntitlements: membershipMetaData.acceptedEntitlements)
+                    
+                    if result is SubscriptionSuccess {
+                        membershipMetaData.onSubscribeSuccess()
+                    } else {
+                        membershipMetaData.onSubscribeFailure()
+                    }
+                }).padding(.top, 4)
+            }
+        })
+        .task {
             if subscriptionOptions.isEmpty {
                                 subscriptionOptions = await purchasesManager.getOfferings()
             }
