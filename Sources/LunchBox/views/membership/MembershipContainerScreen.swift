@@ -135,33 +135,35 @@ public struct MembershipContainerScreen: View {
             }
         }.safeAreaInset(edge: .bottom, content: {
             if let _choice = selectedChoice as? SubscriptionOptionMetadata {
-                Text(_choice.getConfirmationString())
-                    .font(.caption)
-                    .foregroundStyle(Color.secondary)
-                    .multilineTextAlignment(.center)
-                    .padding(6)
-                
-                AsyncPrimaryButton(text: _choice.eligibleForTrial ? "Try FREE and Subscribe" : "Continue", color: membershipMetaData.primaryMembershipColor, action: {
+                VStack{
+                    Text(_choice.getConfirmationString())
+                        .font(.caption)
+                        .foregroundStyle(Color.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(6)
                     
-                    let result = await purchasesManager.purchase(selectedChoice: _choice)
+                    AsyncPrimaryButton(text: _choice.eligibleForTrial ? "Try FREE and Subscribe" : "Continue", color: membershipMetaData.primaryMembershipColor, action: {
+                        
+                        let result = await purchasesManager.purchase(selectedChoice: _choice)
+                        
+                        if result is SubscriptionSuccess {
+                            membershipMetaData.onSubscribeSuccess()
+                        } else {
+                            membershipMetaData.onSubscribeFailure()
+                        }
+                        
+                    })
                     
-                    if result is SubscriptionSuccess {
-                        membershipMetaData.onSubscribeSuccess()
-                    } else {
-                        membershipMetaData.onSubscribeFailure()
-                    }
-                    
-                })
-                
-                AsyncSecondaryButton(text: "Restore", action: {
-                    let result = await purchasesManager.restore(acceptableEntitlements: membershipMetaData.acceptedEntitlements)
-                    
-                    if result is SubscriptionSuccess {
-                        membershipMetaData.onSubscribeSuccess()
-                    } else {
-                        membershipMetaData.onSubscribeFailure()
-                    }
-                }).padding(.top, 4)
+                    AsyncSecondaryButton(text: "Restore", action: {
+                        let result = await purchasesManager.restore(acceptableEntitlements: membershipMetaData.acceptedEntitlements)
+                        
+                        if result is SubscriptionSuccess {
+                            membershipMetaData.onSubscribeSuccess()
+                        } else {
+                            membershipMetaData.onSubscribeFailure()
+                        }
+                    }).padding(.top, 4)
+                }
             }
         })
         .task {
