@@ -88,7 +88,7 @@ public struct MembershipContainerScreen: View {
                         .font(.system(size: 90))
                         .foregroundStyle(Color.LBUtilityBrightYellow.gradient)
                     Spacer()
-                }
+                }.padding(.top, 24)
                 
                 Text("Unlock the Full \(membershipMetaData.appName) Experience")
                     .font(.title)
@@ -163,7 +163,7 @@ public struct MembershipContainerScreen: View {
             }
         }.task {
             if subscriptionOptions.isEmpty {
-                //                subscriptionOptions = await purchasesManager.getOfferings()
+                                subscriptionOptions = await purchasesManager.getOfferings()
             }
         }
     }
