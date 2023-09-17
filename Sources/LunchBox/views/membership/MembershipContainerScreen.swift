@@ -11,6 +11,11 @@ import SwiftUI
 public struct LocalizedKeyWithPosition {
     let id: Int
     let feature: LocalizedStringKey
+    
+    public init(id: Int, feature: LocalizedStringKey) {
+        self.id = id
+        self.feature = feature
+    }
 }
 
 @available(iOS 13.0, *)
@@ -24,6 +29,17 @@ public struct MembershipMetaData {
     let features: [LocalizedStringKey]
     let onSubscribeSuccess: () -> Void
     let onSubscribeFailure: () -> Void
+    
+    public init(appName: String, appMembershipName: String, acceptedEntitlements: [String], heroImageAsset: String, primaryMembershipColor: Color, features: [LocalizedStringKey], onSubscribeSuccess: @escaping () -> Void, onSubscribeFailure: @escaping () -> Void) {
+        self.appName = appName
+        self.appMembershipName = appMembershipName
+        self.acceptedEntitlements = acceptedEntitlements
+        self.heroImageAsset = heroImageAsset
+        self.primaryMembershipColor = primaryMembershipColor
+        self.features = features
+        self.onSubscribeSuccess = onSubscribeSuccess
+        self.onSubscribeFailure = onSubscribeFailure
+    }
 }
 
 @available(iOS 16.0, *)
@@ -64,7 +80,9 @@ public struct MembershipContainerScreen: View {
                     Image(systemName: "laurel.leading")
                         .font(.system(size: 90))
                         .foregroundStyle(Color.LBUtilityBrightYellow.gradient)
-                    membershipMetaData.primaryMembershipColor
+                    Image(membershipMetaData.heroImageAsset)
+                        .resizable()
+                        .scaledToFit()
                         .squareFrame(length: 100)
                     Image(systemName: "laurel.trailing")
                         .font(.system(size: 90))
