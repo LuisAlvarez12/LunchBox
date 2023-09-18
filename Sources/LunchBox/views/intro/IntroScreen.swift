@@ -29,24 +29,25 @@ public struct IntroFeaturesScreen: View {
 
     public var body: some View {
         VStack {
-            Image(headerImage)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 140)
-                .padding(.top, 24)
-
-            TitleHeaderView(subtitle: "Welcome to", title: appName)
-
             ScrollView(showsIndicators: false) {
-                VStack(spacing: 24) {
+                VStack {
+                    Image(headerImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100)
+                        .padding(.top)
+
+                    TitleHeaderView(subtitle: "Welcome to", title: appName)
+                    
                     ForEach(introRows, id: \.text) { row in
                         row
                     }
 
                     Image(premiumHeaderImage)
                         .resizable()
-                        .frame(width: 240)
                         .scaledToFit()
+                        .frame(width: 100)
+                        .padding(.top)
 
                     Text("... And with **Premium**")
 
@@ -67,6 +68,7 @@ public struct IntroFeaturesScreen: View {
             SecondaryButton(text: "Dismiss", action: {
                 onDismiss()
             })
+            
             Spacer()
         }.full().horPadding(36)
     }

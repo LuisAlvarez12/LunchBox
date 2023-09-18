@@ -27,7 +27,7 @@ public struct PrimaryButton: View {
         }, label: {
             Text(text)
                 .foregroundStyle(.white)
-                .font(.system(size: 18, weight: .medium, design: .default))
+                .font(.system(size: 18, weight: .semibold, design: .default))
                 .fullWidth()
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 12).fill(disabled ? Color.secondary : color))
@@ -59,7 +59,7 @@ public struct AsyncPrimaryButton: View {
         }, label: {
             Text(text)
                 .foregroundStyle(.white)
-                .font(.system(size: 18, weight: .medium, design: .default))
+                .font(.system(size: 18, weight: .semibold, design: .default))
                 .fullWidth()
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 12).fill(disabled ? Color.secondary : color))

@@ -168,7 +168,7 @@ public struct MembershipContainerScreen: View {
         })
         .task {
             if subscriptionOptions.isEmpty {
-                                subscriptionOptions = await purchasesManager.getOfferings()
+                subscriptionOptions = await purchasesManager.getOfferings()
             }
         }
     }
