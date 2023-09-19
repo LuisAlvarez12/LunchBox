@@ -35,11 +35,13 @@ public struct TitleHeaderView: View {
         if let primaryColor {
             Text(title)
                 .font(.system(size: titleSize, weight: .bold, design: .rounded))
+                .multilineTextAlignment(.center)
                 .foregroundStyle(primaryColor)
                 .shadow(color: primaryColor, radius: 4)
         } else {
             Text(title)
                 .font(.system(size: titleSize, weight: .bold, design: .rounded))
+                .multilineTextAlignment(.center)
         }
     }
 }
