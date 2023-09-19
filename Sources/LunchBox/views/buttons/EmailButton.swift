@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 public extension View {
     func emailButton(email: String = "team@rezonating.app", subject: LocalizedStringKey, emailBody: LocalizedStringKey) -> some View {
         EmailButton(email: email, subject: subject, emailBody: emailBody, content: {
@@ -16,7 +16,7 @@ public extension View {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 public struct EmailButton<Content>: View where Content: View {
     var email: String = "team@rezonating.app"
     let subject: LocalizedStringKey

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 extension View {
     func delayVisibility(delay: CGFloat = 1.0) -> some View {
         DelayVisibilityView(delay: delay, content: {
@@ -16,7 +16,7 @@ extension View {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 private struct DelayVisibilityView<Content>: View where Content: View {
     let delay: CGFloat
     @ViewBuilder var content: () -> Content
@@ -38,7 +38,7 @@ private struct DelayVisibilityView<Content>: View where Content: View {
     }
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 16.0.0, *)
 struct DelayVisibilityView_Previews: PreviewProvider {
     static var previews: some View {
         DelayVisibilityView(delay: 2.0) {

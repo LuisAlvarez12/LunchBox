@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@available(iOS 14.0, *)
+@available(iOS 16.0, *)
 public struct AsyncButton<Label: View>: View {
     var action: () async -> Void
     var actionOptions = Set(ActionOption.allCases)
@@ -54,7 +54,7 @@ public struct AsyncButton<Label: View>: View {
     }
 }
 
-@available(iOS 14.0, *)
+@available(iOS 16.0, *)
 public extension AsyncButton where Label == Text {
     init(_ label: String,
          actionOptions _: Set<ActionOption> = Set(ActionOption.allCases),
@@ -66,7 +66,7 @@ public extension AsyncButton where Label == Text {
     }
 }
 
-@available(iOS 14.0, *)
+@available(iOS 16.0, *)
 public extension AsyncButton where Label == Image {
     init(systemImageName: String,
          actionOptions _: Set<ActionOption> = Set(ActionOption.allCases),
@@ -78,7 +78,7 @@ public extension AsyncButton where Label == Image {
     }
 }
 
-@available(iOS 14.0, *)
+@available(iOS 16.0, *)
 public extension AsyncButton {
     enum ActionOption: CaseIterable {
         case disableButton

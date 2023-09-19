@@ -165,8 +165,8 @@ public struct PinView: View {
  @available(iOS 16.0.0, *)
  struct PinView_Previews: PreviewProvider {
     static var previews: some View {
-        StatefulPreviewWrapper(value: "112") {
-            PinView(input: $0, onPinComplete: { _ in
+        StatefulPreviewWrapper(value: "112") { str in
+            PinView(input: str, onPinComplete: { _ in
 
             }, textColor: Color.red, hidesPin: false, currentEmoji: "a", onClearEmoji: {})
         }

@@ -15,7 +15,7 @@ import UIKit
 //  Created by Luis Alvarez on 9/16/21.
 //
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 class PinchZoomView: UIView {
     weak var delegate: PinchZoomViewDelgate?
 
@@ -133,7 +133,7 @@ class PinchZoomView: UIView {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 protocol PinchZoomViewDelgate: AnyObject {
     func pinchZoomView(_ pinchZoomView: PinchZoomView, didChangePinching isPinching: Bool)
     func pinchZoomView(_ pinchZoomView: PinchZoomView, didChangeScale scale: CGFloat)
@@ -141,7 +141,7 @@ protocol PinchZoomViewDelgate: AnyObject {
     func pinchZoomView(_ pinchZoomView: PinchZoomView, didChangeOffset offset: CGSize)
 }
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 struct PinchZoom: UIViewRepresentable {
     @Binding var scale: CGFloat
     @Binding var anchor: UnitPoint
@@ -188,7 +188,7 @@ struct PinchZoom: UIViewRepresentable {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 struct PinchToZoom: ViewModifier {
     var onDoubleTap: (() -> Void)? = nil
     @State var scale: CGFloat = 1.0

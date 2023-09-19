@@ -31,7 +31,7 @@ public enum SubscriptionTimeIncrement {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 public extension SubscriptionTimeIncrement {
     public func getLocalizedBundle() -> MembershipLocalizedBundle {
         switch self {
@@ -47,7 +47,7 @@ public extension SubscriptionTimeIncrement {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 public protocol SubscriptionMetadata {
     var choice: SubscriptionTimeIncrement { get }
     var localizedBundle: MembershipLocalizedBundle { get }
@@ -55,7 +55,7 @@ public protocol SubscriptionMetadata {
 }
 
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 struct InternalSubscriptionMetadata : SubscriptionMetadata {
     var choice: SubscriptionTimeIncrement
     let localizedBundle: MembershipLocalizedBundle
@@ -92,7 +92,7 @@ struct InternalSubscriptionMetadata : SubscriptionMetadata {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 public struct SubscriptionOptionMetadata : SubscriptionMetadata {
     
     public var choice: SubscriptionTimeIncrement
@@ -131,14 +131,14 @@ public struct SubscriptionOptionMetadata : SubscriptionMetadata {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 public struct MembershipLocalizedBundle {
     let title: LocalizedStringKey
     var desc: LocalizedStringKey? = nil
     var badge: LocalizedStringKey? = nil
 }
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 public extension Package {
     func createMembershipChoice() async -> SubscriptionOptionMetadata? {
         let identifier = storeProduct.productIdentifier

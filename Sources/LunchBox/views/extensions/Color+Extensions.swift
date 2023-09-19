@@ -14,14 +14,14 @@ import SwiftUI
     import AppKit
 #endif
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 public extension LinearGradient {
     init(_ colors: Color...) {
         self.init(gradient: Gradient(colors: colors), startPoint: .topLeading, endPoint: .bottomTrailing)
     }
 }
 
-@available(iOS 15.0, *)
+@available(iOS 16.0, *)
 public extension Color {
     static let systemSecondary = Color(uiColor: UIColor.secondarySystemBackground)
 

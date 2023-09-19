@@ -290,7 +290,7 @@ private extension String {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 struct GenericFaker_PreviewProvider: PreviewProvider {
     static var previews: some View {
         VStack {

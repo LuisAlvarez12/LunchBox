@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 public extension Text {
     func semiBold() -> Text {
         fontWeight(.semibold)
@@ -18,7 +18,7 @@ public extension Text {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 struct TextExtensions_PreviewProvider: PreviewProvider {
     static var previews: some View {
         VStack {

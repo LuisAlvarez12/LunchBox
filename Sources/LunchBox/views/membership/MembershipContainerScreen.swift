@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 public struct LocalizedKeyWithPosition {
     let id: Int
     let feature: LocalizedStringKey
@@ -18,7 +18,7 @@ public struct LocalizedKeyWithPosition {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 public struct MembershipMetaData {
     let appName: String
     // Premium, plus, etc

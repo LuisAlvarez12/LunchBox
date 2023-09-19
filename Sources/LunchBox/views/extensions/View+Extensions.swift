@@ -137,7 +137,7 @@ public extension View {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 public struct ClearListBackgroundModifier: ViewModifier {
     public func body(content: Content) -> some View {
         if #available(iOS 16.0, *) {
@@ -148,7 +148,7 @@ public struct ClearListBackgroundModifier: ViewModifier {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 private struct RoundedCorner: Shape {
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
@@ -162,7 +162,7 @@ private struct RoundedCorner: Shape {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 public struct AnimatesIn: ViewModifier {
     var offSet: CGFloat
     var duration: Double
@@ -183,7 +183,7 @@ public struct AnimatesIn: ViewModifier {
     }
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 16.0.0, *)
 struct MaxWidthLargeScreenModifier_Previews: PreviewProvider {
     static var previews: some View {
         Text("Hello, world!")
