@@ -57,7 +57,7 @@ public struct PinView: View {
 
                                 Text(String(indexedStr))
                                     .autoFit(size: 40)
-                                    .foregroundColor(Color.LBMonoSchemeTone)
+                                    .foregroundColor(Color.LBMonoScreenOffTone)
                                     .full()
                             }
                         }.frame(minWidth: 40, idealWidth: 40, maxWidth: 40, minHeight: 40, idealHeight: 40, maxHeight: 40)
@@ -162,16 +162,16 @@ public struct PinView: View {
     }
 }
 
-// @available(iOS 16.0.0, *)
-// struct PinView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        StatefulPreviewWrapper("112", content: {
-//            PinView(input: $0, onPinComplete: { _ in
-//
-//            }, textColor: Color.red, hidesPin: false, currentEmoji: "a", onClearEmoji: {})
-//        })
-//    }
-// }
+ @available(iOS 16.0.0, *)
+ struct PinView_Previews: PreviewProvider {
+    static var previews: some View {
+        StatefulPreviewWrapper(value: "112") {
+            PinView(input: $0, onPinComplete: { _ in
+
+            }, textColor: Color.red, hidesPin: false, currentEmoji: "a", onClearEmoji: {})
+        }
+    }
+ }
 
 public enum PinButtonType: CaseIterable {
     case One
