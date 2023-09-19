@@ -79,7 +79,7 @@ public struct PinView: View {
                                 .full()
                                 .padding(12)
                                 .background {
-                                    Circle().foregroundColor(Color.LBMonoScreenOffTone).shadow(radius: 2)
+                                    Circle().foregroundColor(Color.systemSecondary).shadow(radius: 2)
                                 }
                         } else if button == .Delete {
                             Image(systemName: button.identifier())
@@ -161,17 +161,6 @@ public struct PinView: View {
         }
     }
 }
-
- @available(iOS 16.0.0, *)
- struct PinView_Previews: PreviewProvider {
-    static var previews: some View {
-        StatefulPreviewWrapper(value: "112") { str in
-            PinView(input: str, onPinComplete: { _ in
-
-            }, textColor: Color.red, hidesPin: false, currentEmoji: "a", onClearEmoji: {})
-        }
-    }
- }
 
 public enum PinButtonType: CaseIterable {
     case One
