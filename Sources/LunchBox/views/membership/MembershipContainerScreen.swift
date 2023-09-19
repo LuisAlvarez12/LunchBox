@@ -134,27 +134,37 @@ public struct MembershipContainerScreen: View {
                 screen
             }
         }.safeAreaInset(edge: .bottom, content: {
-            if let _choice = selectedChoice as? SubscriptionOptionMetadata {
                 VStack{
-                    Text(_choice.getConfirmationString())
-                        .font(.caption)
-                        .foregroundStyle(Color.secondary)
-                        .multilineTextAlignment(.center)
-                        .padding(6)
+                    if let _choice = selectedChoice as? SubscriptionOptionMetadata {
+                        Text(_choice.getConfirmationString())
+                            .font(.caption)
+                            .foregroundStyle(Color.secondary)
+                            .multilineTextAlignment(.center)
+                            .padding(6)
+                        
+                        AsyncPrimaryButton(text: _choice.eligibleForTrial ? "Try FREE and Subscribe" : "Continue", color: membershipMetaData.primaryMembershipColor, action: {
+                            
+                            let result = await purchasesManager.purchase(selectedChoice: _choice)
+                            
+                            if result is SubscriptionSuccess {
+                                membershipMetaData.onSubscribeSuccess()
+                            } else {
+                                membershipMetaData.onSubscribeFailure()
+                            }
+                        })
+                    } else {
+                        Text("Choose a Plan above\nNo commitment, Cancel Anytime")
+                            .font(.caption)
+                            .foregroundStyle(Color.secondary)
+                            .multilineTextAlignment(.center)
+                            .padding(6)
+                        
+                        PrimaryButton(text: "Continue",disabled: true, action: {
+                            
+                        })
+                    }
                     
-                    AsyncPrimaryButton(text: _choice.eligibleForTrial ? "Try FREE and Subscribe" : "Continue", color: membershipMetaData.primaryMembershipColor, action: {
-                        
-                        let result = await purchasesManager.purchase(selectedChoice: _choice)
-                        
-                        if result is SubscriptionSuccess {
-                            membershipMetaData.onSubscribeSuccess()
-                        } else {
-                            membershipMetaData.onSubscribeFailure()
-                        }
-                        
-                    })
-                    
-                    AsyncSecondaryButton(text: "Restore", action: {
+                    AsyncButton("Restore", action: {
                         let result = await purchasesManager.restore(acceptableEntitlements: membershipMetaData.acceptedEntitlements)
                         
                         if result is SubscriptionSuccess {
@@ -162,10 +172,9 @@ public struct MembershipContainerScreen: View {
                         } else {
                             membershipMetaData.onSubscribeFailure()
                         }
-                    }).padding(.top, 4)
-                }
-            }
-        })
+                    }).foregroundColor(membershipMetaData.primaryMembershipColor).padding(.top, 4)
+                }.background(Color.LBMonoSchemeTone)
+            })
         .task {
             if subscriptionOptions.isEmpty {
                 subscriptionOptions = await purchasesManager.getOfferings()
