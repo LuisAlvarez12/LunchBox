@@ -173,6 +173,7 @@ public struct MembershipContainerScreen: View {
                             membershipMetaData.onSubscribeFailure()
                         }
                     }).foregroundColor(membershipMetaData.primaryMembershipColor).padding(.top, 4)
+                        .padding(.bottom)
                 }.background(Color.LBMonoSchemeTone)
             })
         .task {
