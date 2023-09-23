@@ -37,7 +37,7 @@ public struct IntroFeaturesScreen: View {
                     Image(headerImage)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 100)
+                        .frame(width: imageSize)
                         .padding(.top)
 
                     TitleHeaderView(subtitle: "Welcome to", title: appName)
