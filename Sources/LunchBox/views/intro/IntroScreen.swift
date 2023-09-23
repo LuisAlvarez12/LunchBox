@@ -16,9 +16,12 @@ public struct IntroFeaturesScreen: View {
     let membershipRows: [MembershipFeatureRow]
     let onMembershipClick: () -> Void
     let onDismiss: () -> Void
+    
+    var imageSize: CGFloat
 
-    public init(headerImage: String, appName: LocalizedStringKey, introRows: [IntroRow], premiumHeaderImage: String, membershipRows: [MembershipFeatureRow], onMembershipClick: @escaping () -> Void, onDismiss: @escaping () -> Void) {
+    public init(headerImage: String, imageSize: CGFloat = 100, appName: LocalizedStringKey, introRows: [IntroRow], premiumHeaderImage: String, membershipRows: [MembershipFeatureRow], onMembershipClick: @escaping () -> Void, onDismiss: @escaping () -> Void) {
         self.headerImage = headerImage
+        self.imageSize = imageSize
         self.appName = appName
         self.introRows = introRows
         self.premiumHeaderImage = premiumHeaderImage
