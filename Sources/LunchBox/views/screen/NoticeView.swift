@@ -9,9 +9,9 @@ import SwiftUI
 
 @available(iOS 16.0, *)
 public struct IconProperties {
-    var size: CGFloat = 100
-    var background: Color? = nil
-    var backgroundGradient: Bool = true
+    public var size: CGFloat = 100
+    public var background: Color? = nil
+    public var backgroundGradient: Bool = true
 }
 
 @available(iOS 16.0, *)
@@ -22,7 +22,7 @@ public struct NoticeView: View {
     let title: LocalizedStringKey
     var bodyText: LocalizedStringKey? = nil
     
-    var iconProperties = IconProperties(size: 100)
+    var iconProperties = IconProperties(size: 140)
 
     public init(image: String, title: LocalizedStringKey, bodyText: LocalizedStringKey? = nil) {
         self.image = image
