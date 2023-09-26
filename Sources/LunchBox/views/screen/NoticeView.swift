@@ -13,7 +13,7 @@ public struct IconProperties {
     public var background: Color? = nil
     public var backgroundGradient: Bool = false
     
-    init(size: CGFloat, background: Color? = nil, backgroundGradient: Bool = false) {
+    public init(size: CGFloat, background: Color? = nil, backgroundGradient: Bool = false) {
         self.size = size
         self.background = background
         self.backgroundGradient = backgroundGradient
