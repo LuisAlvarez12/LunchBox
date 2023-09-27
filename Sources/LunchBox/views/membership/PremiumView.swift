@@ -10,12 +10,22 @@ import SwiftUI
 @available(iOS 16.0.0, *)
 public struct PremiumView: View {
     
+    var showCrown = false
+    
+    public init(showCrown: Bool = false) {
+        self.showCrown = showCrown
+    }
+    
     public var body: some View {
         HStack(spacing: 0) {
             Group {
-                Image(systemName: "laurel.leading")
-                Text("Premium")
-                Image(systemName: "laurel.trailing")
+                if showCrown {
+                    Image(systemName: "crown.fill")
+                } else {
+                    Image(systemName: "laurel.leading")
+                    Text("Premium")
+                    Image(systemName: "laurel.trailing")
+                }
             }
         }
     }
@@ -27,7 +37,7 @@ struct PremiumView_PreviewProvider: PreviewProvider {
         VStack {
             PremiumView()
                 .foregroundStyle(.blue)
-            PremiumView()
+            PremiumView(showCrown: true)
                 .foregroundStyle(.red)
         }
     }

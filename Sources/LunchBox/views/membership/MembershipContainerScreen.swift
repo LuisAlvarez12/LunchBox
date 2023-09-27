@@ -78,16 +78,16 @@ public struct MembershipContainerScreen: View {
             VStack {
                 HStack{
                     Spacer()
-                    Image(systemName: "laurel.leading")
-                        .font(.system(size: 90))
-                        .foregroundStyle(Color.LBUtilityBrightYellow.gradient)
+//                    Image(systemName: "laurel.leading")
+//                        .font(.system(size: 90))
+//                        .foregroundStyle(Color.LBUtilityBrightYellow.gradient)
                     Image(membershipMetaData.heroImageAsset)
                         .resizable()
                         .scaledToFit()
                         .squareFrame(length: 100)
-                    Image(systemName: "laurel.trailing")
-                        .font(.system(size: 90))
-                        .foregroundStyle(Color.LBUtilityBrightYellow.gradient)
+//                    Image(systemName: "laurel.trailing")
+//                        .font(.system(size: 90))
+//                        .foregroundStyle(Color.LBUtilityBrightYellow.gradient)
                     Spacer()
                 }.padding(.top, 24)
                 
