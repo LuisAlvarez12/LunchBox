@@ -133,7 +133,9 @@ public struct MembershipContainerScreen: View {
             ScrollView {
                 screen
             }
-        }.safeAreaInset(edge: .bottom, content: {
+        }
+        .background(Color.LBMonoSchemeTone)
+        .safeAreaInset(edge: .bottom, content: {
                 VStack{
                     if let _choice = selectedChoice as? SubscriptionOptionMetadata {
                         Text(_choice.getConfirmationString())
