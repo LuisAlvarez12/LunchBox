@@ -10,8 +10,9 @@ import SwiftUI
 
 @available(iOS 16.0, *)
 public class PurchasesManager: ObservableObject {
+    
     public static let shared = PurchasesManager()
-
+    
     @Published var currentMembershipState: SubscriptionResult = NoSubscriptionStatus()
 
     public var preferredOffering: String? = nil
@@ -83,7 +84,14 @@ public class PurchasesManager: ObservableObject {
         do {
             let offerings = try await Purchases.shared.offerings().all
 
-            guard let packages = offerings.first?.value.availablePackages else { return [] }
+            var fetchedPackages:  [Package]?
+            if let preferredOffering {
+                fetchedPackages = offerings[preferredOffering]?.availablePackages
+            } else {
+                fetchedPackages = offerings.first?.value.availablePackages
+            }
+            
+            guard let packages = fetchedPackages, packages.isNotEmpty else { return [] }
 
             let choices = await packages.mapAsync(task: {
                 await $0.createMembershipChoice()
