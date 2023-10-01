@@ -10,9 +10,9 @@ import SwiftUI
 @available(iOS 16.0, *)
 public struct IconProperties {
     public var size: CGFloat = 100
-    public var background: Color? = nil
+    public var background: Color?
     public var backgroundGradient: Bool = false
-    
+
     public init(size: CGFloat, background: Color? = nil, backgroundGradient: Bool = false) {
         self.size = size
         self.background = background
@@ -27,7 +27,7 @@ public struct NoticeView: View {
     let image: String
     let title: LocalizedStringKey
     var bodyText: LocalizedStringKey? = nil
-    
+
     var iconProperties = IconProperties(size: 140)
 
     public init(image: String, title: LocalizedStringKey, bodyText: LocalizedStringKey? = nil) {
@@ -35,7 +35,7 @@ public struct NoticeView: View {
         self.title = title
         self.bodyText = bodyText
     }
-    
+
     public init(image: String, title: LocalizedStringKey, bodyText: LocalizedStringKey? = nil, iconProperties: IconProperties) {
         self.image = image
         self.title = title
@@ -46,16 +46,16 @@ public struct NoticeView: View {
     public var body: some View {
         VStack {
             Spacer()
-            if let _iconProp =  iconProperties.background {
+            if let _iconProp = iconProperties.background {
                 Image(image)
                     .resizable()
                     .scaledToFit()
                     .frame(width: iconProperties.size)
                     .background(content: {
                         if iconProperties.backgroundGradient {
-                            Circle().foregroundStyle( _iconProp.gradient)
+                            Circle().foregroundStyle(_iconProp.gradient)
                         } else {
-                            Circle().foregroundStyle( _iconProp)
+                            Circle().foregroundStyle(_iconProp)
                         }
                     })
             } else {

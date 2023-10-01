@@ -136,7 +136,7 @@ public extension Color {
 
         return (Double(r), Double(g), Double(b), Double(a))
     }
-    
+
     static let lunchBoxColors = [
         Color.LBMonoScreenOffTone,
         Color.LBMonoSchemeTone,
@@ -145,9 +145,9 @@ public extension Color {
         Color.LBUtilityErrorRed,
         Color.LBUtilityBrightYellow,
         Color.LBIdealBluePrimary,
-        Color.LBIdealBlueSecondary
+        Color.LBIdealBlueSecondary,
     ]
-    
+
     // Mono
     static let LBMonoScreenOffTone = Color(UIColor(named: "lightOffBlackDarkOffWhite", in: Bundle.module, compatibleWith: nil)!)
     static let LBMonoSchemeTone = Color(UIColor(named: "lightWhiteDarkBlack", in: Bundle.module, compatibleWith: nil)!)
@@ -161,5 +161,4 @@ public extension Color {
     // Palette
     static let LBIdealBluePrimary = Color(UIColor(named: "idealBluePrimary", in: Bundle.module, compatibleWith: nil)!)
     static let LBIdealBlueSecondary = Color(UIColor(named: "idealBlueSecondary", in: Bundle.module, compatibleWith: nil)!)
-
 }

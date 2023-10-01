@@ -13,14 +13,14 @@ public struct PrimaryButton: View {
     let color: Color
     let action: () -> Void
     var disabled: Bool = false
-    
+
     public init(text: LocalizedStringKey, color: Color = Color.LBIdealBluePrimary, disabled: Bool = false, action: @escaping () -> Void) {
         self.text = text
         self.color = color
         self.action = action
         self.disabled = disabled
     }
-    
+
     public var body: some View {
         Button(action: {
             action()
@@ -34,8 +34,6 @@ public struct PrimaryButton: View {
         })
         .disabled(disabled)
         .horPadding()
-        
-        
     }
 }
 
@@ -45,14 +43,14 @@ public struct AsyncPrimaryButton: View {
     let color: Color
     var action: () async -> Void
     var disabled: Bool = false
-    
+
     public init(text: LocalizedStringKey, color: Color = Color.LBIdealBluePrimary, disabled: Bool = false, action: @escaping () async -> Void) {
         self.text = text
         self.color = color
         self.action = action
         self.disabled = disabled
     }
-    
+
     public var body: some View {
         AsyncButton(action: {
             await action()

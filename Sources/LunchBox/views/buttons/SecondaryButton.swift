@@ -77,7 +77,6 @@ struct SecondaryButton_PreviewProvider: PreviewProvider {
         VStack {
             SecondaryButton(text: "Dismiss", action: {})
             AsyncSecondaryButton(text: "Dismiss", action: {})
-
         }
     }
 }

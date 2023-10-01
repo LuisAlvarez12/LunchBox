@@ -1,6 +1,6 @@
 //
 //  OptionView.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/16/23.
 //
@@ -9,14 +9,13 @@ import SwiftUI
 
 @available(iOS 16.0, *)
 struct OptionView: View {
-    
     let title: LocalizedStringKey
     var bodyText: LocalizedStringKey? = nil
     var badge: LocalizedStringKey? = nil
     let price: String
-    
+
     var isSelected = false
-    
+
     var body: some View {
         HStack {
             if isSelected {
@@ -69,7 +68,6 @@ struct OptionView: View {
         }.horPadding()
             .vertPadding(8)
             .overlay(alignment: .topTrailing, content: {
-
                 if let _badge = badge {
                     Text(_badge)
                         .foregroundStyle(Color.white)
@@ -86,9 +84,9 @@ struct OptionView: View {
 @available(iOS 16.0, *)
 struct OptionView_PreviewProvider: PreviewProvider {
     static var previews: some View {
-        VStack{
+        VStack {
             OptionView(title: "Annual", bodyText: "Great Offer!", badge: "Limited Time", price: "1.99", isSelected: true)
-            OptionView(title: "Annual", bodyText:nil, badge: "Limited Time", price: "1.99", isSelected: false)
+            OptionView(title: "Annual", bodyText: nil, badge: "Limited Time", price: "1.99", isSelected: false)
             OptionView(title: "Annual", bodyText: "Great Offer!", badge: "Limited Time", price: "1.99", isSelected: true)
         }
     }

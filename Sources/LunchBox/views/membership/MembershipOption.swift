@@ -1,12 +1,12 @@
 //
 //  MembershipOption.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/16/23.
 //
 
-import SwiftUI
 import RevenueCat
+import SwiftUI
 
 public enum SubscriptionTimeIncrement {
     case Annual
@@ -33,16 +33,16 @@ public enum SubscriptionTimeIncrement {
 
 @available(iOS 16.0, *)
 public extension SubscriptionTimeIncrement {
-    public func getLocalizedBundle() -> MembershipLocalizedBundle {
+    func getLocalizedBundle(_ eligibleForTrial: Bool) -> MembershipLocalizedBundle {
         switch self {
         case .Annual:
-            return MembershipLocalizedBundle(title: "Annual", desc: nil, badge: nil)
+            return MembershipLocalizedBundle(title: "Annual", desc: nil, badge: eligibleForTrial ? "3 Day FREE Trial" : nil)
         case .Monthly:
-            return MembershipLocalizedBundle(title: "Monthly", desc: nil, badge: nil)
+            return MembershipLocalizedBundle(title: "Monthly", desc: nil, badge: eligibleForTrial ? "3 Day FREE Trial" : nil)
         case .Lifetime:
             return MembershipLocalizedBundle(title: "Lifetime", desc: nil, badge: "Limited Time Sale!")
         case .Weekly:
-            return MembershipLocalizedBundle(title: "Weekly", desc: nil, badge: nil)
+            return MembershipLocalizedBundle(title: "Weekly", desc: nil, badge: eligibleForTrial ? "3 Day FREE Trial" : nil)
         }
     }
 }
@@ -54,14 +54,13 @@ public protocol SubscriptionMetadata {
     var eligibleForTrial: Bool { get }
 }
 
-
 @available(iOS 16.0, *)
-struct InternalSubscriptionMetadata : SubscriptionMetadata {
+struct InternalSubscriptionMetadata: SubscriptionMetadata {
     var choice: SubscriptionTimeIncrement
     let localizedBundle: MembershipLocalizedBundle
     var eligibleForTrial: Bool = false
     var fakePrice = "$1000"
-    
+
     public func getConfirmationString() -> String {
         switch choice {
         case .Annual:
@@ -93,8 +92,7 @@ struct InternalSubscriptionMetadata : SubscriptionMetadata {
 }
 
 @available(iOS 16.0, *)
-public struct SubscriptionOptionMetadata : SubscriptionMetadata {
-    
+public struct SubscriptionOptionMetadata: SubscriptionMetadata {
     public var choice: SubscriptionTimeIncrement
     public let product: StoreProduct
     public let package: Package
@@ -149,7 +147,7 @@ public extension Package {
         let isEligibleForTrial = await Purchases.shared.checkTrialOrIntroDiscountEligibility(product: storeProduct)
         let isEligible = isEligibleForTrial == .eligible
 
-        let bundle = choice.getLocalizedBundle()
+        let bundle = choice.getLocalizedBundle(isEligible)
 
         return SubscriptionOptionMetadata(choice: choice, product: storeProduct, package: self, localizedBundle: bundle, eligibleForTrial: isEligible)
     }
@@ -160,7 +158,7 @@ public struct MembershipOption: View {
     let option: SubscriptionMetadata
 
     var isSelected = false
-    
+
     public init(option: SubscriptionMetadata, isSelected: Bool = false) {
         self.option = option
         self.isSelected = isSelected

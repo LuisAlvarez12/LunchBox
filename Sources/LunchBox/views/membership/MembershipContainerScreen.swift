@@ -1,6 +1,6 @@
 //
 //  MembershipContainerScreen.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 9/16/23.
 //
@@ -11,7 +11,7 @@ import SwiftUI
 public struct LocalizedKeyWithPosition {
     let id: Int
     let feature: LocalizedStringKey
-    
+
     public init(id: Int, feature: LocalizedStringKey) {
         self.id = id
         self.feature = feature
@@ -29,7 +29,7 @@ public struct MembershipMetaData {
     let features: [LocalizedStringKey]
     let onSubscribeSuccess: () -> Void
     let onSubscribeFailure: () -> Void
-    
+
     public init(appName: String, appMembershipName: String, acceptedEntitlements: [String], heroImageAsset: String, primaryMembershipColor: Color, features: [LocalizedStringKey], onSubscribeSuccess: @escaping () -> Void, onSubscribeFailure: @escaping () -> Void) {
         self.appName = appName
         self.appMembershipName = appMembershipName
@@ -44,39 +44,38 @@ public struct MembershipMetaData {
 
 @available(iOS 16.0, *)
 public struct MembershipContainerScreen: View {
-    
     let purchasesManager = PurchasesManager.shared
-    
+
     let membershipMetaData: MembershipMetaData
     let membershipFeatures: [LocalizedKeyWithPosition]
-    
+
     @State var subscriptionOptions: [SubscriptionMetadata] = []
-    
+
     @State var selectedChoice: SubscriptionMetadata? = nil
-    
+
     public init(membershipMetaData: MembershipMetaData) {
-        let keys: [LocalizedKeyWithPosition] = membershipMetaData.features.enumerated().map { (index, element) in
-            return LocalizedKeyWithPosition(id: index, feature: element)
+        let keys: [LocalizedKeyWithPosition] = membershipMetaData.features.enumerated().map { index, element in
+            LocalizedKeyWithPosition(id: index, feature: element)
         }
-        
+
         self.membershipMetaData = membershipMetaData
-        self.membershipFeatures = keys
+        membershipFeatures = keys
     }
-    
+
     init(membershipMetaData: MembershipMetaData, subscriptionOptions: [SubscriptionMetadata]) {
-        let keys: [LocalizedKeyWithPosition] = membershipMetaData.features.enumerated().map { (index, element) in
-            return LocalizedKeyWithPosition(id: index, feature: element)
+        let keys: [LocalizedKeyWithPosition] = membershipMetaData.features.enumerated().map { index, element in
+            LocalizedKeyWithPosition(id: index, feature: element)
         }
-        
+
         self.membershipMetaData = membershipMetaData
-        self.membershipFeatures = keys
+        membershipFeatures = keys
         self.subscriptionOptions = subscriptionOptions
     }
-    
+
     public var screen: some View {
         VStack {
             VStack {
-                HStack{
+                HStack {
                     Spacer()
 //                    Image(systemName: "laurel.leading")
 //                        .font(.system(size: 90))
@@ -90,7 +89,7 @@ public struct MembershipContainerScreen: View {
 //                        .foregroundStyle(Color.LBUtilityBrightYellow.gradient)
                     Spacer()
                 }.padding(.top, 24)
-                
+
                 Text("Unlock the Full \(membershipMetaData.appName) Experience")
                     .font(.title)
                     .multilineTextAlignment(.center)
@@ -98,8 +97,8 @@ public struct MembershipContainerScreen: View {
                     .lineLimit(3)
                     .horPadding()
                     .padding(.bottom, 4)
-                
-                VStack(alignment: .leading){
+
+                VStack(alignment: .leading) {
                     ForEach(membershipFeatures, id: \.id) { item in
                         Label(title: {
                             Text(item.feature)
@@ -108,7 +107,7 @@ public struct MembershipContainerScreen: View {
                                 .renderingMode(.template)
                                 .foregroundStyle(membershipMetaData.primaryMembershipColor.gradient)
                                 .bold()
-                        } )
+                        })
                     }
                 }
             }
@@ -120,15 +119,15 @@ public struct MembershipContainerScreen: View {
                         MembershipOption(option: option, isSelected: selectedChoice?.choice == option.choice)
                     })
                 }
-                
+
                 Spacer()
-                
+
             }.full()
         }
     }
-    
+
     public var body: some View {
-        ViewThatFits{
+        ViewThatFits {
             screen
             ScrollView {
                 screen
@@ -136,48 +135,45 @@ public struct MembershipContainerScreen: View {
         }
         .background(Color.LBMonoSchemeTone)
         .safeAreaInset(edge: .bottom, content: {
-                VStack{
-                    if let _choice = selectedChoice as? SubscriptionOptionMetadata {
-                        Text(_choice.getConfirmationString())
-                            .font(.caption)
-                            .foregroundStyle(Color.secondary)
-                            .multilineTextAlignment(.center)
-                            .padding(6)
-                        
-                        AsyncPrimaryButton(text: _choice.eligibleForTrial ? "Try FREE and Subscribe" : "Continue", color: membershipMetaData.primaryMembershipColor, action: {
-                            
-                            let result = await purchasesManager.purchase(selectedChoice: _choice)
-                            
-                            if result is SubscriptionSuccess {
-                                membershipMetaData.onSubscribeSuccess()
-                            } else {
-                                membershipMetaData.onSubscribeFailure()
-                            }
-                        })
-                    } else {
-                        Text("Choose a Plan above\nNo commitment, Cancel Anytime")
-                            .font(.caption)
-                            .foregroundStyle(Color.secondary)
-                            .multilineTextAlignment(.center)
-                            .padding(6)
-                        
-                        PrimaryButton(text: "Continue",disabled: true, action: {
-                            
-                        })
-                    }
-                    
-                    AsyncButton("Restore", action: {
-                        let result = await purchasesManager.restore(acceptableEntitlements: membershipMetaData.acceptedEntitlements)
-                        
+            VStack {
+                if let _choice = selectedChoice as? SubscriptionOptionMetadata {
+                    Text(_choice.getConfirmationString())
+                        .font(.caption)
+                        .foregroundStyle(Color.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(6)
+
+                    AsyncPrimaryButton(text: _choice.eligibleForTrial ? "Try FREE and Subscribe" : "Continue", color: membershipMetaData.primaryMembershipColor, action: {
+                        let result = await purchasesManager.purchase(selectedChoice: _choice)
+
                         if result is SubscriptionSuccess {
                             membershipMetaData.onSubscribeSuccess()
                         } else {
                             membershipMetaData.onSubscribeFailure()
                         }
-                    }).foregroundColor(membershipMetaData.primaryMembershipColor).padding(.top, 4)
-                        .padding(.bottom)
-                }.background(Color.LBMonoSchemeTone)
-            })
+                    })
+                } else {
+                    Text("Choose a Plan above\nNo commitment, Cancel Anytime")
+                        .font(.caption)
+                        .foregroundStyle(Color.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(6)
+
+                    PrimaryButton(text: "Continue", disabled: true, action: {})
+                }
+
+                AsyncButton("Restore", action: {
+                    let result = await purchasesManager.restore(acceptableEntitlements: membershipMetaData.acceptedEntitlements)
+
+                    if result is SubscriptionSuccess {
+                        membershipMetaData.onSubscribeSuccess()
+                    } else {
+                        membershipMetaData.onSubscribeFailure()
+                    }
+                }).foregroundColor(membershipMetaData.primaryMembershipColor).padding(.top, 4)
+                    .padding(.bottom)
+            }.background(Color.LBMonoSchemeTone)
+        })
         .task {
             if subscriptionOptions.isEmpty {
                 subscriptionOptions = await purchasesManager.getOfferings()
@@ -187,7 +183,7 @@ public struct MembershipContainerScreen: View {
 }
 
 @available(iOS 16.0, *)
-struct MembershipContainerScreen_PreviewProvider : PreviewProvider {
+struct MembershipContainerScreen_PreviewProvider: PreviewProvider {
     static var previews: some View {
         MembershipContainerScreen(
             membershipMetaData: MembershipMetaData(
@@ -210,8 +206,9 @@ struct MembershipContainerScreen_PreviewProvider : PreviewProvider {
             subscriptionOptions: [
                 InternalSubscriptionMetadata(choice: SubscriptionTimeIncrement.Weekly, localizedBundle: MembershipLocalizedBundle(title: "Weekly"), eligibleForTrial: false),
                 InternalSubscriptionMetadata(choice: SubscriptionTimeIncrement.Monthly, localizedBundle: MembershipLocalizedBundle(title: "Monthly"), eligibleForTrial: false),
-                InternalSubscriptionMetadata(choice: SubscriptionTimeIncrement.Annual, localizedBundle: MembershipLocalizedBundle(title: "Annual"), eligibleForTrial: true)
-            ])
+                InternalSubscriptionMetadata(choice: SubscriptionTimeIncrement.Annual, localizedBundle: MembershipLocalizedBundle(title: "Annual"), eligibleForTrial: true),
+            ]
+        )
         //        .asSheetPreview()
     }
 }
@@ -219,16 +216,16 @@ struct MembershipContainerScreen_PreviewProvider : PreviewProvider {
 @available(iOS 16.0, *)
 extension View {
     func asSheetPreview() -> some View {
-        self.modifier(SheetPreviewModifier())
+        modifier(SheetPreviewModifier())
     }
 }
 
 @available(iOS 16.0, *)
 struct SheetPreviewModifier: ViewModifier {
     @State var presented = false
-    
-    func body(content: Content) -> some View {
-        VStack{
+
+    func body(content _: Content) -> some View {
+        VStack {
             Color.white
         }.sheet(isPresented: $presented, content: {
             MembershipContainerScreen(
@@ -252,8 +249,9 @@ struct SheetPreviewModifier: ViewModifier {
                 subscriptionOptions: [
                     InternalSubscriptionMetadata(choice: SubscriptionTimeIncrement.Weekly, localizedBundle: MembershipLocalizedBundle(title: "Weekly"), eligibleForTrial: true),
                     InternalSubscriptionMetadata(choice: SubscriptionTimeIncrement.Monthly, localizedBundle: MembershipLocalizedBundle(title: "Monthly"), eligibleForTrial: true),
-                    InternalSubscriptionMetadata(choice: SubscriptionTimeIncrement.Annual, localizedBundle: MembershipLocalizedBundle(title: "Annual"), eligibleForTrial: true)
-                ])
+                    InternalSubscriptionMetadata(choice: SubscriptionTimeIncrement.Annual, localizedBundle: MembershipLocalizedBundle(title: "Annual"), eligibleForTrial: true),
+                ]
+            )
         }).task {
             try? await Task.sleep(nanoseconds: 1.nano())
             await MainActor.run {

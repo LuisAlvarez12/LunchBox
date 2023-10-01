@@ -9,13 +9,12 @@ import SwiftUI
 
 @available(iOS 16.0.0, *)
 public struct PremiumView: View {
-    
     var showCrown = false
-    
+
     public init(showCrown: Bool = false) {
         self.showCrown = showCrown
     }
-    
+
     public var body: some View {
         HStack(spacing: 0) {
             Group {

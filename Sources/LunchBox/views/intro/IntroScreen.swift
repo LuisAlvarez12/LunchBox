@@ -15,11 +15,12 @@ public struct IntroFeaturesScreen: View {
     let premiumHeaderImage: String
     let membershipRows: [MembershipFeatureRow]
     let onMembershipClick: () -> Void
+    let onSecondaryText: LocalizedStringKey
     let onDismiss: () -> Void
-    
+
     var imageSize: CGFloat
 
-    public init(headerImage: String, imageSize: CGFloat = 100, appName: LocalizedStringKey, introRows: [IntroRow], premiumHeaderImage: String, membershipRows: [MembershipFeatureRow], onMembershipClick: @escaping () -> Void, onDismiss: @escaping () -> Void) {
+    public init(headerImage: String, imageSize: CGFloat = 100, appName: LocalizedStringKey, introRows: [IntroRow], premiumHeaderImage: String, membershipRows: [MembershipFeatureRow], onMembershipClick: @escaping () -> Void, onSecondaryText: LocalizedStringKey = "Dismiss", onDismiss: @escaping () -> Void) {
         self.headerImage = headerImage
         self.imageSize = imageSize
         self.appName = appName
@@ -27,6 +28,7 @@ public struct IntroFeaturesScreen: View {
         self.premiumHeaderImage = premiumHeaderImage
         self.membershipRows = membershipRows
         self.onMembershipClick = onMembershipClick
+        self.onSecondaryText = onSecondaryText
         self.onDismiss = onDismiss
     }
 
@@ -41,7 +43,7 @@ public struct IntroFeaturesScreen: View {
                         .padding(.top)
 
                     TitleHeaderView(subtitle: "Welcome to", title: appName)
-                    
+
                     ForEach(introRows, id: \.text) { row in
                         row
                     }
@@ -68,10 +70,10 @@ public struct IntroFeaturesScreen: View {
                 onMembershipClick()
             })
 
-            SecondaryButton(text: "Dismiss", action: {
+            SecondaryButton(text: onSecondaryText, action: {
                 onDismiss()
             })
-            
+
             Spacer()
         }.full().horPadding(36)
     }
@@ -87,7 +89,7 @@ struct IntroFeaturesScreen_Previews: PreviewProvider {
             IntroRow(color: Color.blue, icon: "lock", text: "Lock your app with a Pin and Face-ID to keep your Library private"),
             IntroRow(color: Color.blue, icon: "folder", text: "Organize your content in folders"),
         ], premiumHeaderImage: "", membershipRows: [
-        ], onMembershipClick: {}, onDismiss: {})
+        ], onMembershipClick: {}, onSecondaryText: "Test", onDismiss: {})
     }
 }
 
