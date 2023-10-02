@@ -17,8 +17,6 @@ public extension View {
 
 public struct LBSheetModifier: ViewModifier {
     
-    @Environment(\.dismiss) private var dismiss
-    
     @Binding var isPresented: Bool
     
     let title: LocalizedStringKey
@@ -61,7 +59,7 @@ public struct LBSheetModifier: ViewModifier {
             Spacer()
             
             SecondaryButton(text: buttonText, action: {
-                dismiss()
+                isPresented = false
             })
         }
         

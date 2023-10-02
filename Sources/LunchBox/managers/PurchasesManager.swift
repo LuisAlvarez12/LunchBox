@@ -13,10 +13,15 @@ public class PurchasesManager: ObservableObject {
     
     public static let shared = PurchasesManager()
     
-    @Published var currentMembershipState: SubscriptionResult = NoSubscriptionStatus()
+    @Published public var currentMembershipState: SubscriptionResult = NoSubscriptionStatus()
+    @Published public var membershipPresented = false
 
     public var preferredOffering: String? = nil
-
+    
+    public func showMembershipModal() {
+        membershipPresented = true
+    }
+    
     public func isSubscribed() -> Bool {
         currentMembershipState is SubscriptionSuccess
     }

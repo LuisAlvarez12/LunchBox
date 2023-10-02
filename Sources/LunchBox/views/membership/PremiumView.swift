@@ -30,6 +30,31 @@ public struct PremiumView: View {
     }
 }
 
+public struct PremiumViewButton: View {
+    @ObservedObject var purchasesMagager = PurchasesManager.shared
+    
+    var showCrown = false
+
+    public init(showCrown: Bool = false) {
+        self.showCrown = showCrown
+    }
+
+    @ViewBuilder
+    public var body: some View {
+        Button(action: {
+            if !purchasesMagager.isSubscribed() {
+                purchasesMagager.showMembershipModal()
+            }
+        }, label: {
+            if purchasesMagager.isSubscribed() {
+                EmptyView()
+            } else {
+                PremiumView(showCrown: showCrown)
+            }
+        })
+    }
+}
+
 @available(iOS 16.0.0, *)
 struct PremiumView_PreviewProvider: PreviewProvider {
     static var previews: some View {
