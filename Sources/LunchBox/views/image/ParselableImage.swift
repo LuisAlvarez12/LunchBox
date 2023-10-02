@@ -8,8 +8,8 @@
 import SwiftUI
 
 public struct ParselableNetworkImage {
-   public let url: URL
-   public let systemImage: String
+    public let url: URL
+    public let systemImage: String
     
     public init(url: URL, systemImage: String) {
         self.url = url
@@ -37,18 +37,29 @@ public struct ParselableImage {
     @ViewBuilder
     public func createImage(frame: CGFloat, color: Color = Color.LBIdealBluePrimary) -> some View {
         if let _networkImage = networkImage {
-            AsyncImage(url: _networkImage.url) { image in
+            AsyncImage(url: _networkImage.url) { phase in
+                
+                switch phase {
+                case .empty:
+                    EmptyView()
+                        .squareFrame(length: frame)
+                case .success(let image):
                     image
-                    .resizable()
-                    .scaledToFit()
-                    .squareFrame(length: frame)
-                  } placeholder: {
-                      Image(systemName: _networkImage.systemImage)
-                          .resizable()
-                          .scaledToFit()
-                          .squareFrame(length: frame)
-                          .foregroundStyle(color)
-                  }
+                        .resizable()
+                        .scaledToFit()
+                        .squareFrame(length: frame)
+                case .failure(let error):
+                    Image(systemName: _networkImage.systemImage)
+                        .resizable()
+                        .scaledToFit()
+                        .squareFrame(length: frame)
+                        .foregroundStyle(color)
+                @unknown default:
+                    EmptyView()
+                        .squareFrame(length: frame)
+                }
+                
+            }
         } else if let _assetImage = assetImage {
             Image(_assetImage)
                 .resizable()
@@ -62,7 +73,7 @@ public struct ParselableImage {
                     .squareFrame(length: frame)
                     .symbolEffect(.bounce, value: true)
                     .foregroundStyle(color)
-                    
+                
             } else {
                 Image(systemName: _systemImage)
                     .resizable()

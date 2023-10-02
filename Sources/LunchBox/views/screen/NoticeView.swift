@@ -12,11 +12,13 @@ public struct IconProperties {
     public var size: CGFloat = 100
     public var background: Color?
     public var backgroundGradient: Bool = false
+    public var iconColor: Color
 
-    public init(size: CGFloat, background: Color? = nil, backgroundGradient: Bool = false) {
+    public init(size: CGFloat, background: Color? = nil, backgroundGradient: Bool = false, iconColor: Color = Color.LBIdealBluePrimary) {
         self.size = size
         self.background = background
         self.backgroundGradient = backgroundGradient
+        self.iconColor = iconColor
     }
 }
 
@@ -24,19 +26,13 @@ public struct IconProperties {
 public struct NoticeView: View {
     @Environment(\.colorScheme) var colorScheme
 
-    let image: String
+    let image: ParselableImage
     let title: LocalizedStringKey
     var bodyText: LocalizedStringKey? = nil
 
     var iconProperties = IconProperties(size: 140)
-
-    public init(image: String, title: LocalizedStringKey, bodyText: LocalizedStringKey? = nil) {
-        self.image = image
-        self.title = title
-        self.bodyText = bodyText
-    }
-
-    public init(image: String, title: LocalizedStringKey, bodyText: LocalizedStringKey? = nil, iconProperties: IconProperties) {
+    
+    public init(image: ParselableImage, title: LocalizedStringKey, bodyText: LocalizedStringKey? = nil, iconProperties: IconProperties = IconProperties(size: 140)) {
         self.image = image
         self.title = title
         self.bodyText = bodyText
@@ -47,10 +43,7 @@ public struct NoticeView: View {
         VStack {
             Spacer()
             if let _iconProp = iconProperties.background {
-                Image(image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: iconProperties.size)
+                image.createImage(frame: iconProperties.size, color: iconProperties.iconColor)
                     .background(content: {
                         if iconProperties.backgroundGradient {
                             Circle().foregroundStyle(_iconProp.gradient)
@@ -59,10 +52,7 @@ public struct NoticeView: View {
                         }
                     })
             } else {
-                Image(image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: iconProperties.size)
+                image.createImage(frame: iconProperties.size, color: iconProperties.iconColor)
             }
 
             Text(title).font(.system(size: 18, weight: .bold, design: .default))
@@ -83,6 +73,6 @@ public struct NoticeView: View {
 @available(iOS 16.0, *)
 struct NoticeView_Previews: PreviewProvider {
     static var previews: some View {
-        NoticeView(image: "icon-viewer-empty", title: "Search throughout your specific Cabin for files, folders, links, etc.", bodyText: "Not to worry! askfl; kadsf asdkf;kasd l;kfl;asl;fk l;asdkfl;asdkdf 'asd;lkdf ;laskd l;fkasl;' dfkl;ask;df kasiop jdfio").full()
+        NoticeView(image: ParselableImage(assetImage: "folder"), title: "Search throughout your specific Cabin for files, folders, links, etc.", bodyText: "Not to worry! askfl; kadsf asdkf;kasd l;kfl;asl;fk l;asdkfl;asdkdf 'asd;lkdf ;laskd l;fkasl;' dfkl;ask;df kasiop jdfio").full()
     }
 }
