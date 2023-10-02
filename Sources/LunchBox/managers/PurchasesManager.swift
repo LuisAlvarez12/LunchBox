@@ -118,3 +118,4 @@ public struct SubscriptionFailure: SubscriptionResult {
 }
 
 public struct NoSubscriptionStatus: SubscriptionResult {}
+

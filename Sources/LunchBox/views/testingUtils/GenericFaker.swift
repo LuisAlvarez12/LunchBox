@@ -8,6 +8,12 @@
 import Foundation
 import SwiftUI
 
+extension String {
+    func localized() -> LocalizedStringKey {
+        LocalizedStringKey(self)
+    }
+}
+
 /// A lightweight lorem ipsum generator.
 public enum GenericFaker {
     // ======================================================= //
