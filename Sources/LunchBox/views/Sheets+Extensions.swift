@@ -78,47 +78,6 @@ public struct LBSheetModifier: ViewModifier {
     }
 }
 
-public struct ParselableImage {
-    
-    public var assetImage: String? = nil
-    public var systemImage: String? = nil
-    
-    public init(assetImage: String? = nil, systemImage: String? = nil) {
-        self.assetImage = assetImage
-        self.systemImage = systemImage
-    }
-    
-    @ViewBuilder
-    public func createImage(frame: CGFloat, color: Color = Color.LBIdealBluePrimary) -> some View {
-        if let _assetImage = assetImage {
-            Image(_assetImage)
-                .resizable()
-                .squareFrame(length: frame)
-                .scaledToFit()
-        } else if let _systemImage = systemImage {
-            if #available(iOS 17.0, *) {
-                Image(systemName: _systemImage)
-                    .resizable()
-                    .squareFrame(length: frame)
-                    .scaledToFit()
-                    .symbolEffect(.bounce, value: true)
-                    .foregroundStyle(color)
-                    
-            } else {
-                Image(systemName: _systemImage)
-                    .resizable()
-                    .squareFrame(length: frame)
-                    .scaledToFit()
-                    .foregroundStyle(color)
-            }
-        } else {
-            Spacer()
-        }
-    }
-}
-
-
-
 //#Preview {
 //    
 //    @State var f = false
