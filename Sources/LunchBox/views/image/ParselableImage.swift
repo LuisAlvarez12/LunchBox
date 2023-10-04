@@ -1,6 +1,6 @@
 //
 //  SwiftUIView.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 10/2/23.
 //
@@ -20,6 +20,10 @@ public struct ParselableNetworkImage {
         self.url = URL(string: urlString)!
         self.systemImage = systemImage
     }
+    
+    public static func buildLink(parentName: String, assetName: String, sizeVariant: Int = 1) -> String {
+        "https://raw.githubusercontent.com/LuisAlvarez12/AppAssets/main/\(parentName)/\(assetName)/\(sizeVariant)x.png"
+    }
 }
 
 public struct ParselableImage {
@@ -35,7 +39,7 @@ public struct ParselableImage {
     }
     
     @ViewBuilder
-    public func createImage(frame: CGFloat, color: Color = Color.LBIdealBluePrimary) -> some View {
+    public func createImage(widthFrame: CGFloat? = nil, frame: CGFloat, color: Color = Color.LBIdealBluePrimary) -> some View {
         if let _networkImage = networkImage {
             AsyncImage(url: _networkImage.url) { phase in
                 
@@ -44,10 +48,17 @@ public struct ParselableImage {
                     EmptyView()
                         .squareFrame(length: frame)
                 case .success(let image):
-                    image
-                        .resizable()
-                        .scaledToFit()
-                        .squareFrame(length: frame)
+                    if let widthFrame {
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: widthFrame)
+                    } else {
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .squareFrame(length: frame)
+                    }
                 case .failure(let error):
                     Image(systemName: _networkImage.systemImage)
                         .resizable()

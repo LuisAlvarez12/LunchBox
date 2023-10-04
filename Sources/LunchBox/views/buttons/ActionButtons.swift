@@ -54,7 +54,7 @@ public struct BottomBarHorizontalModifier: ViewModifier {
                             .font(.system(size: 18, weight: .medium, design: .default))
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(Color.systemSecondary))
-                    })
+                    }).padding(.trailing)
 
                 }.padding().background {
                     LinearGradient(colors: [Color.LBMonoSchemeTone, Color.clear], startPoint: .bottom, endPoint: .top).edgesIgnoringSafeArea(.bottom)
@@ -78,6 +78,21 @@ public struct BottomBarHorizontalModifier: ViewModifier {
                     LinearGradient(colors: [Color.LBMonoSchemeTone, Color.clear], startPoint: .bottom, endPoint: .top).edgesIgnoringSafeArea(.bottom)
                 }
             }
+        })
+    }
+}
+
+#Preview {
+    VStack{
+        Color.white.withActionButtons(type:.Vertical, primaryDisabled: false, onPrimaryEnabledClick: {
+            
+        }, onSecondaryEnabledClick: {
+            
+        })
+        Color.white.withActionButtons(primaryDisabled: false, onPrimaryEnabledClick: {
+            
+        }, onSecondaryEnabledClick: {
+            
         })
     }
 }

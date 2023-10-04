@@ -34,12 +34,11 @@ public struct LBSheetModifier: ViewModifier {
     
     public var sheet: some View {
         VStack{
-            Spacer()
+            Spacer().frame(height: 42)
             Text(title)
                 .font(.largeTitle)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
-                .padding(.top)
                 .bold()
             
             if let desc {
@@ -52,7 +51,7 @@ public struct LBSheetModifier: ViewModifier {
             Spacer()
             
             if let image {
-                image.createImage(frame: 80)
+                image.createImage(widthFrame: 160, frame: 80)
             }
             
             Spacer()
@@ -78,10 +77,9 @@ public struct LBSheetModifier: ViewModifier {
     }
 }
 
-//#Preview {
-//    
-//    @State var f = false
-//    
-//    Color.blue
-//        .infoSheet(isPresented: $f, title: "Setup Folder Name", desc: GenericFaker.words(23).localized(), image: ParselableImage(systemImage: "globe"), buttonText: "Continue")
-//}
+#Preview {
+    let networkImage = ParselableNetworkImage(urlString: ParselableNetworkImage.buildLink(parentName: "Cabinit", assetName: "icon-color-palette", sizeVariant: 1), systemImage: "globe")
+    
+    return Color.blue
+        .infoSheet(isPresented: .constant(true), title: "Setup Folder Name", desc: GenericFaker.words(23).localized(), image: ParselableImage(networkImage: networkImage), buttonText: "Continue")
+}
