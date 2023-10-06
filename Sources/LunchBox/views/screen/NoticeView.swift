@@ -30,7 +30,7 @@ public struct NoticeView: View {
     let title: LocalizedStringKey
     var bodyText: LocalizedStringKey? = nil
 
-    var iconProperties = IconProperties(size: 140)
+    var iconProperties = IconProperties(size: 120)
     
     public init(image: ParselableImage, title: LocalizedStringKey, bodyText: LocalizedStringKey? = nil, iconProperties: IconProperties = IconProperties(size: 140)) {
         self.image = image
@@ -43,7 +43,7 @@ public struct NoticeView: View {
         VStack {
             Spacer()
             if let _iconProp = iconProperties.background {
-                image.createImage(frame: iconProperties.size, color: iconProperties.iconColor)
+                image.createImage(widthFrame: iconProperties.size + 30,  frame: iconProperties.size, color: iconProperties.iconColor)
                     .background(content: {
                         if iconProperties.backgroundGradient {
                             Circle().foregroundStyle(_iconProp.gradient)

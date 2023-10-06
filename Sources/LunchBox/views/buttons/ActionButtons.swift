@@ -39,7 +39,7 @@ public struct BottomBarHorizontalModifier: ViewModifier {
     let onSecondaryEnabledClick: () -> Void
 
     public func body(content: Content) -> some View {
-        content.safeAreaInset(edge: .bottom, content: {
+        content.overlay(alignment: .bottom, content: {
             if type == .Horizontal {
                 HStack(alignment: .center) {
                     PrimaryButton(text: primaryText, disabled: primaryDisabled, action: {

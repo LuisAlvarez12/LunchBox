@@ -21,6 +21,11 @@ public struct ParselableNetworkImage {
         self.systemImage = systemImage
     }
     
+    public init(parentName: String, assetName: String, sizeVariant: Int = 1, systemImage: String) {
+        self.url = URL(string: Self.buildLink(parentName: parentName, assetName: assetName, sizeVariant: sizeVariant))!
+        self.systemImage = systemImage
+    }
+    
     public static func buildLink(parentName: String, assetName: String, sizeVariant: Int = 1) -> String {
         "https://raw.githubusercontent.com/LuisAlvarez12/AppAssets/main/\(parentName)/\(assetName)/\(sizeVariant)x.png"
     }
@@ -38,11 +43,16 @@ public struct ParselableImage {
         self.networkImage = networkImage
     }
     
+    public init(parentName: String, assetName: String, sizeVariant: Int = 1, systemImage: String) {
+        let url = URL(string: ParselableNetworkImage.buildLink(parentName: parentName, assetName: assetName, sizeVariant: sizeVariant))!
+        self.networkImage = ParselableNetworkImage(url: url, systemImage: systemImage)
+    }
+    
     @ViewBuilder
     public func createImage(widthFrame: CGFloat? = nil, frame: CGFloat, color: Color = Color.LBIdealBluePrimary) -> some View {
         if let _networkImage = networkImage {
-            AsyncImage(url: _networkImage.url) { phase in
-                
+            AsyncImage(url: _networkImage.url,
+                       transaction: Transaction(animation: .snappy)) { phase in
                 switch phase {
                 case .empty:
                     EmptyView()
@@ -71,6 +81,7 @@ public struct ParselableImage {
                 }
                 
             }
+            .frame(width: widthFrame != nil ? widthFrame! : frame, height: widthFrame != nil ? .infinity : frame)
         } else if let _assetImage = assetImage {
             Image(_assetImage)
                 .resizable()
@@ -105,6 +116,6 @@ public struct ParselableImage {
         ParselableImage(systemImage: "folder").createImage(frame: 80)
         ParselableImage(systemImage: "globe").createImage(frame: 80, color: Color.red)
         ParselableImage(systemImage: "globe").createImage(frame: 80, color: Color.red)
-        ParselableImage(networkImage: ParselableNetworkImage(urlString: "https://swiftanytime-content.s3.ap-south-1.amazonaws.com/SwiftUI-Beginner/Async-Image/TestImage.jpeg", systemImage: "star")).createImage(frame: 80, color: Color.red)
+        ParselableImage(networkImage: ParselableNetworkImage(urlString: "https://raw.githubusercontent.com/LuisAlvarez12/AppAssets/main/General/icon-folder/3x.png", systemImage: "star")).createImage(frame: 80, color: Color.red)
     }
 }
