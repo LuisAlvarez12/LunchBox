@@ -1,6 +1,6 @@
 //
 //  SwiftUIView.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 10/4/23.
 //
@@ -10,7 +10,7 @@ import SwiftUI
 public struct HomeGridItem: View {
     public let image: ParselableImage
     public let text: String
-    
+
     public init(image: ParselableImage, text: String) {
         self.image = image
         self.text = text

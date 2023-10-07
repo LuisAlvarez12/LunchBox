@@ -10,18 +10,18 @@ import SwiftUI
 
 @available(iOS 16.0, *)
 public class PurchasesManager: ObservableObject {
-    
     public static let shared = PurchasesManager()
-    
+
     @Published public var currentMembershipState: SubscriptionResult = NoSubscriptionStatus()
     @Published public var membershipPresented = false
+    @Published public var hasTrialAvailable = false
 
     public var preferredOffering: String? = nil
-    
+
     public func showMembershipModal() {
         membershipPresented = true
     }
-    
+
     public func isSubscribed() -> Bool {
         currentMembershipState is SubscriptionSuccess
     }
@@ -57,6 +57,22 @@ public class PurchasesManager: ObservableObject {
         }
     }
 
+    public func checkCustomerStatus(acceptableEntitlements: [String]) async -> SubscriptionResult {
+        guard let customerInfo = try? await Purchases.shared.customerInfo() else {
+            return SubscriptionFailure(reason: "No subscription")
+        }
+
+        var subResult: SubscriptionResult = SubscriptionFailure(reason: "No subscription")
+
+        acceptableEntitlements.forEach { entitlement in
+            if customerInfo.entitlements.all[entitlement]?.isActive == true {
+                subResult = SubscriptionSuccess(isTrial: false, subscriptionIncrement: .Weekly)
+            }
+        }
+        await updateSubscriptionState(subResult)
+        return subResult
+    }
+
     public func restore(acceptableEntitlements: [String]) async -> SubscriptionResult {
         do {
             let result = try await Purchases.shared.restorePurchases()
@@ -85,17 +101,45 @@ public class PurchasesManager: ObservableObject {
         }
     }
 
+    public func hasTrialsAvailble() async -> Bool {
+        guard let offerings = try? await Purchases.shared.offerings().all else {
+            return false
+        }
+
+        var fetchedPackages: [Package]?
+        if let preferredOffering {
+            fetchedPackages = offerings[preferredOffering]?.availablePackages
+        } else {
+            fetchedPackages = offerings.first?.value.availablePackages
+        }
+
+        guard let _fetchedPackages = fetchedPackages else {
+            return false
+        }
+
+        var isElligible = false
+
+        await _fetchedPackages.asyncForEach {
+            let res = await Purchases.shared.checkTrialOrIntroDiscountEligibility(product: $0.storeProduct)
+            if res.isEligible {
+                isElligible = true
+            }
+        }
+
+        return isElligible
+    }
+
     public func getOfferings() async -> [SubscriptionOptionMetadata] {
         do {
             let offerings = try await Purchases.shared.offerings().all
 
-            var fetchedPackages:  [Package]?
+            var fetchedPackages: [Package]?
             if let preferredOffering {
                 fetchedPackages = offerings[preferredOffering]?.availablePackages
             } else {
                 fetchedPackages = offerings.first?.value.availablePackages
             }
-            
+
             guard let packages = fetchedPackages, packages.isNotEmpty else { return [] }
 
             let choices = await packages.mapAsync(task: {
@@ -123,4 +167,3 @@ public struct SubscriptionFailure: SubscriptionResult {
 }
 
 public struct NoSubscriptionStatus: SubscriptionResult {}
-

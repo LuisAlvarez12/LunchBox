@@ -9,10 +9,10 @@ import SwiftUI
 
 @available(iOS 16.0.0, *)
 public struct IntroFeaturesScreen: View {
-    let headerImage: String
+    let headerImage: ParselableImage
     let appName: LocalizedStringKey
     let introRows: [IntroRow]
-    let premiumHeaderImage: String
+    let premiumHeaderImage: ParselableImage
     let membershipRows: [MembershipFeatureRow]
     let onMembershipClick: () -> Void
     let onSecondaryText: LocalizedStringKey
@@ -20,7 +20,7 @@ public struct IntroFeaturesScreen: View {
 
     var imageSize: CGFloat
 
-    public init(headerImage: String, imageSize: CGFloat = 100, appName: LocalizedStringKey, introRows: [IntroRow], premiumHeaderImage: String, membershipRows: [MembershipFeatureRow], onMembershipClick: @escaping () -> Void, onSecondaryText: LocalizedStringKey = "Dismiss", onDismiss: @escaping () -> Void) {
+    public init(headerImage: ParselableImage, imageSize: CGFloat = 100, appName: LocalizedStringKey, introRows: [IntroRow], premiumHeaderImage: ParselableImage, membershipRows: [MembershipFeatureRow], onMembershipClick: @escaping () -> Void, onSecondaryText: LocalizedStringKey = "Dismiss", onDismiss: @escaping () -> Void) {
         self.headerImage = headerImage
         self.imageSize = imageSize
         self.appName = appName
@@ -36,10 +36,7 @@ public struct IntroFeaturesScreen: View {
         VStack {
             ScrollView(showsIndicators: false) {
                 VStack {
-                    Image(headerImage)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: imageSize)
+                    headerImage.createImage(frame: imageSize)
                         .padding(.top)
 
                     TitleHeaderView(subtitle: "Welcome to", title: appName)
@@ -48,10 +45,7 @@ public struct IntroFeaturesScreen: View {
                         row
                     }
 
-                    Image(premiumHeaderImage)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 100)
+                    premiumHeaderImage.createImage(frame: imageSize)
                         .padding(.top)
 
                     Text("... And with **Premium**")
@@ -62,17 +56,22 @@ public struct IntroFeaturesScreen: View {
 
                     Spacer()
                 }
-            }
-            // todo
-            .fullWidth(ipadWidth: 400)
 
-            PrimaryButton(text: "Get Premium", action: {
+                Spacer().frame(height: 250)
+            }.withActionButtons(type: .Vertical, primaryText: "Premium", secondaryText: "Continue", primaryDisabled: false, secondaryDisabled: false, secondaryTransparent: false, onPrimaryEnabledClick: {
                 onMembershipClick()
-            })
-
-            SecondaryButton(text: onSecondaryText, action: {
+            }, onSecondaryEnabledClick: {
                 onDismiss()
             })
+            // todo
+            .fullWidth(ipadWidth: 400)
+//            PrimaryButton(text: "Get Premium", action: {
+//
+//            })
+//
+//            SecondaryButton(text: onSecondaryText, action: {
+//                onDismiss()
+//            })
 
             Spacer()
         }.full().horPadding(36)
@@ -82,14 +81,14 @@ public struct IntroFeaturesScreen: View {
 @available(iOS 16.0.0, *)
 struct IntroFeaturesScreen_Previews: PreviewProvider {
     static var previews: some View {
-        IntroFeaturesScreen(headerImage: "", appName: "Uncover", introRows: [
+        IntroFeaturesScreen(headerImage: ParselableImage(parentName: "Cabinit", assetName: "icon-folder-main-icon", sizeVariant: 3, systemImage: "lock.fill"), appName: "Uncover", introRows: [
             IntroRow(color: Color.blue, icon: "book", text: "With support for PDF, CBZ, and CBR files, Uncover aims to be your next favorite file reading app"),
 
             IntroRow(color: Color.red, icon: "bookmark", text: "Save those favorite pages with Bookmarks and Bookmark galleries"),
             IntroRow(color: Color.blue, icon: "lock", text: "Lock your app with a Pin and Face-ID to keep your Library private"),
             IntroRow(color: Color.blue, icon: "folder", text: "Organize your content in folders"),
-        ], premiumHeaderImage: "", membershipRows: [
-        ], onMembershipClick: {}, onSecondaryText: "Test", onDismiss: {})
+        ], premiumHeaderImage: ParselableImage(parentName: "Premium", assetName: "icon-crown", sizeVariant: 3, systemImage: "lock.fill"), membershipRows: TestFeatureRow.membershipRowItems,
+        onMembershipClick: {}, onSecondaryText: "Test", onDismiss: {})
     }
 }
 
@@ -122,4 +121,19 @@ public struct IntroRow: View {
                 .aligned()
         }.fullWidth()
     }
+}
+
+private struct TestFeatureRow: MembershipFeatureRow {
+    var feature: String
+    let icon: String
+    let featureName: LocalizedStringKey
+    let description: LocalizedStringKey
+    var color: Color
+
+    static let membershipRowItems = [
+        TestFeatureRow(feature: "0", icon: "house", featureName: "More Folders", description: "Keep your content organized and seperate from other Folders. You can still directly share content to them too!", color: Color.blue),
+        TestFeatureRow(feature: "1", icon: "play", featureName: "Audio and Video Playback", description: "Play Supported audio and video files from within the app.", color: Color.red),
+        TestFeatureRow(feature: "2", icon: "book", featureName: "Read PDFs", description: "Read Supported PDFs directly from your Cabin", color: Color.purple),
+        TestFeatureRow(feature: "3", icon: "infinity", featureName: "No file Limits", description: "Use your local storage to its full capacity and exceed the standard file limit.", color: Color.yellow),
+    ]
 }

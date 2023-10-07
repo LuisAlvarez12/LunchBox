@@ -15,10 +15,11 @@ public extension View {
         secondaryText: LocalizedStringKey = "Skip",
         primaryDisabled: Bool,
         secondaryDisabled: Bool = false,
+        secondaryTransparent: Bool = true,
         onPrimaryEnabledClick: @escaping () -> Void,
         onSecondaryEnabledClick: @escaping () -> Void
     ) -> some View {
-        modifier(BottomBarHorizontalModifier(type: type, primaryText: primaryText, secondaryText: secondaryText, primaryDisabled: primaryDisabled, secondaryDisabled: secondaryDisabled, onPrimaryEnabledClick: onPrimaryEnabledClick, onSecondaryEnabledClick: onSecondaryEnabledClick))
+        modifier(BottomBarHorizontalModifier(type: type, primaryText: primaryText, secondaryText: secondaryText, primaryDisabled: primaryDisabled, secondaryTransparent: secondaryTransparent, secondaryDisabled: secondaryDisabled, onPrimaryEnabledClick: onPrimaryEnabledClick, onSecondaryEnabledClick: onSecondaryEnabledClick))
     }
 }
 
@@ -34,6 +35,7 @@ public struct BottomBarHorizontalModifier: ViewModifier {
     var primaryText: LocalizedStringKey = "Continue"
     var secondaryText: LocalizedStringKey = "Skip"
     var primaryDisabled: Bool
+    var secondaryTransparent: Bool
     var secondaryDisabled: Bool = false
     let onPrimaryEnabledClick: () -> Void
     let onSecondaryEnabledClick: () -> Void
@@ -65,17 +67,23 @@ public struct BottomBarHorizontalModifier: ViewModifier {
                         onPrimaryEnabledClick()
                     })
 
-                    Button(action: {
-                        onSecondaryEnabledClick()
-                    }, label: {
-                        Text(secondaryText)
-                            .foregroundStyle(Color.LBIdealBluePrimary)
-                            .font(.system(size: 16, weight: .regular, design: .default))
-                            .padding(8)
-                    })
+                    if secondaryTransparent {
+                        Button(action: {
+                            onSecondaryEnabledClick()
+                        }, label: {
+                            Text(secondaryText)
+                                .foregroundStyle(Color.LBIdealBluePrimary)
+                                .font(.system(size: 16, weight: .regular, design: .default))
+                                .padding(8)
+                        })
+                    } else {
+                        SecondaryButton(text: secondaryText, action: {
+                            onSecondaryEnabledClick()
+                        })
+                    }
 
                 }.padding().background {
-                    LinearGradient(colors: [Color.LBMonoSchemeTone, Color.clear], startPoint: .bottom, endPoint: .top).edgesIgnoringSafeArea(.bottom)
+                    LinearGradient(colors: [Color.LBMonoSchemeTone, Color.LBMonoSchemeTone.opacity(0.6), Color.clear], startPoint: .bottom, endPoint: .top).edgesIgnoringSafeArea(.bottom)
                 }
             }
         })
@@ -83,16 +91,8 @@ public struct BottomBarHorizontalModifier: ViewModifier {
 }
 
 #Preview {
-    VStack{
-        Color.white.withActionButtons(type:.Vertical, primaryDisabled: false, onPrimaryEnabledClick: {
-            
-        }, onSecondaryEnabledClick: {
-            
-        })
-        Color.white.withActionButtons(primaryDisabled: false, onPrimaryEnabledClick: {
-            
-        }, onSecondaryEnabledClick: {
-            
-        })
+    VStack {
+        Color.white.withActionButtons(type: .Vertical, primaryDisabled: false, onPrimaryEnabledClick: {}, onSecondaryEnabledClick: {})
+        Color.white.withActionButtons(primaryDisabled: false, onPrimaryEnabledClick: {}, onSecondaryEnabledClick: {})
     }
 }

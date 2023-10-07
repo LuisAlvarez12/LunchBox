@@ -10,54 +10,54 @@ import SwiftUI
 public struct ParselableNetworkImage {
     public let url: URL
     public let systemImage: String
-    
+
     public init(url: URL, systemImage: String) {
         self.url = url
         self.systemImage = systemImage
     }
-    
+
     public init(urlString: String, systemImage: String) {
-        self.url = URL(string: urlString)!
+        url = URL(string: urlString)!
         self.systemImage = systemImage
     }
-    
+
     public init(parentName: String, assetName: String, sizeVariant: Int = 1, systemImage: String) {
-        self.url = URL(string: Self.buildLink(parentName: parentName, assetName: assetName, sizeVariant: sizeVariant))!
+        url = URL(string: Self.buildLink(parentName: parentName, assetName: assetName, sizeVariant: sizeVariant))!
         self.systemImage = systemImage
     }
-    
+
     public static func buildLink(parentName: String, assetName: String, sizeVariant: Int = 1) -> String {
         "https://raw.githubusercontent.com/LuisAlvarez12/AppAssets/main/\(parentName)/\(assetName)/\(sizeVariant)x.png"
     }
 }
 
 public struct ParselableImage {
-    
-    public var assetImage: String? = nil
-    public var systemImage: String? = nil
-    public var networkImage: ParselableNetworkImage? = nil
-    
+    public var assetImage: String?
+    public var systemImage: String?
+    public var networkImage: ParselableNetworkImage?
+
     public init(assetImage: String? = nil, systemImage: String? = nil, networkImage: ParselableNetworkImage? = nil) {
         self.assetImage = assetImage
         self.systemImage = systemImage
         self.networkImage = networkImage
     }
-    
+
     public init(parentName: String, assetName: String, sizeVariant: Int = 1, systemImage: String) {
         let url = URL(string: ParselableNetworkImage.buildLink(parentName: parentName, assetName: assetName, sizeVariant: sizeVariant))!
-        self.networkImage = ParselableNetworkImage(url: url, systemImage: systemImage)
+        networkImage = ParselableNetworkImage(url: url, systemImage: systemImage)
     }
-    
+
     @ViewBuilder
     public func createImage(widthFrame: CGFloat? = nil, frame: CGFloat, color: Color = Color.LBIdealBluePrimary) -> some View {
         if let _networkImage = networkImage {
             AsyncImage(url: _networkImage.url,
-                       transaction: Transaction(animation: .snappy)) { phase in
+                       transaction: Transaction(animation: .snappy))
+            { phase in
                 switch phase {
                 case .empty:
                     EmptyView()
                         .squareFrame(length: frame)
-                case .success(let image):
+                case let .success(image):
                     if let widthFrame {
                         image
                             .resizable()
@@ -69,7 +69,7 @@ public struct ParselableImage {
                             .scaledToFit()
                             .squareFrame(length: frame)
                     }
-                case .failure(let error):
+                case let .failure(error):
                     Image(systemName: _networkImage.systemImage)
                         .resizable()
                         .scaledToFit()
@@ -79,7 +79,6 @@ public struct ParselableImage {
                     EmptyView()
                         .squareFrame(length: frame)
                 }
-                
             }
             .frame(width: widthFrame != nil ? widthFrame! : frame, height: widthFrame != nil ? .infinity : frame)
         } else if let _assetImage = assetImage {
@@ -95,7 +94,7 @@ public struct ParselableImage {
                     .squareFrame(length: frame)
                     .symbolEffect(.bounce, value: true)
                     .foregroundStyle(color)
-                
+
             } else {
                 Image(systemName: _systemImage)
                     .resizable()
@@ -108,8 +107,6 @@ public struct ParselableImage {
         }
     }
 }
-
-
 
 #Preview {
     VStack {

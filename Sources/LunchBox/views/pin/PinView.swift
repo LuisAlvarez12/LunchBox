@@ -79,7 +79,7 @@ public struct PinView: View {
                                 .full()
                                 .padding(12)
                                 .background {
-                                    Circle().foregroundColor(Color.systemSecondary).shadow(radius: 2)
+                                    Circle().foregroundColor(Color.systemSecondary)
                                 }
                         } else if button == .Delete {
                             Image(systemName: button.identifier())
@@ -93,7 +93,7 @@ public struct PinView: View {
                             if onClearEmoji != nil, let _currentEmoji = currentEmoji {
                                 Text(_currentEmoji).autoFit(size: 32).padding(12)
                                     .overlay(alignment: .bottom, content: {
-                                        Text("Edit").font(.system(size: 12, weight: .heavy, design: .rounded)).foregroundColor(Color.LBMonoScreenOffTone)
+                                        Text("Reset").font(.system(size: 12, weight: .heavy, design: .rounded)).foregroundColor(Color.LBMonoScreenOffTone)
                                             .horPadding(6)
                                             .background(Capsule().fill(Material.thin))
                                     })
@@ -215,4 +215,10 @@ public enum PinButtonType: CaseIterable {
 
 public struct PinButton {
     let id: PinButtonType
+}
+
+#Preview {
+    StatefulPreviewWrapper(value: "Test") { f in
+        PinView(input: f, hidesPin: true)
+    }
 }
