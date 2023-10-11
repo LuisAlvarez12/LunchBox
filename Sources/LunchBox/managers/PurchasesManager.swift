@@ -25,6 +25,14 @@ public class PurchasesManager: ObservableObject {
     public func isSubscribed() -> Bool {
         currentMembershipState is SubscriptionSuccess
     }
+    
+    public func debugPurchaseSuccess() async {
+        await updateSubscriptionState(SubscriptionSuccess(isTrial: false, subscriptionIncrement: .Annual))
+    }
+    
+    public func debugPurchaseFailure() async {
+        await updateSubscriptionState( SubscriptionFailure(reason: "Could Not Subscribe. Please try again later."))
+    }
 
     public func purchase(selectedChoice: SubscriptionOptionMetadata) async -> SubscriptionResult {
         do {
@@ -53,6 +61,7 @@ public class PurchasesManager: ObservableObject {
             } else if result is SubscriptionFailure {
                 NotificationsManager.shared.showMessage("Could Not Subscribe. Please try again later.")
             }
+            membershipPresented = false
             currentMembershipState = result
         }
     }

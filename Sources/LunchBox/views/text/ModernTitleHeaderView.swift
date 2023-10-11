@@ -17,18 +17,17 @@ public struct ModernTitleHeaderView: View {
     }
 
     public var body: some View {
-        VStack(spacing: 2) {
-            Text(subtitle)
-                .font(.subheadline)
-                .fontWeight(.bold)
-                .foregroundStyle(.secondary)
-                .lineLimit(1)
-                .aligned()
-
+        VStack(spacing: 0) {
             Text(title)
                 .font(.largeTitle)
                 .bold()
-                .fontWidth(.expanded)
+                .fontWidth(.compressed)
+                .lineLimit(1)
+                .aligned()
+            Text(subtitle)
+                .font(.subheadline)
+                .fontWeight(.semibold)
+                .foregroundStyle(.secondary)
                 .lineLimit(1)
                 .aligned()
         }.horPadding()

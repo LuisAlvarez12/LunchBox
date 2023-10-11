@@ -133,6 +133,30 @@ public struct MembershipContainerScreen: View {
                 screen
             }
         }
+        .overlay(alignment: .topTrailing) {
+            Button(action: {
+                Task {
+                    await PurchasesManager.shared.debugPurchaseSuccess()
+                    await MainActor.run {
+                        membershipMetaData.onSubscribeSuccess()
+                    }
+                }
+            }, label: {
+                Image(systemName: "checkmark.circle.fill")
+            })
+        }
+        .overlay(alignment: .topLeading) {
+            Button(action: {
+                Task {
+                    await PurchasesManager.shared.debugPurchaseFailure()
+                    await MainActor.run {
+                        membershipMetaData.onSubscribeFailure()
+                    }
+                }
+            }, label: {
+                Image(systemName: "xmark.app.fill")
+            })
+        }
         .background(Color.LBMonoSchemeTone)
         .safeAreaInset(edge: .bottom, content: {
             VStack {
