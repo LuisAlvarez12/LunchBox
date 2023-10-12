@@ -98,7 +98,7 @@ public struct ChipView: View {
         .vertPadding(8)
         .foregroundColor(isSelected ? Color.white : Color.LBMonoScreenOffTone)
         .background {
-            let bgColor = isSelected ? Color.LBIdealBluePrimary : Color.systemSecondary
+            let bgColor = isSelected ? Color.LBIdealBluePrimary : Color.LBMonoSheetAccent
 
             Capsule().fill(bgColor)
         }
@@ -134,7 +134,7 @@ struct ShareSheetScreen_Previews: PreviewProvider {
         VStack {
             ChipView(systemImage: "folder", title: "References", isSelected: true)
             ChipView(systemImage: "folder", title: "Dinner Ideas", isSelected: false)
-        }
+        }.background(Color.systemSecondary)
     }
 }
 
