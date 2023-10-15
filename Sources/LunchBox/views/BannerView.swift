@@ -93,6 +93,9 @@ public struct BannerView: View {
 
 private struct TestBanners: View {
     var body: some View {
+        
+        BannerView.ratingsBanner
+        
         BannerView(sublineText: GenericFaker.words(20).localized(), buttonText: GenericFaker.words(3).localized(), buttonColor: Color.LBIdealBluePrimary, bannerColor: Color.LBIdealBlueSecondary, image: ParselableImage(parentName: "Premium", assetName: "icon-crown", systemImage: ""), onClick: {})
 
         BannerView(sublineText: GenericFaker.words(20).localized(), buttonText: GenericFaker.words(3).localized(), buttonColor: Color.red, bannerColor: Color.white, image: ParselableImage(parentName: "Premium", assetName: "icon-crown", systemImage: ""), onClick: {})
@@ -102,17 +105,11 @@ private struct TestBanners: View {
 }
 
 #Preview {
-//    ScrollView(.horizontal, content: {
-//        HStack {
-//            Spacer().frame(width: 16)
-//            TestBanners()
-//        }
-//    }).scrollIndicators(.hidden)
-
-    ScrollView(.vertical, content: {
-        VStack {
+    ScrollView(.horizontal, content: {
+        HStack {
             Spacer().frame(width: 16)
             TestBanners()
+            Spacer()
         }
     }).scrollIndicators(.hidden)
 }

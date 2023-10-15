@@ -147,6 +147,13 @@ public extension Color {
         Color.LBIdealBluePrimary,
         Color.LBIdealBlueSecondary,
     ]
+    
+    // Banner
+    static let LBBannerDarkPurple = Color(UIColor(named: "banner-dark-purple", in: Bundle.module, compatibleWith: nil)!)
+    static let LBBannerGreen = Color(UIColor(named: "banner-green", in: Bundle.module, compatibleWith: nil)!)
+    static let LBBannerOffBlack = Color(UIColor(named: "banner-offblack", in: Bundle.module, compatibleWith: nil)!)
+    static let LBBannerOffWhite = Color(UIColor(named: "banner-offwhite", in: Bundle.module, compatibleWith: nil)!)
+
 
     // Mono
     static let LBMonoScreenOffTone = Color(UIColor(named: "lightOffBlackDarkOffWhite", in: Bundle.module, compatibleWith: nil)!)
