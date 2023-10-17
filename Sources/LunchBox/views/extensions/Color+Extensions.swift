@@ -153,6 +153,10 @@ public extension Color {
     static let LBBannerGreen = Color(UIColor(named: "banner-green", in: Bundle.module, compatibleWith: nil)!)
     static let LBBannerOffBlack = Color(UIColor(named: "banner-offblack", in: Bundle.module, compatibleWith: nil)!)
     static let LBBannerOffWhite = Color(UIColor(named: "banner-offwhite", in: Bundle.module, compatibleWith: nil)!)
+    static let LBBannerPink = Color(UIColor(named: "banner-pink", in: Bundle.module, compatibleWith: nil)!)
+    static let LBBannerRed = Color(UIColor(named: "banner-red", in: Bundle.module, compatibleWith: nil)!)
+    static let LBBannerYellow = Color(UIColor(named: "banner-yellow", in: Bundle.module, compatibleWith: nil)!)
+    static let LBBannerLimeGreen = Color(UIColor(named: "banner-lime-green", in: Bundle.module, compatibleWith: nil)!)
 
 
     // Mono
