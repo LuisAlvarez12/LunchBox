@@ -25,15 +25,16 @@ struct BannerScrollView<Content>: View where Content: View {
 #Preview {
 //    Color.red
     BannerScrollView(content: {
+        BannerView.checkOutCabinitBanner
         BannerView.changeAppIconBanner {
             
         }
         BannerView.ratingsBanner {
             
         }
-        BannerView.requestFeatureBanner(appName: "Cabinit")
+        BannerView.requestFeatureBanner(appName: "Uncover")
         BannerView.thankYouSubBanner
-        BannerView.premiumBanner()
+        BannerView.premiumBanner(appName: "Uncover")
     })
 }
 
@@ -52,6 +53,12 @@ public extension BannerView {
     }
     
     public static let thankYouSubBanner =  BannerView(sublineText: "Thank you for being a Premium member", buttonText: "", buttonColor: Color.clear, bannerColor: Color.LBIdealBlueSecondary, image: ParselableImage(parentName: "Banners", assetName: "icon-confetti-crown", systemImage: ""), onClick: {
+        if let url = URL(string: "itms-apps://itunes.apple.com/app/id1631243885") {
+            UIApplication.shared.open(url)
+        }
+    })
+    
+    public static let checkOutCabinitBanner =  BannerView(sublineText: "Lock your Files with our\nnew app, Cabinit", buttonText: "Check it out", buttonColor: Color.LBBannerOffBlack, bannerColor: Color.LBBannerOffWhite, image: ParselableImage(parentName: "Cabinit", assetName: "icon-folder-main-icon", systemImage: ""), onClick: {
     })
     
     public static func requestFeatureBanner(appName: String) -> some View {
@@ -67,8 +74,8 @@ public extension BannerView {
 //        aboutBannersPresented.toggle()
 //    })
     
-    public static func premiumBanner(hasTrialAvailable: Bool = false) -> some View {
-        BannerView(sublineText: hasTrialAvailable ? "Special Offer: Free Premium For new users!" : "Cabinit Premium: More Features, Less Limits", buttonText: hasTrialAvailable ? "Try for Free" : "Check it out", buttonColor: Color.LBIdealBluePrimary, bannerColor: Color.LBIdealBlueSecondary, image: ParselableImage(parentName: "Banners", assetName: "icon-confetti-crown", systemImage: ""), onClick: {
+    public static func premiumBanner(appName: String, hasTrialAvailable: Bool = false) -> some View {
+        BannerView(sublineText: hasTrialAvailable ? "Special Offer: Free Premium For new users!" : "\(appName) Premium: More Features, Less Limits", buttonText: hasTrialAvailable ? "Try for Free" : "Check it out", buttonColor: Color.LBIdealBluePrimary, bannerColor: Color.LBIdealBlueSecondary, image: ParselableImage(parentName: "Banners", assetName: "icon-confetti-crown", systemImage: ""), onClick: {
             PurchasesManager.shared.showMembershipModal()
         })
     }
