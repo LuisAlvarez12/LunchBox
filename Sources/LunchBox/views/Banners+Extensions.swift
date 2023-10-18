@@ -53,7 +53,7 @@ public extension BannerView {
     }
     
     public static let thankYouSubBanner =  BannerView(sublineText: "Thank you for being a Premium member", buttonText: "", buttonColor: Color.clear, bannerColor: Color.LBIdealBlueSecondary, image: ParselableImage(parentName: "Banners", assetName: "icon-confetti-crown", systemImage: ""), onClick: {
-        if let url = URL(string: "itms-apps://itunes.apple.com/app/id1631243885") {
+        if let url = URL(string: "https://itunes.apple.com/app/id1631243885") {
             UIApplication.shared.open(url)
         }
     })
