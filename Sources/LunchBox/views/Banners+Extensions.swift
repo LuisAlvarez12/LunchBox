@@ -40,7 +40,7 @@ struct BannerScrollView<Content>: View where Content: View {
 public extension BannerView {
     
     public static func ratingsBanner(requestReview: @escaping () -> Void) -> some View {
-        BannerView(sublineText: "Keep us Motivated!\nRate us", buttonText: "Rate us", sublineTextColor: .LBBannerOffWhite, buttonColor: Color.LBBannerYellow,buttonTextColor: Color.LBBannerOffBlack, bannerColor: Color.LBBannerOffBlack, image: ParselableImage(parentName: "General", assetName: "icon-ratings-stars", sizeVariant: 1, systemImage: ""), onClick: {
+        BannerView(sublineText: "Help us grow\nConsider rating us", buttonText: "Rate this app", sublineTextColor: .LBBannerOffWhite, buttonColor: Color.LBBannerYellow,buttonTextColor: Color.LBBannerOffBlack, bannerColor: Color.LBBannerOffBlack, image: ParselableImage(parentName: "General", assetName: "icon-ratings-stars", sizeVariant: 1, systemImage: ""), onClick: {
             requestReview()
         })
     }
