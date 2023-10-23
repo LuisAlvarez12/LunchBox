@@ -8,10 +8,10 @@
 import SwiftUI
 
 public struct ModernTitleHeaderView: View {
-    let subtitle: String
-    let title: String
+    let subtitle: LocalizedStringKey
+    let title: LocalizedStringKey
 
-    public init(subtitle: String, title: String) {
+    public init(subtitle: LocalizedStringKey, title: LocalizedStringKey) {
         self.subtitle = subtitle
         self.title = title
     }

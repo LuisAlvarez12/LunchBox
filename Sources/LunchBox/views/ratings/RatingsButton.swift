@@ -29,7 +29,7 @@ public struct RatingButton<Content>: View where Content: View {
 
 @available(iOS 16.0, *)
 public struct DefaultRatingsButton: View {
-    var text: String
+    var text: LocalizedStringKey
     var textColor: Color
     var bgColor: Color
 
@@ -39,7 +39,7 @@ public struct DefaultRatingsButton: View {
         bgColor = Color.LBIdealBlueSecondary
     }
 
-    public init(text: String, textColor: Color, bgColor: Color) {
+    public init(text: LocalizedStringKey, textColor: Color, bgColor: Color) {
         self.text = text
         self.textColor = textColor
         self.bgColor = bgColor

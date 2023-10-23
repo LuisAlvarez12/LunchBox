@@ -96,7 +96,7 @@ public extension View {
         frame(width: length, height: length)
     }
 
-    func withTitle(_ title: String) -> some View {
+    func withTitle(_ title: LocalizedStringKey) -> some View {
         VStack {
             Text(title).font(.system(size: 32, weight: .heavy, design: .default)).aligned().padding(.top, 24).padding(.leading, 16)
             self

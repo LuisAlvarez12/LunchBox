@@ -18,7 +18,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(name: "RevenueCat", url: "https://github.com/RevenueCat/purchases-ios.git", from: "4.26.0"),
+        .package(name: "RevenueCat", url: "https://github.com/RevenueCat/purchases-ios.git", from: "4.28.1"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.

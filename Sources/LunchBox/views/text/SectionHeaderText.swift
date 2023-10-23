@@ -8,7 +8,11 @@
 import SwiftUI
 
 public struct SectionHeaderText: View {
-    public let text: String
+    public let text: LocalizedStringKey
+    
+    public init(text: LocalizedStringKey) {
+        self.text = text
+    }
 
     public var body: some View {
         Text(text).font(.system(size: 12, weight: .heavy, design: .default))

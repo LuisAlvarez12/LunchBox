@@ -49,13 +49,13 @@ public struct TitleHeaderView: View {
 
 @available(iOS 16.0.0, *)
 public struct AlignedTitleHeaderView: View {
-    var subtitle: String? = nil
-    let title: String
+    var subtitle: LocalizedStringKey? = nil
+    let title: LocalizedStringKey
 
     var subtitleSize: CGFloat = 28
     var titleSize: CGFloat = 42
 
-    public init(subtitle: String? = nil, title: String, subtitleSize: CGFloat = 18, titleSize: CGFloat = 42) {
+    public init(subtitle: LocalizedStringKey? = nil, title: LocalizedStringKey, subtitleSize: CGFloat = 18, titleSize: CGFloat = 42) {
         self.subtitle = subtitle
         self.title = title
         self.subtitleSize = subtitleSize
@@ -69,7 +69,7 @@ public struct AlignedTitleHeaderView: View {
             .foregroundStyle(Color.secondary)
             .aligned()
 
-        Text(.init(title))
+        Text(title)
             .font(.system(size: titleSize, weight: .bold, design: .default))
             .aligned()
     }

@@ -9,9 +9,9 @@ import SwiftUI
 
 @available(iOS 16.0.0, *)
 public struct SecondaryText: View {
-    let text: String
+    let text: LocalizedStringKey
 
-    public init(_ text: String) {
+    public init(_ text: LocalizedStringKey) {
         self.text = text
     }
 
