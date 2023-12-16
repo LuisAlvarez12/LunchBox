@@ -25,7 +25,10 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "LunchBox",
-            dependencies: ["RevenueCat"],
+            dependencies: [ 
+                .product(name: "RevenueCat", package: "RevenueCat"),
+                .product(name: "RevenueCatUI", package: "RevenueCat")
+                          ],
             resources: [
                 .process("Resources"),
             ]

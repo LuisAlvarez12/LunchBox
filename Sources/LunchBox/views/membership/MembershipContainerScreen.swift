@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RevenueCatUI
 
 @available(iOS 16.0, *)
 public struct LocalizedKeyWithPosition {
@@ -158,46 +159,7 @@ public struct MembershipContainerScreen: View {
 //            })
 //        }
         .background(Color.LBMonoSchemeTone)
-        .safeAreaInset(edge: .bottom, content: {
-            VStack {
-                if let _choice = selectedChoice as? SubscriptionOptionMetadata {
-                    Text(_choice.getConfirmationString())
-                        .font(.caption)
-                        .foregroundStyle(Color.secondary)
-                        .multilineTextAlignment(.center)
-                        .padding(6)
-
-                    AsyncPrimaryButton(text: _choice.eligibleForTrial ? "Try FREE and Subscribe" : "Continue", color: membershipMetaData.primaryMembershipColor, action: {
-                        let result = await purchasesManager.purchase(selectedChoice: _choice)
-
-                        if result is SubscriptionSuccess {
-                            membershipMetaData.onSubscribeSuccess()
-                        } else {
-                            membershipMetaData.onSubscribeFailure()
-                        }
-                    })
-                } else {
-                    Text("Choose a Plan above\nNo commitment, Cancel Anytime")
-                        .font(.caption)
-                        .foregroundStyle(Color.secondary)
-                        .multilineTextAlignment(.center)
-                        .padding(6)
-
-                    PrimaryButton(text: "Continue", disabled: true, action: {})
-                }
-
-                AsyncButton("Restore", action: {
-                    let result = await purchasesManager.restore(acceptableEntitlements: membershipMetaData.acceptedEntitlements)
-
-                    if result is SubscriptionSuccess {
-                        membershipMetaData.onSubscribeSuccess()
-                    } else {
-                        membershipMetaData.onSubscribeFailure()
-                    }
-                }).foregroundColor(membershipMetaData.primaryMembershipColor).padding(.top, 4)
-                    .padding(.bottom)
-            }.background(Color.LBMonoSchemeTone)
-        })
+        .paywallFooter()
         .task {
             if subscriptionOptions.isEmpty {
                 subscriptionOptions = await purchasesManager.getOfferings()
