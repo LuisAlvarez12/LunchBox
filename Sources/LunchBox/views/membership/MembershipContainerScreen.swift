@@ -149,11 +149,6 @@ public struct MembershipContainerScreen: View {
 //            })
 //        }
         .background(Color.LBMonoSchemeTone)
-        .paywallFooter(purchaseCompleted: { f in
-            
-        }, restoreCompleted: { f in
-            
-        })
         .task {
             if subscriptionOptions.isEmpty {
                 subscriptionOptions = await purchasesManager.getOfferings()
