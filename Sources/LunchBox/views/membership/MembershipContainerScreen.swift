@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RevenueCatUI
 
 @available(iOS 16.0, *)
 public struct LocalizedKeyWithPosition {
@@ -133,32 +134,32 @@ public struct MembershipContainerScreen: View {
                 screen
             }
         }
-        .overlay(alignment: .topTrailing) {
-            Button(action: {
-                Task {
-                    await PurchasesManager.shared.debugPurchaseSuccess()
-                    await MainActor.run {
-                        membershipMetaData.onSubscribeSuccess()
-                    }
-                }
-            }, label: {
-                Image(systemName: "checkmark.circle.fill")
-            })
-        }
-        .overlay(alignment: .topLeading) {
-            Button(action: {
-                Task {
-                    await PurchasesManager.shared.debugPurchaseFailure()
-                    await MainActor.run {
-                        membershipMetaData.onSubscribeFailure()
-                    }
-                }
-            }, label: {
-                Image(systemName: "xmark.app.fill")
-            })
-        }
+//        .overlay(alignment: .topTrailing) {
+//            Button(action: {
+//                Task {
+//                    await PurchasesManager.shared.debugPurchaseSuccess()
+//                    await MainActor.run {
+//                        membershipMetaData.onSubscribeSuccess()
+//                    }
+//                }
+//            }, label: {
+//                Image(systemName: "checkmark.circle.fill")
+//            })
+//        }
+//        .overlay(alignment: .topLeading) {
+//            Button(action: {
+//                Task {
+//                    await PurchasesManager.shared.debugPurchaseFailure()
+//                    await MainActor.run {
+//                        membershipMetaData.onSubscribeFailure()
+//                    }
+//                }
+//            }, label: {
+//                Image(systemName: "xmark.app.fill")
+//            })
+//        }
         .background(Color.LBMonoSchemeTone)
-//        .paywallFooter()
+        .paywallFooter()
         .task {
             if subscriptionOptions.isEmpty {
                 subscriptionOptions = await purchasesManager.getOfferings()
