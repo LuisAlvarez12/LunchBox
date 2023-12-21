@@ -37,7 +37,7 @@ public class PurchasesManager: ObservableObject {
     public func purchase(selectedChoice: SubscriptionOptionMetadata) async -> SubscriptionResult {
         do {
             let result = try await Purchases.shared.purchase(package: selectedChoice.package)
-
+            
             if !result.userCancelled {
                 let successResult = SubscriptionSuccess(isTrial: selectedChoice.eligibleForTrial, subscriptionIncrement: selectedChoice.choice)
                 await updateSubscriptionState(successResult)
@@ -90,6 +90,32 @@ public class PurchasesManager: ObservableObject {
 
             acceptableEntitlements.forEach { entitlement in
                 if result.entitlements.all[entitlement]?.isActive == true {
+                    subResult = SubscriptionSuccess(isTrial: false, subscriptionIncrement: .Weekly)
+                }
+            }
+
+            if let _subResult = subResult {
+                await updateSubscriptionState(_subResult)
+                NotificationsManager.shared.showMessage("Subscription Restored!")
+                return _subResult
+            } else {
+                let failureResult = SubscriptionFailure(reason: "Subscription not found.")
+                await updateSubscriptionState(failureResult)
+                return failureResult
+            }
+        } catch {
+            let failureResult = SubscriptionFailure(reason: "Subscription not found.")
+            await updateSubscriptionState(failureResult)
+            return failureResult
+        }
+    }
+    
+    public func restore(customerInfo: CustomerInfo, acceptableEntitlements: [String]) async -> SubscriptionResult {
+        do {
+            var subResult: SubscriptionResult? = nil
+
+            acceptableEntitlements.forEach { entitlement in
+                if customerInfo.entitlements.all[entitlement]?.isActive == true {
                     subResult = SubscriptionSuccess(isTrial: false, subscriptionIncrement: .Weekly)
                 }
             }

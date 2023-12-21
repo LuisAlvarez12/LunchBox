@@ -78,16 +78,10 @@ public struct MembershipContainerScreen: View {
             VStack {
                 HStack {
                     Spacer()
-//                    Image(systemName: "laurel.leading")
-//                        .font(.system(size: 90))
-//                        .foregroundStyle(Color.LBUtilityBrightYellow.gradient)
                     Image(membershipMetaData.heroImageAsset)
                         .resizable()
                         .scaledToFit()
                         .squareFrame(length: 100)
-//                    Image(systemName: "laurel.trailing")
-//                        .font(.system(size: 90))
-//                        .foregroundStyle(Color.LBUtilityBrightYellow.gradient)
                     Spacer()
                 }.padding(.top, 24)
 
@@ -111,19 +105,15 @@ public struct MembershipContainerScreen: View {
                         })
                     }
                 }
-            }
-            VStack(spacing: 0) {
-                ForEach(subscriptionOptions, id: \.choice) { option in
-                    Button(action: {
-                        selectedChoice = option
-                    }, label: {
-                        MembershipOption(option: option, isSelected: selectedChoice?.choice == option.choice)
-                    })
+            }.paywallFooter(purchaseCompleted: { customerInfo in
+                Task {
+                    _ = await purchasesManager.restore(customerInfo: customerInfo, acceptableEntitlements: membershipMetaData.acceptedEntitlements)
                 }
-
-                Spacer()
-
-            }.full()
+            }, restoreCompleted: { customerInfo in
+                Task {
+                    _ = await purchasesManager.restore(customerInfo: customerInfo, acceptableEntitlements: membershipMetaData.acceptedEntitlements)
+                }
+            })
         }
     }
 
@@ -159,7 +149,11 @@ public struct MembershipContainerScreen: View {
 //            })
 //        }
         .background(Color.LBMonoSchemeTone)
-        .paywallFooter()
+        .paywallFooter(purchaseCompleted: { f in
+            
+        }, restoreCompleted: { f in
+            
+        })
         .task {
             if subscriptionOptions.isEmpty {
                 subscriptionOptions = await purchasesManager.getOfferings()
