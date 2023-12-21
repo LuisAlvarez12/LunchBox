@@ -105,6 +105,15 @@ public struct MembershipContainerScreen: View {
                         })
                     }
                 }
+            }
+        }
+    }
+
+    public var body: some View {
+        ViewThatFits {
+            screen
+            ScrollView {
+                screen
             }.paywallFooter(purchaseCompleted: { customerInfo in
                 Task {
                     _ = await purchasesManager.restore(customerInfo: customerInfo, acceptableEntitlements: membershipMetaData.acceptedEntitlements)
@@ -114,15 +123,6 @@ public struct MembershipContainerScreen: View {
                     _ = await purchasesManager.restore(customerInfo: customerInfo, acceptableEntitlements: membershipMetaData.acceptedEntitlements)
                 }
             })
-        }
-    }
-
-    public var body: some View {
-        ViewThatFits {
-            screen
-            ScrollView {
-                screen
-            }
         }
 //        .overlay(alignment: .topTrailing) {
 //            Button(action: {
