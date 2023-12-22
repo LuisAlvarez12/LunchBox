@@ -102,7 +102,7 @@ private struct TestBanners: View {
             
         }
         
-        BannerView(sublineText: GenericFaker.words(20).localized(), buttonText: GenericFaker.words(3).localized(), buttonColor: Color.LBIdealBluePrimary, bannerColor: Color.LBIdealBlueSecondary, image: ParselableImage(parentName: "Premium", assetName: "icon-crown", systemImage: ""), onClick: {})
+        BannerView(sublineText: GenericFaker.words(20).localized(), buttonText: GenericFaker.words(3).localized(), buttonColor: LunchboxThemeManager.shared.currentColor, bannerColor: Color.LBIdealBlueSecondary, image: ParselableImage(parentName: "Premium", assetName: "icon-crown", systemImage: ""), onClick: {})
 
         BannerView(sublineText: GenericFaker.words(20).localized(), buttonText: GenericFaker.words(3).localized(), buttonColor: Color.red, bannerColor: Color.white, image: ParselableImage(parentName: "Premium", assetName: "icon-crown", systemImage: ""), onClick: {})
 

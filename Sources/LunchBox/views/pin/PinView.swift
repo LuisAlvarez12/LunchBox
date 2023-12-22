@@ -40,10 +40,10 @@ public struct PinView: View {
                 if hidesPin {
                     ForEach(0 ..< maxDigits, id: \.self) { index in
                         if input.count >= index + 1 {
-                            Circle().foregroundStyle(Color.LBIdealBluePrimary.gradient)
+                            Circle().foregroundStyle(LunchboxThemeManager.shared.currentColor.gradient)
                                 .frame(minHeight: 26, idealHeight: 26, maxHeight: 26)
                         } else {
-                            Circle().stroke(Color.LBIdealBluePrimary, lineWidth: 3)
+                            Circle().stroke(LunchboxThemeManager.shared.currentColor, lineWidth: 3)
                                 .frame(minHeight: 20, idealHeight: 20, maxHeight: 20)
                         }
                     }

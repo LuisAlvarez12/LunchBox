@@ -18,7 +18,7 @@ public struct HomeGridItem: View {
 
     public var body: some View {
         VStack {
-            image.createImage(frame: 46, color: Color.LBIdealBluePrimary)
+            image.createImage(frame: 46, color: LunchboxThemeManager.shared.currentColor)
                 .padding(16)
                 .background(
                     RoundedRectangle(cornerRadius: 12)

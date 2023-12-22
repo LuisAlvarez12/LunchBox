@@ -15,7 +15,7 @@ public struct AsyncSecondaryButton: View {
     var transparent = false
     var disabled: Bool = false
 
-    public init(text: LocalizedStringKey, color: Color = Color.LBIdealBluePrimary, transparent: Bool = false, disabled: Bool = false, action: @escaping () async -> Void) {
+    public init(text: LocalizedStringKey, color: Color = LunchboxThemeManager.shared.currentColor, transparent: Bool = false, disabled: Bool = false, action: @escaping () async -> Void) {
         self.text = text
         self.color = color
         self.action = action
@@ -47,7 +47,7 @@ public struct SecondaryButton: View {
     var transparent = false
     var disabled: Bool = false
 
-    public init(text: LocalizedStringKey, color: Color = Color.LBIdealBluePrimary, transparent: Bool = false, disabled: Bool = false, action: @escaping () -> Void) {
+    public init(text: LocalizedStringKey, color: Color = LunchboxThemeManager.shared.currentColor, transparent: Bool = false, disabled: Bool = false, action: @escaping () -> Void) {
         self.text = text
         self.color = color
         self.action = action

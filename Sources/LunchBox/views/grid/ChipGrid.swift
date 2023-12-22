@@ -98,7 +98,7 @@ public struct ChipView: View {
         .vertPadding(8)
         .foregroundColor(isSelected ? Color.white : Color.LBMonoScreenOffTone)
         .background {
-            let bgColor = isSelected ? Color.LBIdealBluePrimary : Color.LBMonoSheetAccent
+            let bgColor = isSelected ? LunchboxThemeManager.shared.currentColor : Color.LBMonoSheetAccent
 
             Capsule().fill(bgColor)
         }

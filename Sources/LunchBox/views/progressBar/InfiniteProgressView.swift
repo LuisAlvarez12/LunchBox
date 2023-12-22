@@ -33,7 +33,7 @@ public struct InfiniteProgressBar: View {
     private func overlayRect(in rect: CGRect) -> some View {
         let width = rect.width * coverPercentage
         return Rectangle()
-            .foregroundStyle(Color.LBIdealBluePrimary)
+            .foregroundStyle(LunchboxThemeManager.shared.currentColor)
             .frame(width: width)
             .offset(x: width * offset)
             .onAppear {

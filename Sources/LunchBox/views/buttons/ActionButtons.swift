@@ -52,7 +52,7 @@ public struct BottomBarHorizontalModifier: ViewModifier {
                         onSecondaryEnabledClick()
                     }, label: {
                         Text(secondaryText)
-                            .foregroundStyle(Color.LBIdealBluePrimary)
+                            .foregroundStyle(LunchboxThemeManager.shared.currentColor)
                             .font(.system(size: 18, weight: .medium, design: .default))
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(Color.systemSecondary))
@@ -72,7 +72,7 @@ public struct BottomBarHorizontalModifier: ViewModifier {
                             onSecondaryEnabledClick()
                         }, label: {
                             Text(secondaryText)
-                                .foregroundStyle(Color.LBIdealBluePrimary)
+                                .foregroundStyle(LunchboxThemeManager.shared.currentColor)
                                 .font(.system(size: 16, weight: .regular, design: .default))
                                 .padding(8)
                         })

@@ -76,7 +76,7 @@ public extension BannerView {
 //    })
     
     public static func premiumBanner(appName: String, hasTrialAvailable: Bool = false) -> some View {
-        BannerView(sublineText: hasTrialAvailable ? "Special Offer: Free Premium For new users!" : "\(appName) Premium: More Features, Less Limits", buttonText: hasTrialAvailable ? "Try for Free" : "Check it out", buttonColor: Color.LBIdealBluePrimary, bannerColor: Color.LBIdealBlueSecondary, image: ParselableImage(parentName: "Banners", assetName: "icon-confetti-crown", systemImage: ""), onClick: {
+        BannerView(sublineText: hasTrialAvailable ? "Special Offer: Free Premium For new users!" : "\(appName) Premium: More Features, Less Limits", buttonText: hasTrialAvailable ? "Try for Free" : "Check it out", buttonColor: LunchboxThemeManager.shared.currentColor, bannerColor: Color.LBIdealBlueSecondary, image: ParselableImage(parentName: "Banners", assetName: "icon-confetti-crown", systemImage: ""), onClick: {
             PurchasesManager.shared.showMembershipModal()
         })
     }

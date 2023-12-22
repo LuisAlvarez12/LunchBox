@@ -174,7 +174,7 @@ struct MembershipContainerScreen_PreviewProvider: PreviewProvider {
                 appMembershipName: "Plus",
                 acceptedEntitlements: [""],
                 heroImageAsset: "",
-                primaryMembershipColor: Color.LBIdealBluePrimary,
+                primaryMembershipColor: LunchboxThemeManager.shared.currentColor,
                 features: [
                     "Multiple Cabins",
                     "Audio and Video Playback",

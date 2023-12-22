@@ -48,7 +48,7 @@ public struct ParselableImage {
     }
 
     @ViewBuilder
-    public func createImage(widthFrame: CGFloat? = nil, frame: CGFloat, color: Color = Color.LBIdealBluePrimary) -> some View {
+    public func createImage(widthFrame: CGFloat? = nil, frame: CGFloat, color: Color = LunchboxThemeManager.shared.currentColor) -> some View {
         if let _networkImage = networkImage {
             AsyncImage(url: _networkImage.url,
                        transaction: Transaction(animation: .snappy))

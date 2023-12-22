@@ -14,7 +14,7 @@ public struct IconProperties {
     public var backgroundGradient: Bool = false
     public var iconColor: Color
 
-    public init(size: CGFloat, background: Color? = nil, backgroundGradient: Bool = false, iconColor: Color = Color.LBIdealBluePrimary) {
+    public init(size: CGFloat, background: Color? = nil, backgroundGradient: Bool = false, iconColor: Color = LunchboxThemeManager.shared.currentColor) {
         self.size = size
         self.background = background
         self.backgroundGradient = backgroundGradient

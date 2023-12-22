@@ -144,7 +144,7 @@ public extension Color {
         Color.LBMonoSheetAccent,
         Color.LBUtilityErrorRed,
         Color.LBUtilityBrightYellow,
-        Color.LBIdealBluePrimary,
+        LunchboxThemeManager.shared.currentColor,
         Color.LBIdealBlueSecondary,
     ]
     
