@@ -111,7 +111,15 @@ public struct MembershipContainerScreen: View {
 
     public var body: some View {
         ViewThatFits {
-            screen
+            screen.paywallFooter(purchaseCompleted: { customerInfo in
+                Task {
+                    _ = await purchasesManager.restore(customerInfo: customerInfo, acceptableEntitlements: membershipMetaData.acceptedEntitlements)
+                }
+            }, restoreCompleted: { customerInfo in
+                Task {
+                    _ = await purchasesManager.restore(customerInfo: customerInfo, acceptableEntitlements: membershipMetaData.acceptedEntitlements)
+                }
+            })
             ScrollView {
                 screen
             }.paywallFooter(purchaseCompleted: { customerInfo in
