@@ -35,6 +35,7 @@ public struct IntroFeaturesScreen: View {
     public var body: some View {
         VStack {
             ScrollView(showsIndicators: false) {
+                Spacer().frame(height: 50)
                 VStack {
                     headerImage.createImage(frame: imageSize)
                         .padding(.top)
@@ -58,13 +59,16 @@ public struct IntroFeaturesScreen: View {
                 }
 
                 Spacer().frame(height: 250)
-            }.withActionButtons(type: .Vertical, primaryText: "Premium", secondaryText: "Continue", primaryDisabled: false, secondaryDisabled: false, secondaryTransparent: false, onPrimaryEnabledClick: {
+            }
+            .fullWidth(ipadWidth: 400)
+            .withActionButtons(type: .Vertical, primaryText: "Premium", secondaryText: "Continue", primaryDisabled: false, secondaryDisabled: false, secondaryTransparent: false, onPrimaryEnabledClick: {
                 onMembershipClick()
             }, onSecondaryEnabledClick: {
                 onDismiss()
             })
+            
             // todo
-            .fullWidth(ipadWidth: 400)
+            
 //            PrimaryButton(text: "Get Premium", action: {
 //
 //            })
@@ -74,21 +78,26 @@ public struct IntroFeaturesScreen: View {
 //            })
 
             Spacer()
-        }.full().horPadding(36)
+        }.full().horPadding(36).background(Color.LBMonoSchemeTone)
     }
 }
 
 @available(iOS 16.0.0, *)
 struct IntroFeaturesScreen_Previews: PreviewProvider {
     static var previews: some View {
-        IntroFeaturesScreen(headerImage: ParselableImage(parentName: "Cabinit", assetName: "icon-folder-main-icon", sizeVariant: 3, systemImage: "lock.fill"), appName: "Uncover", introRows: [
-            IntroRow(color: Color.blue, icon: "book", text: "With support for PDF, CBZ, and CBR files, Uncover aims to be your next favorite file reading app"),
+        VStack {
+            Color.clear
+        }.full().sheet(isPresented: .constant(true)) {
+            IntroFeaturesScreen(headerImage: ParselableImage(parentName: "Cabinit", assetName: "icon-folder-main-icon", sizeVariant: 3, systemImage: "lock.fill"), appName: "Uncover", introRows: [
+                IntroRow(color: Color.blue, icon: "book", text: "With support for PDF, CBZ, and CBR files, Uncover aims to be your next favorite file reading app"),
 
-            IntroRow(color: Color.red, icon: "bookmark", text: "Save those favorite pages with Bookmarks and Bookmark galleries"),
-            IntroRow(color: Color.blue, icon: "lock", text: "Lock your app with a Pin and Face-ID to keep your Library private"),
-            IntroRow(color: Color.blue, icon: "folder", text: "Organize your content in folders"),
-        ], premiumHeaderImage: ParselableImage(parentName: "Premium", assetName: "icon-crown", sizeVariant: 3, systemImage: "lock.fill"), membershipRows: TestFeatureRow.membershipRowItems,
-        onMembershipClick: {}, onSecondaryText: "Test", onDismiss: {})
+                IntroRow(color: Color.red, icon: "bookmark", text: "Save those favorite pages with Bookmarks and Bookmark galleries"),
+                IntroRow(color: Color.blue, icon: "lock", text: "Lock your app with a Pin and Face-ID to keep your Library private"),
+                IntroRow(color: Color.blue, icon: "folder", text: "Organize your content in folders"),
+            ], premiumHeaderImage: ParselableImage(parentName: "Premium", assetName: "icon-crown", sizeVariant: 3, systemImage: "lock.fill"), membershipRows: TestFeatureRow.membershipRowItems,
+            onMembershipClick: {}, onSecondaryText: "Test", onDismiss: {})
+                }
+      
     }
 }
 
