@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-public class LunchboxThemeManager: ObservableObject {
+public class LunchboxThemeManager {
     public static var shared = LunchboxThemeManager()
     
-    public var currentColor: Color = LunchboxThemeManager.shared.currentColor
+    public var currentColor: Color = Color.LBIdealBluePrimary
     
     public func setColor(_ color: Color) {
         currentColor = color
