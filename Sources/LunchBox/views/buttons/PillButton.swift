@@ -10,6 +10,11 @@ import SwiftUI
 public struct PillButton: View {
     public let text: LocalizedStringKey
     public let image: ParselableImage
+    
+    public init(text: LocalizedStringKey, image: ParselableImage) {
+        self.text = text
+        self.image = image
+    }
 
     public var body: some View {
         Label(title: {
@@ -29,5 +34,8 @@ public struct PillButton: View {
 }
 
 #Preview {
-    PillButton(text: "Favorites", image: ParselableImage(systemImage: ParselableSystemImage("folder", color: Color.green)))
+    HorizontalScrollview({
+        PillButton(text: "Favorites", image: ParselableImage(systemImage: ParselableSystemImage("folder", color: Color.green)))
+        PillButton(text: "Favorites", image: ParselableImage(networkImage: ParselableNetworkImage(urlString: ParselableNetworkImage.buildLink(parentName: "General", assetName: "icon-folder-square"), systemImage: "folder.fill")))
+    })
 }
