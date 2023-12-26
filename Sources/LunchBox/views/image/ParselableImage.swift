@@ -33,10 +33,10 @@ public struct ParselableNetworkImage {
 
 public struct ParselableImage {
     public var assetImage: String?
-    public var systemImage: String?
+    public var systemImage: ParselableSystemImage?
     public var networkImage: ParselableNetworkImage?
 
-    public init(assetImage: String? = nil, systemImage: String? = nil, networkImage: ParselableNetworkImage? = nil) {
+    public init(assetImage: String? = nil, systemImage: ParselableSystemImage? = nil, networkImage: ParselableNetworkImage? = nil) {
         self.assetImage = assetImage
         self.systemImage = systemImage
         self.networkImage = networkImage
@@ -88,19 +88,19 @@ public struct ParselableImage {
                 .scaledToFit()
         } else if let _systemImage = systemImage {
             if #available(iOS 17.0, *) {
-                Image(systemName: _systemImage)
+                Image(systemName: _systemImage.systemImage)
                     .resizable()
                     .scaledToFit()
                     .squareFrame(length: frame)
                     .symbolEffect(.bounce, value: true)
-                    .foregroundStyle(color)
+                    .foregroundStyle(_systemImage.color ?? color)
 
             } else {
-                Image(systemName: _systemImage)
+                Image(systemName: _systemImage.systemImage)
                     .resizable()
                     .scaledToFit()
                     .squareFrame(length: frame)
-                    .foregroundStyle(color)
+                    .foregroundStyle(_systemImage.color ?? color)
             }
         } else {
             Spacer()
@@ -108,11 +108,16 @@ public struct ParselableImage {
     }
 }
 
+public struct ParselableSystemImage {
+    public let systemImage: String
+    public var color: Color? = nil
+}
+
 #Preview {
     VStack {
-        ParselableImage(systemImage: "folder").createImage(frame: 80)
-        ParselableImage(systemImage: "globe").createImage(frame: 80, color: Color.red)
-        ParselableImage(systemImage: "globe").createImage(frame: 80, color: Color.red)
+        ParselableImage(systemImage: ParselableSystemImage(systemImage: "folder")).createImage(frame: 80)
+        ParselableImage(systemImage: ParselableSystemImage(systemImage: "folder")).createImage(frame: 80, color: Color.red)
+        ParselableImage(systemImage: ParselableSystemImage(systemImage: "folder")).createImage(frame: 80, color: Color.red)
         ParselableImage(networkImage: ParselableNetworkImage(urlString: "https://raw.githubusercontent.com/LuisAlvarez12/AppAssets/main/General/icon-folder/3x.png", systemImage: "star")).createImage(frame: 80, color: Color.red)
     }
 }
