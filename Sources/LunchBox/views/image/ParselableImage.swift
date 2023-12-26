@@ -110,14 +110,19 @@ public struct ParselableImage {
 
 public struct ParselableSystemImage {
     public let systemImage: String
-    public var color: Color? = nil
+    public var color: Color?
+
+    public init(_ systemImage: String, color: Color? = nil) {
+        self.systemImage = systemImage
+        self.color = color
+    }
 }
 
 #Preview {
     VStack {
-        ParselableImage(systemImage: ParselableSystemImage(systemImage: "folder")).createImage(frame: 80)
-        ParselableImage(systemImage: ParselableSystemImage(systemImage: "folder")).createImage(frame: 80, color: Color.red)
-        ParselableImage(systemImage: ParselableSystemImage(systemImage: "folder")).createImage(frame: 80, color: Color.red)
+        ParselableImage(systemImage: ParselableSystemImage("folder")).createImage(frame: 80)
+        ParselableImage(systemImage: ParselableSystemImage("folder")).createImage(frame: 80, color: Color.red)
+        ParselableImage(systemImage: ParselableSystemImage("folder")).createImage(frame: 80, color: Color.red)
         ParselableImage(networkImage: ParselableNetworkImage(urlString: "https://raw.githubusercontent.com/LuisAlvarez12/AppAssets/main/General/icon-folder/3x.png", systemImage: "star")).createImage(frame: 80, color: Color.red)
     }
 }

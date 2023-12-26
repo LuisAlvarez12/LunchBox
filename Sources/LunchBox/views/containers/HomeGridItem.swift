@@ -33,5 +33,5 @@ public struct HomeGridItem: View {
 }
 
 #Preview {
-    HomeGridItem(image: ParselableImage(systemImage: ParselableSystemImage(systemImage: "folder")), text: "Test")
+    HomeGridItem(image: ParselableImage(systemImage: ParselableSystemImage("folder")), text: "Test")
 }

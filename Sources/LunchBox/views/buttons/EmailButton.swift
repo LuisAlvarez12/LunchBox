@@ -17,7 +17,7 @@ public extension View {
 }
 
 extension UIApplication {
-    func sendEmail(email: String = "team@rezonating.app",subject: String,emailBody: String) {
+    func sendEmail(email: String = "team@rezonating.app", subject: String, emailBody: String) {
         let coded = "mailto:\(email)?subject=\(subject)&body=\(emailBody)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         if let emailURL = URL(string: coded!) {
             if UIApplication.shared.canOpenURL(emailURL) {

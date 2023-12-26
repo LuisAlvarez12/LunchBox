@@ -66,9 +66,9 @@ public struct IntroFeaturesScreen: View {
             }, onSecondaryEnabledClick: {
                 onDismiss()
             })
-            
+
             // todo
-            
+
 //            PrimaryButton(text: "Get Premium", action: {
 //
 //            })
@@ -96,8 +96,7 @@ struct IntroFeaturesScreen_Previews: PreviewProvider {
                 IntroRow(color: Color.blue, icon: "folder", text: "Organize your content in folders"),
             ], premiumHeaderImage: ParselableImage(parentName: "Premium", assetName: "icon-crown", sizeVariant: 3, systemImage: "lock.fill"), membershipRows: TestFeatureRow.membershipRowItems,
             onMembershipClick: {}, onSecondaryText: "Test", onDismiss: {})
-                }
-      
+        }
     }
 }
 

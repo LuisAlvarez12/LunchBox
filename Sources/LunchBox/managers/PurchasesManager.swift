@@ -25,19 +25,19 @@ public class PurchasesManager: ObservableObject {
     public func isSubscribed() -> Bool {
         currentMembershipState is SubscriptionSuccess
     }
-    
+
     public func debugPurchaseSuccess() async {
         await updateSubscriptionState(SubscriptionSuccess(isTrial: false, subscriptionIncrement: .Annual))
     }
-    
+
     public func debugPurchaseFailure() async {
-        await updateSubscriptionState( SubscriptionFailure(reason: "Could Not Subscribe. Please try again later."))
+        await updateSubscriptionState(SubscriptionFailure(reason: "Could Not Subscribe. Please try again later."))
     }
 
     public func purchase(selectedChoice: SubscriptionOptionMetadata) async -> SubscriptionResult {
         do {
             let result = try await Purchases.shared.purchase(package: selectedChoice.package)
-            
+
             if !result.userCancelled {
                 let successResult = SubscriptionSuccess(isTrial: selectedChoice.eligibleForTrial, subscriptionIncrement: selectedChoice.choice)
                 await updateSubscriptionState(successResult)
@@ -109,7 +109,7 @@ public class PurchasesManager: ObservableObject {
             return failureResult
         }
     }
-    
+
     public func restore(customerInfo: CustomerInfo, acceptableEntitlements: [String]) async -> SubscriptionResult {
         do {
             var subResult: SubscriptionResult? = nil

@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct SectionHeaderText: View {
     public let text: LocalizedStringKey
-    
+
     public init(text: LocalizedStringKey) {
         self.text = text
     }

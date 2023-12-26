@@ -147,7 +147,7 @@ public extension Color {
         LunchboxThemeManager.shared.currentColor,
         Color.LBIdealBlueSecondary,
     ]
-    
+
     // Banner
     static let LBBannerDarkPurple = Color(UIColor(named: "banner-dark-purple", in: Bundle.module, compatibleWith: nil)!)
     static let LBBannerGreen = Color(UIColor(named: "banner-green", in: Bundle.module, compatibleWith: nil)!)
@@ -157,7 +157,6 @@ public extension Color {
     static let LBBannerRed = Color(UIColor(named: "banner-red", in: Bundle.module, compatibleWith: nil)!)
     static let LBBannerYellow = Color(UIColor(named: "banner-yellow", in: Bundle.module, compatibleWith: nil)!)
     static let LBBannerLimeGreen = Color(UIColor(named: "banner-lime-green", in: Bundle.module, compatibleWith: nil)!)
-
 
     // Mono
     static let LBMonoScreenOffTone = Color(UIColor(named: "lightOffBlackDarkOffWhite", in: Bundle.module, compatibleWith: nil)!)
