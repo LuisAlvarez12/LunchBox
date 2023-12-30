@@ -89,6 +89,9 @@ public struct IntroFeaturesScreen: View {
 
             Spacer()
         }.full().horPadding(36).background(Color.LBMonoSchemeTone)
+            .task {
+                _ = await PurchasesManager.shared.hasTrialsAvailble()
+            }
     }
 }
 
