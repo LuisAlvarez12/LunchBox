@@ -160,7 +160,7 @@ public class PurchasesManager: ObservableObject {
                 isElligible = true
             }
         }
-
+        hasTrialAvailable = isElligible
         return isElligible
     }
 

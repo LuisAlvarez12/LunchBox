@@ -40,14 +40,14 @@ public struct IntroFeaturesScreen: View {
                     
                     VStack(spacing: 0){
                         Text("Welcome to")
-                            .font(.system(size: 20, weight: .bold, design: .rounded))
+                            .font(.system(size: 16, weight: .bold, design: .rounded))
                             .foregroundStyle(Color.secondary)
                         
-                        HStack{
-                            headerImage.createImage(frame: imageSize)
+                        HStack(spacing: 4){
+                            headerImage.createImage(frame: 50)
                             Text(appName)
-                                .font(.system(size: 44, weight: .semibold, design: .default))
-                                .fontWidth(.compressed)
+                                .font(.system(size: 40, weight: .bold, design: .default))
+                                .fontWidth(.condensed)
                                 .lineLimit(1)
                         }
                     }.fullWidth()
@@ -56,7 +56,7 @@ public struct IntroFeaturesScreen: View {
                         row
                     }
 
-                    premiumHeaderImage.createImage(frame: imageSize)
+                    premiumHeaderImage.createImage(widthFrame: 100, frame: 100)
                         .padding(.top)
 
                     Text("... And with **Premium**")
@@ -98,7 +98,7 @@ struct IntroFeaturesScreen_Previews: PreviewProvider {
         VStack {
             Color.clear
         }.full().sheet(isPresented: .constant(true)) {
-            IntroFeaturesScreen(headerImage: ParselableImage(parentName: "Cabinit", assetName: "icon-folder-main-icon", sizeVariant: 3, systemImage: "lock.fill"), appName: "Uncover", introRows: [
+            IntroFeaturesScreen(headerImage: ParselableImage(parentName: "Cabinit", assetName: "icon-folder-main-icon", sizeVariant: 3, systemImage: "lock.fill"), appName: "Cabinit", introRows: [
                 IntroRow(color: Color.blue, icon: "book", text: "With support for PDF, CBZ, and CBR files, Uncover aims to be your next favorite file reading app"),
 
                 IntroRow(color: Color.red, icon: "bookmark", text: "Save those favorite pages with Bookmarks and Bookmark galleries"),
