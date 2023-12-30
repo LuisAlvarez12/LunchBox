@@ -13,6 +13,27 @@ public extension View {
     }
 }
 
+public extension View {
+    
+    @ViewBuilder
+    public func materialSheet() -> some View {
+        if #available(iOS 16.4.1, *) {
+            self
+                .padding()
+                .presentationDetents([.medium, .large])
+            .presentationDragIndicator(.visible)
+            .presentationBackground(Material.thick)
+            .presentationCornerRadius(30)
+        } else {
+            self
+                .padding()
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
+        }
+    }
+}
+
+
 public struct LBSheetModifier: ViewModifier {
     @Binding var isPresented: Bool
 

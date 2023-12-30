@@ -20,7 +20,7 @@ public struct IntroFeaturesScreen: View {
 
     var imageSize: CGFloat
 
-    public init(headerImage: ParselableImage, imageSize: CGFloat = 100, appName: LocalizedStringKey, introRows: [IntroRow], premiumHeaderImage: ParselableImage, membershipRows: [MembershipFeatureRow], onMembershipClick: @escaping () -> Void, onSecondaryText: LocalizedStringKey = "Dismiss", onDismiss: @escaping () -> Void) {
+    public init(headerImage: ParselableImage, imageSize: CGFloat = 50, appName: LocalizedStringKey, introRows: [IntroRow], premiumHeaderImage: ParselableImage, membershipRows: [MembershipFeatureRow], onMembershipClick: @escaping () -> Void, onSecondaryText: LocalizedStringKey = "Dismiss", onDismiss: @escaping () -> Void) {
         self.headerImage = headerImage
         self.imageSize = imageSize
         self.appName = appName
@@ -37,10 +37,20 @@ public struct IntroFeaturesScreen: View {
             ScrollView(showsIndicators: false) {
                 Spacer().frame(height: 50)
                 VStack {
-                    headerImage.createImage(frame: imageSize)
-                        .padding(.top)
-
-                    TitleHeaderView(subtitle: "Welcome to", title: appName)
+                    
+                    VStack(spacing: 0){
+                        Text("Welcome to")
+                            .font(.system(size: 20, weight: .bold, design: .rounded))
+                            .foregroundStyle(Color.secondary)
+                        
+                        HStack{
+                            headerImage.createImage(frame: imageSize)
+                            Text(appName)
+                                .font(.system(size: 44, weight: .semibold, design: .default))
+                                .fontWidth(.compressed)
+                                .lineLimit(1)
+                        }
+                    }.fullWidth()
 
                     ForEach(introRows, id: \.text) { row in
                         row
@@ -61,7 +71,7 @@ public struct IntroFeaturesScreen: View {
                 Spacer().frame(height: 250)
             }
             .fullWidth(ipadWidth: 400)
-            .withActionButtons(type: .Vertical, primaryText: "Premium", secondaryText: "Continue", primaryDisabled: false, secondaryDisabled: false, secondaryTransparent: false, onPrimaryEnabledClick: {
+            .withActionButtons(type: .Vertical, primaryText: PurchasesManager.shared.hasTrialAvailable ? "Redeem Free Trial" : "Premium" , secondaryText: "Continue", primaryDisabled: false, secondaryDisabled: false, secondaryTransparent: false, onPrimaryEnabledClick: {
                 onMembershipClick()
             }, onSecondaryEnabledClick: {
                 onDismiss()
