@@ -19,6 +19,8 @@ public struct IntroFeaturesScreen: View {
     let onDismiss: () -> Void
 
     var imageSize: CGFloat
+    
+    @State var hasTrialAvailable = false
 
     public init(headerImage: ParselableImage, imageSize: CGFloat = 50, appName: LocalizedStringKey, introRows: [IntroRow], premiumHeaderImage: ParselableImage, membershipRows: [MembershipFeatureRow], onMembershipClick: @escaping () -> Void, onSecondaryText: LocalizedStringKey = "Dismiss", onDismiss: @escaping () -> Void) {
         self.headerImage = headerImage
@@ -71,7 +73,7 @@ public struct IntroFeaturesScreen: View {
                 Spacer().frame(height: 250)
             }
             .fullWidth(ipadWidth: 400)
-            .withActionButtons(type: .Vertical, primaryText: PurchasesManager.shared.hasTrialAvailable ? "Redeem Free Trial" : "Premium" , secondaryText: "Continue", primaryDisabled: false, secondaryDisabled: false, secondaryTransparent: false, onPrimaryEnabledClick: {
+            .withActionButtons(type: .Vertical, primaryText: hasTrialAvailable ? "Redeem Free Trial" : "Premium" , secondaryText: "Continue", primaryDisabled: false, secondaryDisabled: false, secondaryTransparent: false, onPrimaryEnabledClick: {
                 onMembershipClick()
             }, onSecondaryEnabledClick: {
                 onDismiss()
@@ -90,7 +92,7 @@ public struct IntroFeaturesScreen: View {
             Spacer()
         }.full().horPadding(36).background(Color.LBMonoSchemeTone)
             .task {
-                _ = await PurchasesManager.shared.hasTrialsAvailble()
+                hasTrialAvailable = await PurchasesManager.shared.hasTrialsAvailble()
             }
     }
 }
