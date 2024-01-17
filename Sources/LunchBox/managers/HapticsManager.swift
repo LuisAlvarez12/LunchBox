@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 16, *)
 public struct HapticsManager {
     public static let shared = HapticsManager()
     private let generator = UINotificationFeedbackGenerator()
