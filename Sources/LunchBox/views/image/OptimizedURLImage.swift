@@ -18,7 +18,7 @@ public struct MemorySafeURLImage: View {
     public init(url: URL, onDoubleTap: (() -> Void)? = nil, image: UIImage? = nil, bgColor: Color = Color.black) {
         self.url = url
         self.onDoubleTap = onDoubleTap
-        self.image = images
+        self.image = image
         self.bgColor = bgColor
     }
 
