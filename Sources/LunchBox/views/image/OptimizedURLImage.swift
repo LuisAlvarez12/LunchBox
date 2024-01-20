@@ -15,10 +15,11 @@ public struct MemorySafeURLImage: View {
 
     @State var image: UIImage? = nil
 
-    public init(url: URL, onDoubleTap: (() -> Void)? = nil, image: UIImage? = nil) {
+    public init(url: URL, onDoubleTap: (() -> Void)? = nil, image: UIImage? = nil, bgColor: Color = Color.black) {
         self.url = url
         self.onDoubleTap = onDoubleTap
-        self.image = image
+        self.image = images
+        self.bgColor = bgColor
     }
 
     public var body: some View {
