@@ -11,6 +11,7 @@ import SwiftUI
 public struct MemorySafeURLImage: View {
     let url: URL
     var onDoubleTap: (() -> Void)? = nil
+    var bgColor: Color = Color.black
 
     @State var image: UIImage? = nil
 
@@ -29,7 +30,7 @@ public struct MemorySafeURLImage: View {
                         .resizable()
                         .scaledToFit()
                         .full()
-                        .background(Color.black)
+                        .background(bgColor)
                         .pinchToZoom(onDoubleTap: {})
                 }
             }.onAppear {
