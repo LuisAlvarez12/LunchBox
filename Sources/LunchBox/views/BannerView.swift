@@ -52,15 +52,13 @@ public struct BannerView: View {
     var content: some View {
         if #available(iOS 17.0, *) {
             HStack {
-                VStack{
+                VStack(spacing: 0){
                     //                if let parselableLabelData {
                     //                    ParselableLabel(parselableLabelData)
                     //                    // ParselableLabel.ParselableLabelData(text: "Premium", image: ParselableImage(networkImage: .folder), size: 20)
                     //                }
                     
-                    image.createImage(widthFrame: 100, frame: 100, color: buttonColor)
-                    
-                    Spacer()
+                    image.createImage(widthFrame: 60, frame: 60, color: buttonColor)
                     
                     Text(sublineText)
                         .font(.system(size: 14, weight: .semibold))
@@ -70,13 +68,12 @@ public struct BannerView: View {
                     Text(buttonText)
                         .font(.footnote)
                         .foregroundStyle(buttonTextColor)
-                    
                         .bold()
-                        .horPadding(8)
-                        .vertPadding(8)
-                        .fullWidth()
+                        .horPadding()
+                        .vertPadding(4)
                         .background(Capsule().foregroundStyle(buttonColor))
-                }.padding()
+                        .padding(.top, 4)
+                }.padding(8)
                 
             }.frame(width: 200)
                 .background(bg)
@@ -169,7 +166,7 @@ private struct TestBanners: View {
         }
         .scrollTargetBehavior(.viewAligned)
         .scrollIndicators(.hidden)
-        .frame(height: 220)
+        
     }
 }
 
