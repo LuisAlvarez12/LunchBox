@@ -50,6 +50,7 @@ public struct AsyncButton<Label: View>: View {
                 }
             }
         )
+        .buttonStyle(.plain)
         .disabled(isDisabled)
     }
 }

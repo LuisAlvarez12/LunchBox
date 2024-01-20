@@ -32,6 +32,7 @@ public struct PrimaryButton: View {
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 12).fill(disabled ? Color.secondary : color))
         })
+        .buttonStyle(.plain)
         .disabled(disabled)
         .horPadding()
     }

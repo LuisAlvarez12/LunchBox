@@ -48,35 +48,65 @@ public struct BannerView: View {
             .full()
     }
 
+    @ViewBuilder
     var content: some View {
-        HStack {
-            VStack(alignment: .leading) {
-//                if let parselableLabelData {
-//                    ParselableLabel(parselableLabelData)
-//                    // ParselableLabel.ParselableLabelData(text: "Premium", image: ParselableImage(networkImage: .folder), size: 20)
-//                }
-                Spacer()
+        if #available(iOS 17.0, *) {
+            HStack {
+                VStack{
+                    //                if let parselableLabelData {
+                    //                    ParselableLabel(parselableLabelData)
+                    //                    // ParselableLabel.ParselableLabelData(text: "Premium", image: ParselableImage(networkImage: .folder), size: 20)
+                    //                }
+                    
+                    image.createImage(widthFrame: 100, frame: 100, color: buttonColor)
+                    
+                    Spacer()
+                    
+                    Text(sublineText)
+                        .font(.system(size: 14, weight: .semibold))
+                        .lineLimit(2, reservesSpace: true)
+                        .multilineTextAlignment(.center)
+                        .foregroundStyle(sublineTextColor)
+                    Text(buttonText)
+                        .font(.footnote)
+                        .foregroundStyle(buttonTextColor)
+                    
+                        .bold()
+                        .horPadding(8)
+                        .vertPadding(8)
+                        .fullWidth()
+                        .background(Capsule().foregroundStyle(buttonColor))
+                }.padding()
+                
+            }.frame(width: 200)
+                .background(bg)
+                .clipped()
+        } else {
+            HStack {
+                    VStack(alignment: .leading) {
+                        Spacer()
 
-                Text(sublineText)
-                    .font(.system(size: 14, weight: .semibold))
-                    .lineLimit(2, reservesSpace: true)
-                    .multilineTextAlignment(.leading)
-                    .foregroundStyle(sublineTextColor)
-                    .aligned()
-                Text(buttonText)
-                    .font(.footnote)
-                    .foregroundStyle(buttonTextColor)
-                    .bold()
-                    .horPadding(8)
-                    .vertPadding(8)
-                    .background(Capsule().foregroundStyle(buttonColor))
-            }.padding([.leading, .vertical], 16)
+                        Text(sublineText)
+                            .font(.system(size: 14, weight: .semibold))
+                            .lineLimit(2, reservesSpace: true)
+                            .multilineTextAlignment(.leading)
+                            .foregroundStyle(sublineTextColor)
+                            .aligned()
+                        Text(buttonText)
+                            .font(.footnote)
+                            .foregroundStyle(buttonTextColor)
+                            .bold()
+                            .horPadding(8)
+                            .vertPadding(8)
+                            .background(Capsule().foregroundStyle(buttonColor))
+                    }.padding([.leading, .vertical], 16)
 
-            image.createImage(widthFrame: 100, frame: 100, color: buttonColor)
+                    image.createImage(widthFrame: 100, frame: 100, color: buttonColor)
 
-        }.frame(width: width, height: height)
-            .background(bg)
-            .clipped()
+                }.frame(width: width, height: height)
+                    .background(bg)
+                    .clipped()
+        }
     }
 
     @ViewBuilder
@@ -86,7 +116,7 @@ public struct BannerView: View {
                 onClick()
             }, label: {
                 content
-            })
+            }).buttonStyle(.plain)
         } else if let webLink {
             WebButton(url: webLink) {
                 content
@@ -115,6 +145,32 @@ private struct TestBanners: View {
             Spacer()
         }
     }).scrollIndicators(.hidden)
+}
+
+@available(iOS 17.0, *)
+#Preview {
+    VStack {
+        ScrollView(.horizontal) {
+            LazyHStack(spacing: 16) {
+//                    let isSubscribed = purchasesManager.isSubscribed()
+                BannerView.premiumBanner(appName: "Uncover", hasTrialAvailable: true)
+                BannerView.ratingsBanner {
+//                        requestReview()
+                }
+                BannerView.checkOutCabinitBanner
+                BannerView.requestFeatureBanner(appName: "Uncover")
+                BannerView.thankYouSubBanner
+                BannerView.checkOutCabinitBanner
+                BannerView.requestFeatureBanner(appName: "Uncover")
+                BannerView.thankYouSubBanner
+            }
+            .padding()
+            .scrollTargetLayout()
+        }
+        .scrollTargetBehavior(.viewAligned)
+        .scrollIndicators(.hidden)
+        .frame(height: 220)
+    }
 }
 
 public struct ParselableLabel: View {
