@@ -18,6 +18,7 @@ public extension View {
         #if os(visionOS)
             return self.sheet(isPresented: isPresented, content: {
                 content()
+                    .frame(minWidth: 550, minHeight: 550)
                     .overlay(alignment: .topLeading, content: {
                         Button(action: {
                             isPresented.wrappedValue = false
@@ -30,14 +31,6 @@ public extension View {
         #else
         return self.sheet(isPresented: isPresented, content: {
             content()
-                .overlay(alignment: .topLeading, content: {
-                    Button(action: {
-                        isPresented.wrappedValue = false
-                    }, label: {
-                            Label("Close", systemImage: "xmark")
-                            .labelStyle(.iconOnly)
-                    }).padding()
-                })
         })
         #endif
      

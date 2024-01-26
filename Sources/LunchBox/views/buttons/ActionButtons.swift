@@ -41,6 +41,25 @@ public struct BottomBarHorizontalModifier: ViewModifier {
     let onSecondaryEnabledClick: () -> Void
 
     public func body(content: Content) -> some View {
+        #if os(visionOS)
+        content
+            .ornament(visibility: .visible, attachmentAnchor: .scene(.bottom), ornament: {
+                
+                HStack{
+                    Button(primaryText, action: {
+                        onPrimaryEnabledClick()
+                    }).disabled(primaryDisabled)
+                    
+                    Button(secondaryText, action: {
+                        onSecondaryEnabledClick()
+                    })
+                    .tint(.blue)
+                    .disabled(secondaryDisabled)
+                }.padding(8)
+                    .glassBackgroundEffect()
+                    
+            })
+        #else
         content.overlay(alignment: .bottom, content: {
             if type == .Horizontal {
                 HStack(alignment: .center) {
@@ -87,12 +106,18 @@ public struct BottomBarHorizontalModifier: ViewModifier {
                 }
             }
         })
+        #endif
     }
 }
 
 #Preview {
     VStack {
-        Color.white.withActionButtons(type: .Vertical, primaryDisabled: false, onPrimaryEnabledClick: {}, onSecondaryEnabledClick: {})
-        Color.white.withActionButtons(primaryDisabled: false, onPrimaryEnabledClick: {}, onSecondaryEnabledClick: {})
+        Rectangle().fill(Material.thin).withActionButtons(type: .Vertical, primaryDisabled: false, onPrimaryEnabledClick: {}, onSecondaryEnabledClick: {})
+    }
+}
+
+#Preview {
+    VStack {
+        Rectangle().fill(Material.thin).withActionButtons(primaryDisabled: false, onPrimaryEnabledClick: {}, onSecondaryEnabledClick: {})
     }
 }

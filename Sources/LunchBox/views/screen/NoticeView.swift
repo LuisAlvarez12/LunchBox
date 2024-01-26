@@ -71,8 +71,8 @@ public struct NoticeView: View {
 }
 
 @available(iOS 16.0, *)
-struct NoticeView_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview {
+    ScrollView(.vertical) {
         NoticeView(image: ParselableImage(assetImage: "folder"), title: "Search throughout your specific Cabin for files, folders, links, etc.", bodyText: "Not to worry! askfl; kadsf asdkf;kasd l;kfl;asl;fk l;asdkfl;asdkdf 'asd;lkdf ;laskd l;fkasl;' dfkl;ask;df kasiop jdfio").full()
     }
 }

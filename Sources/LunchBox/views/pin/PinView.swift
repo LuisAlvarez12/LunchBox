@@ -87,6 +87,7 @@ public struct PinView: View {
                                 .foregroundColor(Color.LBMonoScreenOffTone)
                                 .scaledToFit()
                                 .squareFrame(length: 32)
+                                .full()
                                 .padding()
 
                         } else {
@@ -100,11 +101,12 @@ public struct PinView: View {
                             } else {
                                 Text("Clear").autoFit(size: 18)
                                     .foregroundColor(Color.LBMonoScreenOffTone)
+                                    .full()
                                     .padding(12)
                             }
                         }
                     }
-                })
+                }).buttonStyle(.plain)
             }
 
             ViewThatFits(in: .vertical) {
