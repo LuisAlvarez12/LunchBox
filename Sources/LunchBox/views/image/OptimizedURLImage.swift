@@ -11,7 +11,7 @@ import SwiftUI
 public struct MemorySafeURLImage: View {
     let url: URL
     var onDoubleTap: (() -> Void)? = nil
-    var bgColor: Color = Color.black
+    var bgColor: Color = .black
 
     @State var image: UIImage? = nil
 

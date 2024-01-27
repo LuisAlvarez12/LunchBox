@@ -42,70 +42,69 @@ public struct BottomBarHorizontalModifier: ViewModifier {
 
     public func body(content: Content) -> some View {
         #if os(visionOS)
-        content
-            .ornament(visibility: .visible, attachmentAnchor: .scene(.bottom), ornament: {
-                
-                HStack{
-                    Button(primaryText, action: {
-                        onPrimaryEnabledClick()
-                    }).disabled(primaryDisabled)
-                    
-                    Button(secondaryText, action: {
-                        onSecondaryEnabledClick()
-                    })
-                    .tint(.blue)
-                    .disabled(secondaryDisabled)
-                }.padding(8)
-                    .glassBackgroundEffect()
-                    
-            })
+            content
+                .ornament(visibility: .visible, attachmentAnchor: .scene(.bottom), ornament: {
+                    HStack {
+                        Button(primaryText, action: {
+                            onPrimaryEnabledClick()
+                        }).disabled(primaryDisabled)
+
+                        Button(secondaryText, action: {
+                            onSecondaryEnabledClick()
+                        })
+                        .tint(.blue)
+                        .disabled(secondaryDisabled)
+                    }.padding(8)
+                        .glassBackgroundEffect()
+
+                })
         #else
-        content.overlay(alignment: .bottom, content: {
-            if type == .Horizontal {
-                HStack(alignment: .center) {
-                    PrimaryButton(text: primaryText, disabled: primaryDisabled, action: {
-                        onPrimaryEnabledClick()
-                    })
+            content.overlay(alignment: .bottom, content: {
+                if type == .Horizontal {
+                    HStack(alignment: .center) {
+                        PrimaryButton(text: primaryText, disabled: primaryDisabled, action: {
+                            onPrimaryEnabledClick()
+                        })
 
-                    Button(action: {
-                        onSecondaryEnabledClick()
-                    }, label: {
-                        Text(secondaryText)
-                            .foregroundStyle(LunchboxThemeManager.shared.currentColor)
-                            .font(.system(size: 18, weight: .medium, design: .default))
-                            .padding()
-                            .background(RoundedRectangle(cornerRadius: 12).fill(Color.systemSecondary))
-                    }).padding(.trailing)
-
-                }.padding().background {
-                    LinearGradient(colors: [Color.LBMonoSchemeTone, Color.clear], startPoint: .bottom, endPoint: .top).edgesIgnoringSafeArea(.bottom)
-                }
-            } else {
-                VStack(alignment: .center) {
-                    PrimaryButton(text: primaryText, disabled: primaryDisabled, action: {
-                        onPrimaryEnabledClick()
-                    })
-
-                    if secondaryTransparent {
                         Button(action: {
                             onSecondaryEnabledClick()
                         }, label: {
                             Text(secondaryText)
                                 .foregroundStyle(LunchboxThemeManager.shared.currentColor)
-                                .font(.system(size: 16, weight: .regular, design: .default))
-                                .padding(8)
-                        })
-                    } else {
-                        SecondaryButton(text: secondaryText, action: {
-                            onSecondaryEnabledClick()
-                        })
-                    }
+                                .font(.system(size: 18, weight: .medium, design: .default))
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 12).fill(Color.systemSecondary))
+                        }).padding(.trailing)
 
-                }.padding().background {
-                    LinearGradient(colors: [Color.LBMonoSchemeTone, Color.LBMonoSchemeTone.opacity(0.6), Color.clear], startPoint: .bottom, endPoint: .top).edgesIgnoringSafeArea(.bottom)
+                    }.padding().background {
+                        LinearGradient(colors: [Color.LBMonoSchemeTone, Color.clear], startPoint: .bottom, endPoint: .top).edgesIgnoringSafeArea(.bottom)
+                    }
+                } else {
+                    VStack(alignment: .center) {
+                        PrimaryButton(text: primaryText, disabled: primaryDisabled, action: {
+                            onPrimaryEnabledClick()
+                        })
+
+                        if secondaryTransparent {
+                            Button(action: {
+                                onSecondaryEnabledClick()
+                            }, label: {
+                                Text(secondaryText)
+                                    .foregroundStyle(LunchboxThemeManager.shared.currentColor)
+                                    .font(.system(size: 16, weight: .regular, design: .default))
+                                    .padding(8)
+                            })
+                        } else {
+                            SecondaryButton(text: secondaryText, action: {
+                                onSecondaryEnabledClick()
+                            })
+                        }
+
+                    }.padding().background {
+                        LinearGradient(colors: [Color.LBMonoSchemeTone, Color.LBMonoSchemeTone.opacity(0.6), Color.clear], startPoint: .bottom, endPoint: .top).edgesIgnoringSafeArea(.bottom)
+                    }
                 }
-            }
-        })
+            })
         #endif
     }
 }

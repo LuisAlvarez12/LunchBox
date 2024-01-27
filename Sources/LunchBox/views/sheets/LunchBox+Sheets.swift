@@ -1,6 +1,6 @@
 //
 //  SwiftUIView.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 1/18/24.
 //
@@ -14,33 +14,32 @@ public struct SheetSettings {
 }
 
 public extension View {
-    public func lunchboxsheet<Content>(sheetSettings: SheetSettings? = nil, isPresented: Binding<Bool>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content : View {
+    func lunchboxsheet<Content>(sheetSettings _: SheetSettings? = nil, isPresented: Binding<Bool>, onDismiss _: (() -> Void)? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content: View {
         #if os(visionOS)
-            return self.sheet(isPresented: isPresented, content: {
+            return sheet(isPresented: isPresented, content: {
                 content()
                     .frame(minWidth: 550, minHeight: 550)
                     .overlay(alignment: .topLeading, content: {
                         Button(action: {
                             isPresented.wrappedValue = false
                         }, label: {
-                                Label("Close", systemImage: "xmark")
+                            Label("Close", systemImage: "xmark")
                                 .labelStyle(.iconOnly)
                         }).padding()
                     })
             })
         #else
-        return self.sheet(isPresented: isPresented, content: {
-            content()
-        })
+            return sheet(isPresented: isPresented, content: {
+                content()
+            })
         #endif
-     
     }
 }
 
 #Preview {
     @State var sheetPresented = false
-    
-    return VStack{
+
+    return VStack {
         Button("open", action: {
             sheetPresented = true
         })

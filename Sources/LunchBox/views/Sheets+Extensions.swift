@@ -14,25 +14,22 @@ public extension View {
 }
 
 public extension View {
-    
     @ViewBuilder
-    public func materialSheet() -> some View {
+    func materialSheet() -> some View {
         if #available(iOS 16.4.1, *) {
             self
                 .padding()
                 .presentationDetents([.medium, .large])
-            .presentationDragIndicator(.visible)
-            .presentationBackground(Material.thick)
-            .presentationCornerRadius(30)
+                .presentationDragIndicator(.visible)
+                .presentationBackground(Material.thick)
+                .presentationCornerRadius(30)
         } else {
-            self
-                .padding()
+            padding()
                 .presentationDetents([.medium])
                 .presentationDragIndicator(.visible)
         }
     }
 }
-
 
 public struct LBSheetModifier: ViewModifier {
     @Binding var isPresented: Bool
@@ -75,22 +72,35 @@ public struct LBSheetModifier: ViewModifier {
             Spacer()
             Spacer()
 
-            SecondaryButton(text: buttonText, action: {
-                isPresented = false
-            })
+            #if os(visionOS)
+
+                Button(buttonText, action: {
+                    isPresented = false
+                }).padding(.bottom)
+            #else
+                SecondaryButton(text: buttonText, action: {
+                    isPresented = false
+                }).padding(.bottom)
+            #endif
         }
 
-        .background(Color.LBMonoSchemeTone)
+        .background(Color.LBMonoSchemeTone.visionableClear())
         .presentationDetents([.medium])
     }
 
     public func body(content: Content) -> some View {
         content.sheet(isPresented: $isPresented, content: {
-            if #available(iOS 16.4, *) {
-                sheet.presentationCornerRadius(80)
-            } else {
+            #if os(visionOS)
                 sheet
-            }
+
+            #else
+                if #available(iOS 16.4, *) {
+                    sheet.presentationCornerRadius(80)
+                } else {
+                    sheet
+                }
+            #endif
+
         })
     }
 }

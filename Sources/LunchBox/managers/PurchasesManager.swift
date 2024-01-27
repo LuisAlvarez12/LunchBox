@@ -137,9 +137,9 @@ public class PurchasesManager: ObservableObject {
     }
 
     public func hasTrialsAvailble() async -> Bool {
-    #if targetEnvironment(simulator)
-        return false
-    #endif
+        #if targetEnvironment(simulator)
+            return false
+        #endif
         guard let offerings = try? await Purchases.shared.offerings().all else {
             return false
         }
