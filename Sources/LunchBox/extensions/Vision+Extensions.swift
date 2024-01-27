@@ -27,19 +27,20 @@ public enum OrnamentCompatibleAnchor {
     case bottom
     case top
     
-    @available(visionOS 1.0, *)
-    public var anchor: OrnamentAttachmentAnchor {
-        switch self {
-        case .leading:
-                .scene(.leading)
-        case .trailing:
-                .scene(.trailing)
-        case .bottom:
-                .scene(.bottom)
-        case .top:
-                .scene(.top)
+#if os(visionOS) 
+        public var anchor: OrnamentAttachmentAnchor {
+            switch self {
+            case .leading:
+                    .scene(.leading)
+            case .trailing:
+                    .scene(.trailing)
+            case .bottom:
+                    .scene(.bottom)
+            case .top:
+                    .scene(.top)
+            }
         }
-    }
+    #endif
 }
 
 public extension View {
