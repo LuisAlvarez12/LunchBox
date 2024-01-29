@@ -48,7 +48,12 @@ public struct GlareCard: ViewModifier {
 @available(iOS 16.0, *)
 public extension View {
     func shineEffect(animationTrigger: Binding<Bool>) -> some View {
+        #if os(visionOS)
+        // temporarily disable since it looks broken on vision
+        self
+        #else
         modifier(GlareCard(animateTrigger: animationTrigger))
+        #endif
     }
 }
 

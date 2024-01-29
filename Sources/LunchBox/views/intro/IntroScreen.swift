@@ -57,16 +57,27 @@ public struct IntroFeaturesScreen: View {
                         row
                     }
 
-                    premiumHeaderImage.createImage(widthFrame: 100, frame: 100)
+                    let size: CGFloat = 100
+                    premiumHeaderImage.createImage(widthFrame: size.ifVision(130), frame: size.ifVision(130))
                         .padding(.top)
 
                     Text("... And with **Premium**")
 
+                    #if os(visionOS)
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 270))],spacing: 24, content: {
+                        ForEach(membershipRows, id: \.feature) { row in
+                            MembershipRow(membershipRow: row, forceDark: false)
+                        }
+                    })
+
+                    #else
                     ForEach(membershipRows, id: \.feature) { row in
                         MembershipRow(membershipRow: row, forceDark: false)
                     }
-
                     Spacer()
+                    #endif
+                    
+                    
                 }
 
                 Spacer().frame(height: 250)
@@ -158,4 +169,24 @@ private struct TestFeatureRow: MembershipFeatureRow {
         TestFeatureRow(feature: "2", icon: "book", featureName: "Read PDFs", description: "Read Supported PDFs directly from your Cabin", color: Color.purple),
         TestFeatureRow(feature: "3", icon: "infinity", featureName: "No file Limits", description: "Use your local storage to its full capacity and exceed the standard file limit.", color: Color.yellow),
     ]
+}
+
+public extension CGFloat {
+    public func ifVision(_ val: CGFloat) -> CGFloat {
+        #if os(visionOS)
+       return val
+        #else
+        return self
+        #endif
+    }
+}
+
+public extension Int {
+    public func ifVision(_ val: Int) -> Int {
+        #if os(visionOS)
+       return val
+        #else
+        return self
+        #endif
+    }
 }
