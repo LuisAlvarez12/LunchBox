@@ -172,7 +172,7 @@ public struct VisionNavigationCard: View {
                     .lineLimit(3, reservesSpace: true)
                     .padding(.top, 8)
                 
-            }.frame(maxWidth: 200).padding().lunchboxGlassEffect().frame(depth: 12)
+            }.frame(maxWidth: 200).padding().lunchboxGlassEffect()
         }).buttonStyle(.plain)
     }
 }
