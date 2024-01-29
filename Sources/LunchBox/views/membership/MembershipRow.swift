@@ -123,7 +123,7 @@ public struct VisionDetailsCard: View {
                     .padding(.top, 4)
                     .horPadding()
                 Spacer()
-            }.frame(maxWidth: 250, maxHeight: 300).glassBackgroundEffect()
+            }.frame(maxWidth: 250, maxHeight: 300).lunchboxGlassEffect()
     }
 }
 
@@ -172,7 +172,7 @@ public struct VisionNavigationCard: View {
                     .lineLimit(3, reservesSpace: true)
                     .padding(.top, 8)
                 
-            }.frame(maxWidth: 200).padding().glassBackgroundEffect().frame(depth: 12)
+            }.frame(maxWidth: 200).padding().lunchboxGlassEffect().frame(depth: 12)
         }).buttonStyle(.plain)
     }
 }
@@ -203,5 +203,16 @@ public struct CheckMarkView: View {
 struct CheckMarkView_Previews: PreviewProvider {
     static var previews: some View {
         CheckMarkView()
+    }
+}
+
+
+public extension View {
+    public func lunchboxGlassEffect() -> some View {
+        #if os(visionOS)
+            self.glassBackgroundEffect()
+        #else
+            self
+        #endif
     }
 }
