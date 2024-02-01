@@ -29,13 +29,7 @@ public struct CabinitVideoScreen: View {
         )
         return ZStack {
             if let avp = avPlayer {
-                VideoPlayer(player: avp, videoOverlay: {
-                    VStack(alignment: .leading, content: {
-                        CircleLabelButton("Back", image: "xmark", {
-                            dismiss()
-                        })
-                    }).full()
-                })
+                VideoPlayer(player: avp)
                 .full().ignoresSafeArea()
                     .onDisappear {
                         avPlayer?.replaceCurrentItem(with: nil)
