@@ -28,11 +28,15 @@ public struct PrimaryButton: View {
             Text(text)
                 .foregroundStyle(.white)
                 .font(.system(size: 18, weight: .semibold, design: .default))
+            #if os(iOS)
                 .fullWidth()
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 12).fill(disabled ? Color.secondary : color))
+            #else
+                .horPadding(42)
+                .vertPadding(16)
+            #endif
         })
-        .buttonStyle(.plain)
         .disabled(disabled)
         .horPadding()
     }
@@ -59,9 +63,14 @@ public struct AsyncPrimaryButton: View {
             Text(text)
                 .foregroundStyle(.white)
                 .font(.system(size: 18, weight: .semibold, design: .default))
-                .fullWidth()
-                .padding()
-                .background(RoundedRectangle(cornerRadius: 12).fill(disabled ? Color.secondary : color))
+#if os(iOS)
+    .fullWidth()
+    .padding()
+    .background(RoundedRectangle(cornerRadius: 12).fill(disabled ? Color.secondary : color))
+#else
+    .horPadding(42)
+    .vertPadding(16)
+#endif
         })
         .disabled(disabled)
         .horPadding()

@@ -47,12 +47,16 @@ public struct BottomBarHorizontalModifier: ViewModifier {
                     HStack {
                         Button(primaryText, action: {
                             onPrimaryEnabledClick()
-                        }).disabled(primaryDisabled)
+                        })
+                        .tint(.blue)
+                        .disabled(primaryDisabled)
 
+                        Divider().horPadding()
+                        
                         Button(secondaryText, action: {
                             onSecondaryEnabledClick()
                         })
-                        .tint(.blue)
+                       
                         .disabled(secondaryDisabled)
                     }.padding(8)
                         .glassBackgroundEffect()
