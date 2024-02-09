@@ -20,6 +20,15 @@ public struct ThumbnailGridData {
     public let tagDatas: [TagData]
     public let buttonData: ParselableButtonData
     public let menuButtons: [ParselableButtonData]
+    
+    public init(title: String, action: GridItemAction, image: ParselableImage, tagDatas: [TagData], buttonData: ParselableButtonData, menuButtons: [ParselableButtonData]) {
+        self.title = title
+        self.action = action
+        self.image = image
+        self.tagDatas = tagDatas
+        self.buttonData = buttonData
+        self.menuButtons = menuButtons
+    }
 }
 
 #if DEBUG
@@ -62,6 +71,13 @@ public struct TagData {
     public let image: String
     public let color: Color
     public var textColor: Color = .white
+    
+    public init(tagName: LocalizedStringKey, image: String, color: Color, textColor: Color = .white) {
+        self.tagName = tagName
+        self.image = image
+        self.color = color
+        self.textColor = textColor
+    }
     
     public static var Audio = TagData(tagName: "Audio", image: "headphones", color: .red)
     public static var Video = TagData(tagName: "Video", image: "video", color: .blue)
