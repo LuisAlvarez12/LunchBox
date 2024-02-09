@@ -35,11 +35,14 @@ public struct ParselableImage {
     public var assetImage: String?
     public var systemImage: ParselableSystemImage?
     public var networkImage: ParselableNetworkImage?
+    
+    public var backgroundColor: Color = .black
 
-    public init(assetImage: String? = nil, systemImage: ParselableSystemImage? = nil, networkImage: ParselableNetworkImage? = nil) {
+    public init(assetImage: String? = nil, systemImage: ParselableSystemImage? = nil, networkImage: ParselableNetworkImage? = nil, backgroundColor: Color = .black) {
         self.assetImage = assetImage
         self.systemImage = systemImage
         self.networkImage = networkImage
+        self.backgroundColor = backgroundColor
     }
 
     public init(parentName: String, assetName: String, sizeVariant: Int = 1, systemImage: String) {
