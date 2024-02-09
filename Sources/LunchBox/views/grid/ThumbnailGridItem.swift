@@ -42,15 +42,15 @@ public extension ThumbnailGridData {
     }
 }
 
-struct TestBuilder : GridItemBuilder {
-    func gridItem() async -> ThumbnailGridData {
+public struct TestBuilder : GridItemBuilder {
+    public  func gridItem() async -> ThumbnailGridData {
 //        try? await Task.sleep(nanoseconds: 2.nano())
         return ThumbnailGridData.testGrid()
     }
 }
 
-struct LoadingTestBuilder : GridItemBuilder {
-    func gridItem() async -> ThumbnailGridData {
+public struct LoadingTestBuilder : GridItemBuilder {
+    public  func gridItem() async -> ThumbnailGridData {
         try? await Task.sleep(nanoseconds: 300.nano())
         return ThumbnailGridData.testGrid()
     }
@@ -78,17 +78,20 @@ public struct TagData {
     }
 }
 
-protocol GridItemBuilder {
+public protocol GridItemBuilder {
     func gridItem() async -> ThumbnailGridData
 }
 
 public struct ThumbnailGridItem: View {
     
-    let itemBuilder: any GridItemBuilder
+    public let itemBuilder: any GridItemBuilder
     
     @State private var gridData: ThumbnailGridData? = nil
     @State private var buttonActivated = false
     
+    public init(itemBuilder: any GridItemBuilder) {
+        self.itemBuilder = itemBuilder
+    }
     
     public var body: some View {
         actionableBody
