@@ -240,7 +240,7 @@ actor GridActor {
     let data = TestBuilder()
     
     return ScrollView {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 250, maximum: 350))], content: {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 250, maximum: 350))], spacing: 24, content: {
             ForEach(0...300, id: \.self) { _ in
                 ThumbnailGridItem(itemBuilder: data)
             }

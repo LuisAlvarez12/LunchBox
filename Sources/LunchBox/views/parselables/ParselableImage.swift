@@ -58,8 +58,8 @@ public struct ParselableImage {
             { phase in
                 switch phase {
                 case .empty:
-                    EmptyView()
-                        .squareFrame(length: height)
+                    Color.secondary
+                        .frame(width: width, height: height)
                 case let .success(image):
                     image
                         .resizable()
