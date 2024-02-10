@@ -49,6 +49,59 @@ public struct ParselableImage {
         let url = URL(string: ParselableNetworkImage.buildLink(parentName: parentName, assetName: assetName, sizeVariant: sizeVariant))!
         networkImage = ParselableNetworkImage(url: url, systemImage: systemImage)
     }
+    
+    @ViewBuilder
+    public func createImage(width: CGFloat, height: CGFloat, contentMode: ContentMode = .fit, color: Color = LunchboxThemeManager.shared.currentColor) -> some View {
+        if let _networkImage = networkImage {
+            AsyncImage(url: _networkImage.url,
+                       transaction: Transaction(animation: .snappy))
+            { phase in
+                switch phase {
+                case .empty:
+                    EmptyView()
+                        .squareFrame(length: height)
+                case let .success(image):
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: width, height: height)
+                case let .failure(error):
+                    Image(systemName: _networkImage.systemImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: width, height: height)
+                        .foregroundStyle(color)
+                @unknown default:
+                    EmptyView()
+                        .frame(width: width, height: height)
+                }
+            }
+            .frame(width: width, height: height)
+        } else if let _assetImage = assetImage {
+            Image(_assetImage)
+                .resizable()
+                .frame(width: width, height: height)
+                .scaledToFit()
+        } else if let _systemImage = systemImage {
+            if #available(iOS 17.0, *) {
+                Image(systemName: _systemImage.systemImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: width, height: height)
+                    .symbolEffect(.bounce, value: true)
+                    .foregroundStyle(_systemImage.color ?? color)
+
+            } else {
+                Image(systemName: _systemImage.systemImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: width, height: height)
+                    .foregroundStyle(_systemImage.color ?? color)
+            }
+        } else {
+            Spacer()
+        }
+    }
 
     @ViewBuilder
     public func createImage(widthFrame: CGFloat? = nil, frame: CGFloat, color: Color = LunchboxThemeManager.shared.currentColor) -> some View {

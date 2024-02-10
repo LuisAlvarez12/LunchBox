@@ -38,7 +38,7 @@ public extension ThumbnailGridData {
                                  action: GridItemAction.Action({
             
         }),
-                                 image: ParselableImage(systemImage: ParselableSystemImage("", color: nil)),
+                                 image: ParselableImage(networkImage: ParselableNetworkImage(urlString: "https://picsum.photos/100/150", systemImage: "folder")),
                                  tagDatas: [TagData.Audio],
                                  buttonData: ParselableButtonData(text: "Favorite", systemImage: "star", mainColor: .white, activatedColor: .yellow, activatedSystemImage: "star.fill", action: {
             return Bool.random()
@@ -161,9 +161,10 @@ public struct ThumbnailGridItem: View {
             })
             .full()
             .lunchboxGlassEffect()
-            .task {
-                let data = await itemBuilder.gridItem()
-                withAnimation(.easeIn(duration: 3.0)) {
+            .task(priority: .background) {
+                let data = await GridActor.shared.handle(item: itemBuilder)
+                
+                withAnimation(.easeIn) {
                     gridData = data
                 }
             }
@@ -189,10 +190,20 @@ public struct ThumbnailGridItem: View {
     
     var bodyContent: some View {
         VStack(spacing: 0){
-            RoundedRectangle(cornerRadius: 36)
-                .fill(gridData?.image.backgroundColor ?? .secondary)
-                .frame(height: 120)
-                .padding(.top)
+
+            if let gridData {
+                gridData.image.createImage(width: .infinity, height: 120, contentMode: .fill, color: .red)
+                    .frame(width: .infinity, height: 120)
+                    .cornerRadius(36, corners: .allCorners)
+                    .clipped()
+                    .padding(.top)
+            } else {
+                RoundedRectangle(cornerRadius: 36)
+                    .fill(gridData?.image.backgroundColor ?? .secondary)
+                    .frame(height: 120)
+                    .padding(.top)
+            }
+       
             
             HStack {
                 TagData.Video.toView
@@ -205,7 +216,7 @@ public struct ThumbnailGridItem: View {
                 .font(.footnote)
                 .lineLimit(4, reservesSpace: true)
                 .frame(width: .infinity, height: 100)
-                .redacted(reason: .placeholder)
+                .redacted(reason: gridData == nil ? .placeholder : [])
 
             Spacer()
         }
@@ -215,15 +226,25 @@ public struct ThumbnailGridItem: View {
     }
 }
 
+actor GridActor {
+    
+    static let shared = GridActor()
+    
+    func handle(item: any GridItemBuilder) async -> ThumbnailGridData {
+        try? await Task.sleep(nanoseconds: 2.nano())
+        return await item.gridItem()
+    }
+}
+
 #Preview {
     let data = TestBuilder()
     
     return ScrollView {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 250, maximum: 250))], content: {
-            ForEach(0...100, id: \.self) { _ in
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 250, maximum: 350))], content: {
+            ForEach(0...300, id: \.self) { _ in
                 ThumbnailGridItem(itemBuilder: data)
             }
-        })
+        }).clipped()
     }.padding()
 }
 
