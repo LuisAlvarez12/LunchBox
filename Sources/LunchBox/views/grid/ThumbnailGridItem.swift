@@ -236,23 +236,23 @@ actor GridActor {
     }
 }
 
-#Preview {
-    let data = TestBuilder()
-    
-    return ScrollView {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 250, maximum: 350))], spacing: 24, content: {
-            ForEach(0...300, id: \.self) { _ in
-                ThumbnailGridItem(itemBuilder: data)
-            }
-        }).clipped()
-    }.padding()
-}
-
-#Preview {
-    return ScrollView {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 250, maximum: 250))], content: {
-            ThumbnailGridItem(itemBuilder: TestBuilder())
-            ThumbnailGridItem(itemBuilder: LoadingTestBuilder())
-        })
-    }.padding()
-}
+//#Preview {
+//    let data = TestBuilder()
+//    
+//    return ScrollView {
+//        LazyVGrid(columns: [GridItem(.adaptive(minimum: 250, maximum: 350))], spacing: 24, content: {
+//            ForEach(0...300, id: \.self) { _ in
+//                ThumbnailGridItem(itemBuilder: data)
+//            }
+//        }).clipped()
+//    }.padding()
+//}
+//
+//#Preview {
+//    return ScrollView {
+//        LazyVGrid(columns: [GridItem(.adaptive(minimum: 250, maximum: 250))], content: {
+//            ThumbnailGridItem(itemBuilder: TestBuilder())
+//            ThumbnailGridItem(itemBuilder: LoadingTestBuilder())
+//        })
+//    }.padding()
+//}
