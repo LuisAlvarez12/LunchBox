@@ -135,10 +135,16 @@ public class PurchasesManager: ObservableObject {
             return failureResult
         }
     }
+    
+    public func testDebugHasTrialsAvailable(value: Bool) {
+        debugTrials = value
+    }
+    
+    private var debugTrials = false
 
     public func hasTrialsAvailble() async -> Bool {
         #if targetEnvironment(simulator)
-            return false
+            return debugTrials
         #endif
         guard let offerings = try? await Purchases.shared.offerings().all else {
             return false
