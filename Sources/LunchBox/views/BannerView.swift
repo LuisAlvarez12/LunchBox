@@ -178,6 +178,24 @@ private struct TestBanners: View {
     VStack {
         ScrollView(.horizontal) {
             LazyHStack(spacing: 16) {
+                Color.random.full().containerRelativeFrame(.horizontal)
+                Color.random.full().containerRelativeFrame(.horizontal)
+                Color.random.full().containerRelativeFrame(.horizontal)
+                Color.random.full().containerRelativeFrame(.horizontal)
+            }
+            .padding()
+            .scrollTargetLayout()
+        }
+        .scrollTargetBehavior(.viewAligned)
+        .scrollIndicators(.hidden)
+    }
+}
+
+@available(iOS 17.0, *)
+#Preview {
+    VStack {
+        ScrollView(.horizontal) {
+            LazyHStack(spacing: 16) {
 //                    let isSubscribed = purchasesManager.isSubscribed()
                 BannerView.premiumBanner(appName: "Uncover", hasTrialAvailable: true)
                 BannerView.ratingsBanner {

@@ -9,12 +9,21 @@ import SwiftUI
 
 public struct HapticsManager {
     public static let shared = HapticsManager()
-
+    
+#if os(iOS)
+    private let hapticsHandler = UINotificationFeedbackGenerator()
+#endif
+    
     public func onGeneral() {
-//        UINotificationFeedbackGenerator().notificationOccurred(.success)
+#if os(iOS)
+        hapticsHandler.notificationOccurred(.success)
+#endif
+        
     }
-
+    
     public func onError() {
-//        UINotificationFeedbackGenerator().notificationOccurred(.error)
+#if os(iOS)
+        hapticsHandler.notificationOccurred(.error)
+#endif
     }
 }
