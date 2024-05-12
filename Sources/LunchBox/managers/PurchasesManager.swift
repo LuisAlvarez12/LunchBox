@@ -21,9 +21,21 @@ public class PurchasesManager: ObservableObject {
     public func showMembershipModal() {
         membershipPresented = true
     }
+    
+    private var debugOverride = false
 
     public func isSubscribed() -> Bool {
-        currentMembershipState is SubscriptionSuccess
+        if debugOverride {
+            return true
+        } else {
+            return currentMembershipState is SubscriptionSuccess
+        }
+    }
+    
+    public func enableDebugOverride() {
+        #if DEBUG
+            debugOverride = true
+        #endif
     }
 
     public func debugPurchaseSuccess() async {
