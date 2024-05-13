@@ -33,7 +33,7 @@ public struct AsyncSecondaryButton: View {
 #if os(iOS)
     .fullWidth()
     .padding()
-    .background(RoundedRectangle(cornerRadius: 12).fill(transparent ? Color.clear : Color.systemSecondary))
+    .background(Capsule().fill(transparent ? Color.clear : Color.systemSecondary))
 #else
     .horPadding(42)
     .vertPadding(16)
@@ -70,7 +70,7 @@ public struct SecondaryButton: View {
 #if os(iOS)
     .fullWidth()
     .padding()
-    .background(RoundedRectangle(cornerRadius: 12).fill(transparent ? Color.clear : Color.systemSecondary))
+    .background(Capsule().fill(transparent ? Color.clear : Color.systemSecondary))
 #else
     .horPadding(42)
     .vertPadding(16)

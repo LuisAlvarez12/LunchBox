@@ -31,7 +31,7 @@ public struct PrimaryButton: View {
             #if os(iOS)
                 .fullWidth()
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 12).fill(disabled ? Color.secondary : color))
+                .background(Capsule().fill(disabled ? Color.secondary : color))
             #else
                 .horPadding(42)
                 .vertPadding(16)
@@ -66,7 +66,7 @@ public struct AsyncPrimaryButton: View {
 #if os(iOS)
     .fullWidth()
     .padding()
-    .background(RoundedRectangle(cornerRadius: 12).fill(disabled ? Color.secondary : color))
+    .background(Capsule().fill(disabled ? Color.secondary : color))
 #else
     .horPadding(42)
     .vertPadding(16)

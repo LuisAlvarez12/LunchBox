@@ -77,9 +77,8 @@ public struct BottomBarHorizontalModifier: ViewModifier {
                                 .foregroundStyle(LunchboxThemeManager.shared.currentColor)
                                 .font(.system(size: 18, weight: .medium, design: .default))
                                 .padding()
-                                .background(RoundedRectangle(cornerRadius: 12).fill(Color.systemSecondary))
+                                .background(Capsule().fill(Color.systemSecondary))
                         }).padding(.trailing)
-
                     }.padding().background {
                         LinearGradient(colors: [Color.LBMonoSchemeTone, Color.clear], startPoint: .bottom, endPoint: .top).edgesIgnoringSafeArea(.bottom)
                     }
@@ -115,7 +114,7 @@ public struct BottomBarHorizontalModifier: ViewModifier {
 
 #Preview {
     VStack {
-        Rectangle().fill(Material.thin).withActionButtons(type: .Vertical, primaryDisabled: false, onPrimaryEnabledClick: {}, onSecondaryEnabledClick: {})
+        Rectangle().fill(Material.thin).withActionButtons(type: .Vertical, primaryDisabled: false, secondaryTransparent: false, onPrimaryEnabledClick: {}, onSecondaryEnabledClick: {})
     }
 }
 
