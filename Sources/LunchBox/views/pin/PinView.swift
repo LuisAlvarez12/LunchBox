@@ -68,6 +68,7 @@ public struct PinView: View {
 
             let f = ForEach(buttons, id: \.self) { button in
                 Button(action: {
+                    HapticsManager.shared.onGeneral()
                     addAction(button: button)
                 }, label: {
                     ZStack {
