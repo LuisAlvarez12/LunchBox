@@ -105,62 +105,66 @@ public struct ParselableImage {
 
     @ViewBuilder
     public func createImage(widthFrame: CGFloat? = nil, frame: CGFloat, color: Color = LunchboxThemeManager.shared.currentColor) -> some View {
-        if let _networkImage = networkImage {
-            AsyncImage(url: _networkImage.url,
-                       transaction: Transaction(animation: .snappy))
-            { phase in
-                switch phase {
-                case .empty:
-                    EmptyView()
-                        .squareFrame(length: frame)
-                case let .success(image):
-                    if let widthFrame {
-                        image
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: widthFrame)
-                    } else {
-                        image
+        Color.clear.aspectRatio(1.1, contentMode: .fit)
+            .background{
+            
+            if let _networkImage = networkImage {
+                AsyncImage(url: _networkImage.url,
+                           transaction: Transaction(animation: .easeIn))
+                { phase in
+                    switch phase {
+                    case .empty:
+                        Color.clear
+                            .squareFrame(length: frame)
+                    case let .success(image):
+                        if let widthFrame {
+                            image
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: widthFrame)
+                        } else {
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .squareFrame(length: frame)
+                        }
+                    case let .failure(error):
+                        Image(systemName: _networkImage.systemImage)
                             .resizable()
                             .scaledToFit()
                             .squareFrame(length: frame)
+                            .foregroundStyle(color)
+                    @unknown default:
+                        Color.red
+                            .squareFrame(length: frame)
                     }
-                case let .failure(error):
-                    Image(systemName: _networkImage.systemImage)
+                }
+                .frame(width: widthFrame != nil ? widthFrame! : frame, height: widthFrame != nil ? .infinity : frame)
+            } else if let _assetImage = assetImage {
+                Image(_assetImage)
+                    .resizable()
+                    .squareFrame(length: frame)
+                    .scaledToFit()
+            } else if let _systemImage = systemImage {
+                if #available(iOS 17.0, *) {
+                    Image(systemName: _systemImage.systemImage)
                         .resizable()
                         .scaledToFit()
                         .squareFrame(length: frame)
-                        .foregroundStyle(color)
-                @unknown default:
-                    EmptyView()
+                        .symbolEffect(.bounce, value: true)
+                        .foregroundStyle(_systemImage.color ?? color)
+                    
+                } else {
+                    Image(systemName: _systemImage.systemImage)
+                        .resizable()
+                        .scaledToFit()
                         .squareFrame(length: frame)
+                        .foregroundStyle(_systemImage.color ?? color)
                 }
-            }
-            .frame(width: widthFrame != nil ? widthFrame! : frame, height: widthFrame != nil ? .infinity : frame)
-        } else if let _assetImage = assetImage {
-            Image(_assetImage)
-                .resizable()
-                .squareFrame(length: frame)
-                .scaledToFit()
-        } else if let _systemImage = systemImage {
-            if #available(iOS 17.0, *) {
-                Image(systemName: _systemImage.systemImage)
-                    .resizable()
-                    .scaledToFit()
-                    .squareFrame(length: frame)
-                    .symbolEffect(.bounce, value: true)
-                    .foregroundStyle(_systemImage.color ?? color)
-
             } else {
-                Image(systemName: _systemImage.systemImage)
-                    .resizable()
-                    .scaledToFit()
-                    .squareFrame(length: frame)
-                    .foregroundStyle(_systemImage.color ?? color)
+                Spacer()
             }
-        } else {
-            Spacer()
-        }
+        }.aspectRatio(1.1, contentMode: .fit)
     }
 }
 
@@ -176,9 +180,10 @@ public struct ParselableSystemImage {
 
 #Preview {
     VStack {
-        ParselableImage(systemImage: ParselableSystemImage("folder")).createImage(frame: 80)
-        ParselableImage(systemImage: ParselableSystemImage("folder")).createImage(frame: 80, color: Color.red)
-        ParselableImage(systemImage: ParselableSystemImage("folder")).createImage(frame: 80, color: Color.red)
-        ParselableImage(networkImage: ParselableNetworkImage(urlString: "https://raw.githubusercontent.com/LuisAlvarez12/AppAssets/main/General/icon-folder/3x.png", systemImage: "star")).createImage(frame: 80, color: Color.red)
+        LargeImageBanner(image: ParselableImage(parentName: "Uncover", assetName: "icon-woman-reading", systemImage: "book"), title: "Get Premium", subtitle: "Read all of your files, and uncover new features")
+//        ParselableImage(systemImage: ParselableSystemImage("folder")).createImage(frame: 80)
+//        ParselableImage(systemImage: ParselableSystemImage("folder")).createImage(frame: 80, color: Color.red)
+//        ParselableImage(systemImage: ParselableSystemImage("folder")).createImage(frame: 80, color: Color.red)
+//        ParselableImage(networkImage: ParselableNetworkImage(urlString: "https://raw.githubusercontent.com/LuisAlvarez12/AppAssets/main/General/icon-folder/3x.png", systemImage: "star")).createImage(frame: 80, color: Color.red)
     }
 }
