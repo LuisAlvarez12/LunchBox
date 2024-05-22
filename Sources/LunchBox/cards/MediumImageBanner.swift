@@ -7,13 +7,19 @@
 
 import SwiftUI
 
-struct MediumImageBanner: View {
+public struct MediumImageBanner: View {
     
-    let image: ParselableImage
-    let title: LocalizedStringKey
-    let subtitle: LocalizedStringKey
+    public let image: ParselableImage
+    public let title: LocalizedStringKey
+    public let subtitle: LocalizedStringKey
     
-    var body: some View {
+    public init(image: ParselableImage, title: LocalizedStringKey, subtitle: LocalizedStringKey) {
+        self.image = image
+        self.title = title
+        self.subtitle = subtitle
+    }
+    
+    public var body: some View {
         VStack {
             image
             .createImage(frame: .infinity)

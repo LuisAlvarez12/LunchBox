@@ -7,14 +7,21 @@
 
 import SwiftUI
 
-struct LargeImageBanner: View {
+public struct LargeImageBanner: View {
     
-    let image: ParselableImage
-    let title: LocalizedStringKey
-    let subtitle: LocalizedStringKey
-    var titleColor: Color = .blue
+    public let image: ParselableImage
+    public let title: LocalizedStringKey
+    public let subtitle: LocalizedStringKey
+    public var titleColor: Color = .blue
     
-    var body: some View {
+    public init(image: ParselableImage, title: LocalizedStringKey, subtitle: LocalizedStringKey, titleColor: Color = .blue) {
+        self.image = image
+        self.title = title
+        self.subtitle = subtitle
+        self.titleColor = titleColor
+    }
+    
+    public var body: some View {
         image
             .createImage(frame: .infinity)
             .overlay(alignment: .bottom) {
