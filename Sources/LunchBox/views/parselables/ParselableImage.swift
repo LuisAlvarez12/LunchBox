@@ -106,6 +106,7 @@ public struct ParselableImage {
     @ViewBuilder
     public func createImage(widthFrame: CGFloat? = nil, frame: CGFloat, color: Color = LunchboxThemeManager.shared.currentColor) -> some View {
         Color.clear.aspectRatio(1.1, contentMode: .fit)
+            .squareFrame(length: frame)
             .background{
             
             if let _networkImage = networkImage {
@@ -180,6 +181,7 @@ public struct ParselableSystemImage {
 
 #Preview {
     VStack {
+        ParselableImage(parentName: "General", assetName: "icon-folder-square", systemImage: "book.fill").createImage(frame: 80)
         LargeImageBanner(image: ParselableImage(parentName: "Uncover", assetName: "icon-woman-reading", systemImage: "book"), title: "Get Premium", subtitle: "Read all of your files, and uncover new features")
 //        ParselableImage(systemImage: ParselableSystemImage("folder")).createImage(frame: 80)
 //        ParselableImage(systemImage: ParselableSystemImage("folder")).createImage(frame: 80, color: Color.red)
