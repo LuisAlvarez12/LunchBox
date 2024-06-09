@@ -119,7 +119,11 @@ public extension View {
     }
 
     func pinchToZoom(onDoubleTap: (() -> Void)? = nil) -> some View {
+        #if canImport(UIKit)
         modifier(PinchToZoom(onDoubleTap: onDoubleTap))
+        #else
+        self
+        #endif
     }
 
     func animatesIn(offset: CGFloat = 40, duration: Double = 0.7) -> some View {

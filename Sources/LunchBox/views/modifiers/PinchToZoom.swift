@@ -5,8 +5,10 @@
 //  Created by Luis Alvarez on 9/14/23.
 //
 
+#if canImport(UIKit)
+    import UIKit
+
 import SwiftUI
-import UIKit
 
 //
 //  CabinitImage.swift
@@ -216,3 +218,4 @@ struct PinchToZoom: ViewModifier {
             })
     }
 }
+#endif
