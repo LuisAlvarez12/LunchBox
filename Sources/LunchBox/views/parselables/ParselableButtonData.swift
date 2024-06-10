@@ -1,6 +1,6 @@
 //
 //  SwiftUIView.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 2/9/24.
 //
@@ -14,7 +14,7 @@ public struct ParselableButtonData {
     public var activatedColor: Color = .white
     public var activatedSystemImage: String
     public let action: () async -> Bool
-    
+
     public init(text: LocalizedStringKey, systemImage: String, mainColor: Color, activatedColor: Color, activatedSystemImage: String, action: @escaping () -> Bool) {
         self.text = text
         self.systemImage = systemImage
@@ -23,22 +23,22 @@ public struct ParselableButtonData {
         self.activatedSystemImage = activatedSystemImage
         self.action = action
     }
-    
+
     public init(text: LocalizedStringKey, systemImage: String, mainColor: Color = .white, action: @escaping () -> Bool) {
         self.text = text
         self.systemImage = systemImage
         self.mainColor = mainColor
-        self.activatedColor = mainColor
-        self.activatedSystemImage = systemImage
+        activatedColor = mainColor
+        activatedSystemImage = systemImage
         self.action = action
     }
-    
+
     public var menuButton: some View {
         Label(text, systemImage: systemImage)
     }
 }
 
 //
-//#Preview {
+// #Preview {
 //    SwiftUIView()
-//}
+// }

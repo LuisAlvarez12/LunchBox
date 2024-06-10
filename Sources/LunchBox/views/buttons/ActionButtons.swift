@@ -52,11 +52,11 @@ public struct BottomBarHorizontalModifier: ViewModifier {
                         .disabled(primaryDisabled)
 
                         Divider().horPadding()
-                        
+
                         Button(secondaryText, action: {
                             onSecondaryEnabledClick()
                         })
-                       
+
                         .disabled(secondaryDisabled)
                     }.padding(8)
                         .glassBackgroundEffect()

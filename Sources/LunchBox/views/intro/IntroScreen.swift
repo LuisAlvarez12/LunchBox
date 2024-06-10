@@ -53,7 +53,7 @@ public struct IntroFeaturesScreen: View {
                         }
                     }.fullWidth()
 
-                    ForEach(introRows, id: \.text) { row in
+                    ForEach(introRows, id: \.icon) { row in
                         row
                     }
 
@@ -64,20 +64,18 @@ public struct IntroFeaturesScreen: View {
                     Text("... And with **Premium**")
 
                     #if os(visionOS)
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 270))],spacing: 24, content: {
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 270))], spacing: 24, content: {
+                            ForEach(membershipRows, id: \.feature) { row in
+                                MembershipRow(membershipRow: row, forceDark: false)
+                            }
+                        })
+
+                    #else
                         ForEach(membershipRows, id: \.feature) { row in
                             MembershipRow(membershipRow: row, forceDark: false)
                         }
-                    })
-
-                    #else
-                    ForEach(membershipRows, id: \.feature) { row in
-                        MembershipRow(membershipRow: row, forceDark: false)
-                    }
-                    Spacer()
+                        Spacer()
                     #endif
-                    
-                    
                 }
 
                 Spacer().frame(height: 250)
@@ -129,9 +127,9 @@ struct IntroFeaturesScreen_Previews: PreviewProvider {
 public struct IntroRow: View {
     let color: Color
     let icon: String
-    let text: String
-
-    public init(color: Color, icon: String, text: String) {
+    let text: LocalizedStringKey
+    
+    public init(color: Color, icon: String, text: LocalizedStringKey) {
         self.color = color
         self.icon = icon
         self.text = text
@@ -149,7 +147,7 @@ public struct IntroRow: View {
                 }
                 .springsIn(offset: 20, duration: 0.3)
 
-            Text(.init(text))
+            Text.init(text)
                 .font(.system(size: 16, weight: .regular, design: .default))
                 .aligned()
         }.fullWidth()
@@ -172,21 +170,21 @@ private struct TestFeatureRow: MembershipFeatureRow {
 }
 
 public extension CGFloat {
-    public func ifVision(_ val: CGFloat) -> CGFloat {
+    func ifVision(_ val: CGFloat) -> CGFloat {
         #if os(visionOS)
-       return val
+            return val
         #else
-        return self
+            return self
         #endif
     }
 }
 
 public extension Int {
-    public func ifVision(_ val: Int) -> Int {
+    func ifVision(_ val: Int) -> Int {
         #if os(visionOS)
-       return val
+            return val
         #else
-        return self
+            return self
         #endif
     }
 }

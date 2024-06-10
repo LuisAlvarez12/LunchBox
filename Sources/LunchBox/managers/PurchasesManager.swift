@@ -21,7 +21,7 @@ public class PurchasesManager: ObservableObject {
     public func showMembershipModal() {
         membershipPresented = true
     }
-    
+
     private var debugOverride = false
 
     public func isSubscribed() -> Bool {
@@ -31,7 +31,7 @@ public class PurchasesManager: ObservableObject {
             return currentMembershipState is SubscriptionSuccess
         }
     }
-    
+
     public func enableDebugOverride() {
         #if DEBUG
             debugOverride = true
@@ -147,11 +147,11 @@ public class PurchasesManager: ObservableObject {
             return failureResult
         }
     }
-    
+
     public func testDebugHasTrialsAvailable(value: Bool) {
         debugTrials = value
     }
-    
+
     private var debugTrials = false
 
     public func hasTrialsAvailble() async -> Bool {

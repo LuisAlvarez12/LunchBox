@@ -11,7 +11,7 @@ import SwiftUI
 @available(iOS 16.0, *)
 public struct CabinitVideoScreen: View {
     @Environment(\.dismiss) var dismiss
-    
+
     let url: URL
     var currentTime: CMTime? = nil
 
@@ -30,7 +30,7 @@ public struct CabinitVideoScreen: View {
         return ZStack {
             if let avp = avPlayer {
                 VideoPlayer(player: avp)
-                .full().ignoresSafeArea()
+                    .full().ignoresSafeArea()
                     .onDisappear {
                         avPlayer?.replaceCurrentItem(with: nil)
                         avPlayer = nil

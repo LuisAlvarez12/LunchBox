@@ -28,31 +28,31 @@ public struct MembershipRow: View {
 
     public var body: some View {
         #if os(visionOS)
-        VisionDetailsCard(image: ParselableImage(systemImage: ParselableSystemImage(membershipRow.icon, color: Color.white)), title: membershipRow.featureName, subTitle: " ", bodyText: membershipRow.description, bgColor: membershipRow.color, showSubtitle: false)
-        
-        #else
-        HStack(spacing: 16) {
-            RoundedRectangle(cornerRadius: 12)
-                .fill(membershipRow.color.opacity(0.2))
-                .squareFrame(length: 40)
-                .overlay {
-                    Image(systemName: membershipRow.icon)
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
-                        .foregroundColor(membershipRow.color)
-                }
-                .springsIn(offset: 20, duration: 0.3)
+            VisionDetailsCard(image: ParselableImage(systemImage: ParselableSystemImage(membershipRow.icon, color: Color.white)), title: membershipRow.featureName, subTitle: " ", bodyText: membershipRow.description, bgColor: membershipRow.color, showSubtitle: false)
 
-            VStack {
-                Text(membershipRow.featureName)
-                    .font(.system(size: 18, weight: .heavy, design: .default))
-                    .aligned()
-                    .foregroundStyle(membershipRow.color)
-                Text(membershipRow.description)
-                    .font(.system(size: 16, weight: .regular, design: .default))
-                    .aligned()
-                    .foregroundStyle(forceDark ? .white : Color.LBMonoScreenOffTone)
-            }
-        }.padding(.top, 8)
+        #else
+            HStack(spacing: 16) {
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(membershipRow.color.opacity(0.2))
+                    .squareFrame(length: 40)
+                    .overlay {
+                        Image(systemName: membershipRow.icon)
+                            .font(.system(size: 20, weight: .bold, design: .rounded))
+                            .foregroundColor(membershipRow.color)
+                    }
+                    .springsIn(offset: 20, duration: 0.3)
+
+                VStack {
+                    Text(membershipRow.featureName)
+                        .font(.system(size: 18, weight: .heavy, design: .default))
+                        .aligned()
+                        .foregroundStyle(membershipRow.color)
+                    Text(membershipRow.description)
+                        .font(.system(size: 16, weight: .regular, design: .default))
+                        .aligned()
+                        .foregroundStyle(forceDark ? .white : Color.LBMonoScreenOffTone)
+                }
+            }.padding(.top, 8)
         #endif
     }
 }
@@ -90,40 +90,39 @@ public struct VisionDetailsCard: View {
         self.bgColor = bgColor
         self.showSubtitle = showSubtitle
     }
-    
-    
+
     public var body: some View {
-            VStack{
-                image
-                    .createImage(frame: 60)
-                    .fullWidth()
-                    .vertPadding(8)
-                    .background(bgColor.gradient.opacity(0.8))
-                
-                Text(title)
-                    .autoFit(size: 32, weight: .bold)
-                    .lineLimit(2)
-                    .multilineTextAlignment(.center)
+        VStack {
+            image
+                .createImage(frame: 60)
+                .fullWidth()
+                .vertPadding(8)
+                .background(bgColor.gradient.opacity(0.8))
+
+            Text(title)
+                .autoFit(size: 32, weight: .bold)
+                .lineLimit(2)
+                .multilineTextAlignment(.center)
+                .horPadding()
+
+            if showSubtitle {
+                Text(subTitle)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .bold()
+                    .textCase(.uppercase)
                     .horPadding()
-                
-                if showSubtitle {
-                    Text(subTitle)
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                        .bold()
-                        .textCase(.uppercase)
-                        .horPadding()
-                }
-                
-                Text(bodyText)
-                    .font(.subheadline)
-                    .autoFit(size: 20)
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.top, 4)
-                    .horPadding()
-                Spacer()
-            }.frame(maxWidth: 250, maxHeight: 300).lunchboxGlassEffect()
+            }
+
+            Text(bodyText)
+                .font(.subheadline)
+                .autoFit(size: 20)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.top, 4)
+                .horPadding()
+            Spacer()
+        }.frame(maxWidth: 250, maxHeight: 300).lunchboxGlassEffect()
     }
 }
 
@@ -135,7 +134,7 @@ public struct VisionNavigationCard: View {
     let bodyText: LocalizedStringKey
     var isChecked = false
     var imageSize: CGFloat = 110
-    
+
     public init(route: any Hashable, image: ParselableImage, title: LocalizedStringKey, subTitle: LocalizedStringKey = " ", bodyText: LocalizedStringKey, isChecked: Bool = false, imageSize: CGFloat = 110) {
         self.route = route
         self.image = image
@@ -145,33 +144,32 @@ public struct VisionNavigationCard: View {
         self.isChecked = isChecked
         self.imageSize = imageSize
     }
-    
-    
+
     public var body: some View {
         NavigationLink(value: route, label: {
-            VStack{
+            VStack {
                 if isChecked {
                     CheckMarkView(size: imageSize)
                 } else {
                     image.createImage(frame: imageSize)
                 }
-                
+
                 Text(title)
                     .font(.largeTitle)
-                
+
                 Text(subTitle)
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .bold()
                     .textCase(.uppercase)
-                
+
                 Text(bodyText)
                     .font(.subheadline)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
                     .lineLimit(3, reservesSpace: true)
                     .padding(.top, 8)
-                
+
             }.frame(maxWidth: 200).padding().lunchboxGlassEffect()
         }).buttonStyle(.plain)
     }
@@ -181,9 +179,9 @@ import SwiftUI
 
 public struct CheckMarkView: View {
     var size: CGFloat = 40
-    var color: Color = Color.green
-    
-    public init(size: CGFloat  = 40, color: Color = Color.green) {
+    var color: Color = .green
+
+    public init(size: CGFloat = 40, color: Color = Color.green) {
         self.size = size
         self.color = color
     }
@@ -206,11 +204,10 @@ struct CheckMarkView_Previews: PreviewProvider {
     }
 }
 
-
 public extension View {
-    public func lunchboxGlassEffect() -> some View {
+    func lunchboxGlassEffect() -> some View {
         #if os(visionOS)
-            self.glassBackgroundEffect()
+            glassBackgroundEffect()
         #else
             self
         #endif

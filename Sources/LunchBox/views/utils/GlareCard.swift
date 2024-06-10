@@ -49,10 +49,10 @@ public struct GlareCard: ViewModifier {
 public extension View {
     func shineEffect(animationTrigger: Binding<Bool>) -> some View {
         #if os(visionOS)
-        // temporarily disable since it looks broken on vision
-        self
+            // temporarily disable since it looks broken on vision
+            self
         #else
-        modifier(GlareCard(animateTrigger: animationTrigger))
+            modifier(GlareCard(animateTrigger: animationTrigger))
         #endif
     }
 }

@@ -63,14 +63,14 @@ public struct AsyncPrimaryButton: View {
             Text(text)
                 .foregroundStyle(.white)
                 .font(.system(size: 18, weight: .semibold, design: .default))
-#if os(iOS)
-    .fullWidth()
-    .padding()
-    .background(Capsule().fill(disabled ? Color.secondary : color))
-#else
-    .horPadding(42)
-    .vertPadding(16)
-#endif
+            #if os(iOS)
+                .fullWidth()
+                .padding()
+                .background(Capsule().fill(disabled ? Color.secondary : color))
+            #else
+                .horPadding(42)
+                .vertPadding(16)
+            #endif
         })
         .disabled(disabled)
         .horPadding()

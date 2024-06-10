@@ -30,14 +30,14 @@ public struct AsyncSecondaryButton: View {
             Text(text)
                 .foregroundStyle(disabled ? Color.secondary : color)
                 .font(.system(size: 18, weight: .medium, design: .default))
-#if os(iOS)
-    .fullWidth()
-    .padding()
-    .background(Capsule().fill(transparent ? Color.clear : Color.systemSecondary))
-#else
-    .horPadding(42)
-    .vertPadding(16)
-#endif
+            #if os(iOS)
+                .fullWidth()
+                .padding()
+                .background(Capsule().fill(transparent ? Color.clear : Color.systemSecondary))
+            #else
+                .horPadding(42)
+                .vertPadding(16)
+            #endif
         })
         .disabled(disabled)
         .horPadding()
@@ -67,14 +67,14 @@ public struct SecondaryButton: View {
             Text(text)
                 .foregroundStyle(disabled ? Color.secondary : color)
                 .font(.system(size: 18, weight: .medium, design: .default))
-#if os(iOS)
-    .fullWidth()
-    .padding()
-    .background(Capsule().fill(transparent ? Color.clear : Color.systemSecondary))
-#else
-    .horPadding(42)
-    .vertPadding(16)
-#endif
+            #if os(iOS)
+                .fullWidth()
+                .padding()
+                .background(Capsule().fill(transparent ? Color.clear : Color.systemSecondary))
+            #else
+                .horPadding(42)
+                .vertPadding(16)
+            #endif
         })
         .disabled(disabled)
         .horPadding()

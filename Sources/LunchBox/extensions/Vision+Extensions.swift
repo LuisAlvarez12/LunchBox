@@ -26,18 +26,18 @@ public enum OrnamentCompatibleAnchor {
     case trailing
     case bottom
     case top
-    
-#if os(visionOS) 
+
+    #if os(visionOS)
         public var anchor: OrnamentAttachmentAnchor {
             switch self {
             case .leading:
-                    .scene(.leading)
+                .scene(.leading)
             case .trailing:
-                    .scene(.trailing)
+                .scene(.trailing)
             case .bottom:
-                    .scene(.bottom)
+                .scene(.bottom)
             case .top:
-                    .scene(.top)
+                .scene(.top)
             }
         }
     #endif
@@ -46,7 +46,7 @@ public enum OrnamentCompatibleAnchor {
 public extension View {
     func lunchboxOrnament<Content>(visibility: Visibility = .automatic, attachmentAnchor: OrnamentCompatibleAnchor, contentAlignment: Alignment = .center, @ViewBuilder ornament: () -> Content) -> some View where Content: View {
         #if os(visionOS)
-        self.ornament(visibility: visibility, attachmentAnchor: attachmentAnchor.anchor, contentAlignment: contentAlignment, ornament: ornament)
+            self.ornament(visibility: visibility, attachmentAnchor: attachmentAnchor.anchor, contentAlignment: contentAlignment, ornament: ornament)
         #else
             self
         #endif

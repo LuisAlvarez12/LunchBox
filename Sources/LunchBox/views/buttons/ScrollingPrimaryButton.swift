@@ -1,6 +1,6 @@
 //
 //  SwiftUIView.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 5/15/24.
 //
@@ -8,7 +8,6 @@
 import SwiftUI
 
 public struct ScrollingPrimaryButton: View {
-    
     public var expanded = true
     public var title: String
     public var icon: String
@@ -22,9 +21,9 @@ public struct ScrollingPrimaryButton: View {
         self.color = color
         self.textColor = textColor
     }
-    
+
     public var body: some View {
-        HStack{
+        HStack {
             if expanded {
                 Text(title)
                     .lineLimit(1)
@@ -36,24 +35,23 @@ public struct ScrollingPrimaryButton: View {
                 .bold()
         }
         .foregroundStyle(.white)
-            .padding()
-            .background {
-                Capsule().fill(color.gradient)
-            }
+        .padding()
+        .background {
+            Capsule().fill(color.gradient)
+        }
     }
 }
 
 #Preview {
-    VStack{
+    VStack {
         @State var buttonEnabled = true
-        
+
         Button("toggle") {
             withAnimation {
                 buttonEnabled.toggle()
             }
         }
-        
+
         ScrollingPrimaryButton(expanded: buttonEnabled, title: "Add File", icon: "plus", color: .blue, textColor: .white)
     }
-    
 }

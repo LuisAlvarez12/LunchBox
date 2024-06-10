@@ -35,7 +35,7 @@ public struct ParselableImage {
     public var assetImage: String?
     public var systemImage: ParselableSystemImage?
     public var networkImage: ParselableNetworkImage?
-    
+
     public var backgroundColor: Color = .black
 
     public init(assetImage: String? = nil, systemImage: ParselableSystemImage? = nil, networkImage: ParselableNetworkImage? = nil, backgroundColor: Color = .black) {
@@ -49,9 +49,9 @@ public struct ParselableImage {
         let url = URL(string: ParselableNetworkImage.buildLink(parentName: parentName, assetName: assetName, sizeVariant: sizeVariant))!
         networkImage = ParselableNetworkImage(url: url, systemImage: systemImage)
     }
-    
+
     @ViewBuilder
-    public func createImage(width: CGFloat, height: CGFloat, contentMode: ContentMode = .fit, color: Color = LunchboxThemeManager.shared.currentColor) -> some View {
+    public func createImage(width: CGFloat, height: CGFloat, contentMode _: ContentMode = .fit, color: Color = LunchboxThemeManager.shared.currentColor) -> some View {
         if let _networkImage = networkImage {
             AsyncImage(url: _networkImage.url,
                        transaction: Transaction(animation: .snappy))
@@ -107,65 +107,64 @@ public struct ParselableImage {
     public func createImage(widthFrame: CGFloat? = nil, frame: CGFloat, color: Color = LunchboxThemeManager.shared.currentColor) -> some View {
         Color.clear.aspectRatio(1.1, contentMode: .fit)
             .squareFrame(length: frame)
-            .background{
-            
-            if let _networkImage = networkImage {
-                AsyncImage(url: _networkImage.url,
-                           transaction: Transaction(animation: .easeIn))
-                { phase in
-                    switch phase {
-                    case .empty:
-                        Color.clear
-                            .squareFrame(length: frame)
-                    case let .success(image):
-                        if let widthFrame {
-                            image
+            .background {
+                if let _networkImage = networkImage {
+                    AsyncImage(url: _networkImage.url,
+                               transaction: Transaction(animation: .easeIn))
+                    { phase in
+                        switch phase {
+                        case .empty:
+                            Color.clear
+                                .squareFrame(length: frame)
+                        case let .success(image):
+                            if let widthFrame {
+                                image
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: widthFrame)
+                            } else {
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .squareFrame(length: frame)
+                            }
+                        case let .failure(error):
+                            Image(systemName: _networkImage.systemImage)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: widthFrame)
-                        } else {
-                            image
-                                .resizable()
-                                .scaledToFill()
+                                .squareFrame(length: frame)
+                                .foregroundStyle(color)
+                        @unknown default:
+                            Color.red
                                 .squareFrame(length: frame)
                         }
-                    case let .failure(error):
-                        Image(systemName: _networkImage.systemImage)
+                    }
+                    .frame(width: widthFrame != nil ? widthFrame! : frame, height: widthFrame != nil ? .infinity : frame)
+                } else if let _assetImage = assetImage {
+                    Image(_assetImage)
+                        .resizable()
+                        .squareFrame(length: frame)
+                        .scaledToFit()
+                } else if let _systemImage = systemImage {
+                    if #available(iOS 17.0, *) {
+                        Image(systemName: _systemImage.systemImage)
                             .resizable()
                             .scaledToFit()
                             .squareFrame(length: frame)
-                            .foregroundStyle(color)
-                    @unknown default:
-                        Color.red
+                            .symbolEffect(.bounce, value: true)
+                            .foregroundStyle(_systemImage.color ?? color)
+
+                    } else {
+                        Image(systemName: _systemImage.systemImage)
+                            .resizable()
+                            .scaledToFit()
                             .squareFrame(length: frame)
+                            .foregroundStyle(_systemImage.color ?? color)
                     }
-                }
-                .frame(width: widthFrame != nil ? widthFrame! : frame, height: widthFrame != nil ? .infinity : frame)
-            } else if let _assetImage = assetImage {
-                Image(_assetImage)
-                    .resizable()
-                    .squareFrame(length: frame)
-                    .scaledToFit()
-            } else if let _systemImage = systemImage {
-                if #available(iOS 17.0, *) {
-                    Image(systemName: _systemImage.systemImage)
-                        .resizable()
-                        .scaledToFit()
-                        .squareFrame(length: frame)
-                        .symbolEffect(.bounce, value: true)
-                        .foregroundStyle(_systemImage.color ?? color)
-                    
                 } else {
-                    Image(systemName: _systemImage.systemImage)
-                        .resizable()
-                        .scaledToFit()
-                        .squareFrame(length: frame)
-                        .foregroundStyle(_systemImage.color ?? color)
+                    Spacer()
                 }
-            } else {
-                Spacer()
-            }
-        }.aspectRatio(1.1, contentMode: .fit)
+            }.aspectRatio(1.1, contentMode: .fit)
     }
 }
 

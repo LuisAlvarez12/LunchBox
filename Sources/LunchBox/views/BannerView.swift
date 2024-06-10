@@ -51,51 +51,21 @@ public struct BannerView: View {
     @ViewBuilder
     var content: some View {
         #if os(visionOS)
-        HStack {
-            image.createImage(widthFrame: 60, frame: 60, color: buttonColor)
-                .background(Circle().foregroundStyle(bannerColor.gradient))
-            
-            VStack(alignment: .trailing, spacing: 0) {
-                Text(sublineText)
-                    .font(.system(size: 14, weight: .semibold))
-                    .lineLimit(2, reservesSpace: true)
-                    .multilineTextAlignment(.leading)
-                    .foregroundStyle(.white)
-                
-                Text(buttonText)
-                    .font(.footnote)
-                    .foregroundStyle(buttonTextColor)
-                    .lineLimit(1)
-                    .bold()
-                    .horPadding()
-                    .vertPadding(4)
-                    .background(Capsule().foregroundStyle(buttonColor))
-                    .padding(.top, 4)
-            }.padding(8)
-
-        }.frame(maxWidth: 270)
-            .horPadding()
-            .lunchboxGlassEffect()
-            .clipped()
-        #else
-        if #available(iOS 17.0, *) {
             HStack {
-                VStack(spacing: 0) {
-                    //                if let parselableLabelData {
-                    //                    ParselableLabel(parselableLabelData)
-                    //                    // ParselableLabel.ParselableLabelData(text: "Premium", image: ParselableImage(networkImage: .folder), size: 20)
-                    //                }
+                image.createImage(widthFrame: 60, frame: 60, color: buttonColor)
+                    .background(Circle().foregroundStyle(bannerColor.gradient))
 
-                    image.createImage(widthFrame: 60, frame: 60, color: buttonColor)
-
+                VStack(alignment: .trailing, spacing: 0) {
                     Text(sublineText)
                         .font(.system(size: 14, weight: .semibold))
                         .lineLimit(2, reservesSpace: true)
-                        .multilineTextAlignment(.center)
-                        .foregroundStyle(sublineTextColor)
+                        .multilineTextAlignment(.leading)
+                        .foregroundStyle(.white)
+
                     Text(buttonText)
                         .font(.footnote)
                         .foregroundStyle(buttonTextColor)
+                        .lineLimit(1)
                         .bold()
                         .horPadding()
                         .vertPadding(4)
@@ -103,35 +73,65 @@ public struct BannerView: View {
                         .padding(.top, 4)
                 }.padding(8)
 
-            }.frame(width: 200)
-                .background(bg)
+            }.frame(maxWidth: 270)
+                .horPadding()
+                .lunchboxGlassEffect()
                 .clipped()
-        } else {
-            HStack {
-                VStack(alignment: .leading) {
-                    Spacer()
+        #else
+            if #available(iOS 17.0, *) {
+                HStack {
+                    VStack(spacing: 0) {
+                        //                if let parselableLabelData {
+                        //                    ParselableLabel(parselableLabelData)
+                        //                    // ParselableLabel.ParselableLabelData(text: "Premium", image: ParselableImage(networkImage: .folder), size: 20)
+                        //                }
 
-                    Text(sublineText)
-                        .font(.system(size: 14, weight: .semibold))
-                        .lineLimit(2, reservesSpace: true)
-                        .multilineTextAlignment(.leading)
-                        .foregroundStyle(sublineTextColor)
-                        .aligned()
-                    Text(buttonText)
-                        .font(.footnote)
-                        .foregroundStyle(buttonTextColor)
-                        .bold()
-                        .horPadding(8)
-                        .vertPadding(8)
-                        .background(Capsule().foregroundStyle(buttonColor))
-                }.padding([.leading, .vertical], 16)
+                        image.createImage(widthFrame: 60, frame: 60, color: buttonColor)
 
-                image.createImage(widthFrame: 100, frame: 100, color: buttonColor)
+                        Text(sublineText)
+                            .font(.system(size: 14, weight: .semibold))
+                            .lineLimit(2, reservesSpace: true)
+                            .multilineTextAlignment(.center)
+                            .foregroundStyle(sublineTextColor)
+                        Text(buttonText)
+                            .font(.footnote)
+                            .foregroundStyle(buttonTextColor)
+                            .bold()
+                            .horPadding()
+                            .vertPadding(4)
+                            .background(Capsule().foregroundStyle(buttonColor))
+                            .padding(.top, 4)
+                    }.padding(8)
 
-            }.frame(width: width, height: height)
-                .background(bg)
-                .clipped()
-        }
+                }.frame(width: 200)
+                    .background(bg)
+                    .clipped()
+            } else {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Spacer()
+
+                        Text(sublineText)
+                            .font(.system(size: 14, weight: .semibold))
+                            .lineLimit(2, reservesSpace: true)
+                            .multilineTextAlignment(.leading)
+                            .foregroundStyle(sublineTextColor)
+                            .aligned()
+                        Text(buttonText)
+                            .font(.footnote)
+                            .foregroundStyle(buttonTextColor)
+                            .bold()
+                            .horPadding(8)
+                            .vertPadding(8)
+                            .background(Capsule().foregroundStyle(buttonColor))
+                    }.padding([.leading, .vertical], 16)
+
+                    image.createImage(widthFrame: 100, frame: 100, color: buttonColor)
+
+                }.frame(width: width, height: height)
+                    .background(bg)
+                    .clipped()
+            }
         #endif
     }
 
