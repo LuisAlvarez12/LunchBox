@@ -34,11 +34,18 @@ extension UIApplication {
 
 @available(iOS 16.0, *)
 public struct EmailButton<Content>: View where Content: View {
-    var email: String = "team@rezonating.app"
-    let subject: String
-    let emailBody: String
+    public var email: String = "team@rezonating.app"
+    public let subject: String
+    public let emailBody: String
 
-    @ViewBuilder var content: () -> Content
+    @ViewBuilder public var content: () -> Content
+    
+    public init(email: String, subject: String, emailBody: String, content: @escaping () -> Content) {
+        self.email = email
+        self.subject = subject
+        self.emailBody = emailBody
+        self.content = content
+    }
 
     public var body: some View {
         Button(action: {

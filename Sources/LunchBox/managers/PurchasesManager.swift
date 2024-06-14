@@ -12,7 +12,7 @@ import SwiftUI
 public class PurchasesManager: ObservableObject {
     public static let shared = PurchasesManager()
 
-    @Published public var currentMembershipState: SubscriptionResult = NoSubscriptionStatus()
+    @Published public var currentMembershipState: any SubscriptionResult = NoSubscriptionStatus()
     @Published public var membershipPresented = false
     @Published public var hasTrialAvailable = false
 
@@ -46,7 +46,7 @@ public class PurchasesManager: ObservableObject {
         await updateSubscriptionState(SubscriptionFailure(reason: "Could Not Subscribe. Please try again later."))
     }
 
-    public func purchase(selectedChoice: SubscriptionOptionMetadata) async -> SubscriptionResult {
+    public func purchase(selectedChoice: SubscriptionOptionMetadata) async -> any SubscriptionResult {
         do {
             let result = try await Purchases.shared.purchase(package: selectedChoice.package)
 
@@ -66,7 +66,7 @@ public class PurchasesManager: ObservableObject {
         }
     }
 
-    private func updateSubscriptionState(_ result: SubscriptionResult) async {
+    private func updateSubscriptionState(_ result: any SubscriptionResult) async {
         await MainActor.run {
             if result is SubscriptionSuccess {
                 NotificationsManager.shared.showMessage("Subscription Success")
@@ -78,12 +78,12 @@ public class PurchasesManager: ObservableObject {
         }
     }
 
-    public func checkCustomerStatus(acceptableEntitlements: [String]) async -> SubscriptionResult {
+    public func checkCustomerStatus(acceptableEntitlements: [String]) async -> any SubscriptionResult {
         guard let customerInfo = try? await Purchases.shared.customerInfo() else {
             return SubscriptionFailure(reason: "No subscription")
         }
 
-        var subResult: SubscriptionResult = SubscriptionFailure(reason: "No subscription")
+        var subResult: any SubscriptionResult = SubscriptionFailure(reason: "No subscription")
 
         acceptableEntitlements.forEach { entitlement in
             if customerInfo.entitlements.all[entitlement]?.isActive == true {
@@ -94,11 +94,11 @@ public class PurchasesManager: ObservableObject {
         return subResult
     }
 
-    public func restore(acceptableEntitlements: [String]) async -> SubscriptionResult {
+    public func restore(acceptableEntitlements: [String]) async -> any SubscriptionResult {
         do {
             let result = try await Purchases.shared.restorePurchases()
 
-            var subResult: SubscriptionResult? = nil
+            var subResult: (any SubscriptionResult)? = nil
 
             acceptableEntitlements.forEach { entitlement in
                 if result.entitlements.all[entitlement]?.isActive == true {
@@ -122,9 +122,9 @@ public class PurchasesManager: ObservableObject {
         }
     }
 
-    public func restore(customerInfo: CustomerInfo, acceptableEntitlements: [String]) async -> SubscriptionResult {
+    public func restore(customerInfo: CustomerInfo, acceptableEntitlements: [String]) async -> any SubscriptionResult {
         do {
-            var subResult: SubscriptionResult? = nil
+            var subResult: (any SubscriptionResult)? = nil
 
             acceptableEntitlements.forEach { entitlement in
                 if customerInfo.entitlements.all[entitlement]?.isActive == true {
@@ -211,15 +211,22 @@ public class PurchasesManager: ObservableObject {
     }
 }
 
-public protocol SubscriptionResult {}
+public protocol SubscriptionResult : Equatable{
+    var status: String { get }
+}
 
 public struct SubscriptionSuccess: SubscriptionResult {
     public var isTrial: Bool
     public var subscriptionIncrement: SubscriptionTimeIncrement
+    
+    public let status: String = "SubscriptionSuccess"
 }
 
 public struct SubscriptionFailure: SubscriptionResult {
     public var reason: String
+    public let status: String = "SubscriptionFailure"
 }
 
-public struct NoSubscriptionStatus: SubscriptionResult {}
+public struct NoSubscriptionStatus: SubscriptionResult {
+    public let status: String = "NoSubscriptionStatus"
+}

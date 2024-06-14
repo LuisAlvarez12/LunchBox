@@ -25,7 +25,10 @@ public struct MediumImageBanner: View {
                 .cornerRadius(20, corners: .allCorners)
 
             Text(title).font(.subheadline).bold().aligned()
-            Text(subtitle).foregroundStyle(.secondary).font(.footnote).aligned()
+                .foregroundStyle(Color.LBMonoScreenOffTone)
+                .multilineTextAlignment(.leading)
+            Text(subtitle).foregroundStyle(Color.gray).font(.footnote).aligned()
+                .multilineTextAlignment(.leading)
         }
     }
 }
@@ -33,7 +36,12 @@ public struct MediumImageBanner: View {
 #Preview {
     VStack {
         HStack {
-            MediumImageBanner(image: ParselableImage(parentName: "Uncover", assetName: "icon-woman-reading", systemImage: "book"), title: "Get Premium", subtitle: "Read all of your files, and uncover new features")
+            Button(action: {
+                
+            }, label: {
+                MediumImageBanner(image: ParselableImage(parentName: "Uncover", assetName: "icon-woman-reading", systemImage: "book"), title: "Get Premium", subtitle: "Read all of your files, and uncover new features")
+            })
+
             MediumImageBanner(image: ParselableImage(parentName: "Uncover", assetName: "icon-woman-reading", systemImage: "book"), title: "Get Premium", subtitle: "Read all of your files, and uncover new features")
         }
     }
