@@ -8,18 +8,18 @@
 import SwiftUI
 
 @Observable
-class NotificationsManager {
-    var notificationMessage: AlertMessage? = nil
+public class NotificationsManager {
+    public var notificationMessage: AlertMessage? = nil
 
-    static var shared = NotificationsManager()
+    public static var shared = NotificationsManager()
 
     private var currentTask: Task<Void, Never>?
 
-    func showMessage(_ msg: LocalizedStringKey) {
+    public func showMessage(_ msg: LocalizedStringKey) {
         updateAlert(alertMessage: AlertMessage(message: msg, color: .blue))
     }
 
-    func showLoading() {
+    public func showLoading() {
         HapticsManager.shared.onGeneral()
 
         withAnimation(.easeIn(duration: 0.1)) {
@@ -27,11 +27,11 @@ class NotificationsManager {
         }
     }
 
-    func error(_ msg: LocalizedStringKey) {
+    public  func error(_ msg: LocalizedStringKey) {
         updateAlert(alertMessage: AlertMessage(message: msg, color: Color.red))
     }
 
-    func updateAlert(alertMessage: AlertMessage) {
+    public func updateAlert(alertMessage: AlertMessage) {
         HapticsManager.shared.onGeneral()
 
         withAnimation(.easeIn(duration: 0.1)) {
@@ -75,15 +75,22 @@ struct FloatingNotice_Previews: PreviewProvider {
     }
 }
 
-struct SimpleNotificationView: View {
+public struct SimpleNotificationView: View {
     @Environment(\.colorScheme) var colorScheme
 
-    let title: LocalizedStringKey
-    let image: String
-    var color: Color = .blue
-    var loading: Bool = false
+    public let title: LocalizedStringKey
+    public let image: String
+    public var color: Color = .blue
+    public var loading: Bool = false
+    
+    public init(title: LocalizedStringKey, image: String, color: Color = .blue, loading: Bool = false) {
+        self.title = title
+        self.image = image
+        self.color = color
+        self.loading = loading
+    }
 
-    var body: some View {
+    public var body: some View {
         HStack(alignment: .center) {
             if loading {
                 ProgressView()
@@ -113,17 +120,21 @@ struct SimpleNotificationView: View {
     }
 }
 
-struct AlertMessage {
-    let message: LocalizedStringKey
-    var color: Color = .blue
-    var imageName: String = "info.circle.fill"
-    var isLoading: Bool = false
+public struct AlertMessage {
+    public let message: LocalizedStringKey
+    public var color: Color = .blue
+    public var imageName: String = "info.circle.fill"
+    public var isLoading: Bool = false
 }
 
-struct FloatingNotice: View {
-    let alertMessage: AlertMessage
+public struct FloatingNotice: View {
+    public let alertMessage: AlertMessage
 
-    var body: some View {
+    public init(alertMessage: AlertMessage) {
+        self.alertMessage = alertMessage
+    }
+    
+    public var body: some View {
         SimpleNotificationView(title: alertMessage.message, image: alertMessage.imageName, color: alertMessage.color)
     }
 }
