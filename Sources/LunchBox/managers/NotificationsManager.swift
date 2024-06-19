@@ -125,6 +125,13 @@ public struct AlertMessage {
     public var color: Color = .blue
     public var imageName: String = "info.circle.fill"
     public var isLoading: Bool = false
+    
+    public init(message: LocalizedStringKey, color: Color = .blue, imageName: String = "info.circle.fill", isLoading: Bool = false) {
+        self.message = message
+        self.color = color
+        self.imageName = imageName
+        self.isLoading = isLoading
+    }
 }
 
 public struct FloatingNotice: View {
