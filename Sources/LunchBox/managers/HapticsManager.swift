@@ -14,50 +14,51 @@ public class HapticsManager {
 
     public func onGeneral() {
         #if os(iOS)
-        feedbackHandler = HapticsData()
+            feedbackHandler = HapticsData()
         #endif
     }
 
     public func onError() {
         #if os(iOS)
-        feedbackHandler = HapticsData(feedback: .error)
+            feedbackHandler = HapticsData(feedback: .error)
         #endif
     }
 }
 
 public extension View {
-    public func hapticsReciever() -> some View {
+    func hapticsReciever() -> some View {
         #if os(iOS)
-        sensoryFeedback(HapticsManager.shared.feedbackHandler.feedback, trigger: HapticsManager.shared.feedbackHandler)
+            sensoryFeedback(HapticsManager.shared.feedbackHandler.feedback, trigger: HapticsManager.shared.feedbackHandler)
         #else
-        self
+            self
         #endif
     }
 }
+
 #if os(iOS)
-public struct HapticsData: Equatable {
-    public var feedback: SensoryFeedback = .increase
-    public var id = UUID()
-    
-    public init(feedback: SensoryFeedback = .increase, id: UUID = UUID()) {
-        self.feedback = feedback
-        self.id = id
-    }
+    public struct HapticsData: Equatable {
+        public var feedback: SensoryFeedback = .increase
+        public var id = UUID()
 
-    public static func == (lhs: HapticsData, rhs: HapticsData) -> Bool {
-        return lhs.id == rhs.id
+        public init(feedback: SensoryFeedback = .increase, id: UUID = UUID()) {
+            self.feedback = feedback
+            self.id = id
+        }
+
+        public static func == (lhs: HapticsData, rhs: HapticsData) -> Bool {
+            return lhs.id == rhs.id
+        }
     }
-}
 #else
-public struct HapticsData: Equatable {
-    public var id = UUID()
-    
-    public init(id: UUID = UUID()) {
-        self.id = id
-    }
+    public struct HapticsData: Equatable {
+        public var id = UUID()
 
-    public static func == (lhs: HapticsData, rhs: HapticsData) -> Bool {
-        return lhs.id == rhs.id
+        public init(id: UUID = UUID()) {
+            self.id = id
+        }
+
+        public static func == (lhs: HapticsData, rhs: HapticsData) -> Bool {
+            return lhs.id == rhs.id
+        }
     }
-}
 #endif

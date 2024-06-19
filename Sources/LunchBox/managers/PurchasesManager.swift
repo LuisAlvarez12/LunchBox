@@ -211,14 +211,14 @@ public class PurchasesManager: ObservableObject {
     }
 }
 
-public protocol SubscriptionResult : Equatable{
+public protocol SubscriptionResult: Equatable {
     var status: String { get }
 }
 
 public struct SubscriptionSuccess: SubscriptionResult {
     public var isTrial: Bool
     public var subscriptionIncrement: SubscriptionTimeIncrement
-    
+
     public let status: String = "SubscriptionSuccess"
 }
 

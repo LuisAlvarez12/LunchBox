@@ -128,7 +128,7 @@ public struct IntroRow: View {
     let color: Color
     let icon: String
     let text: LocalizedStringKey
-    
+
     public init(color: Color, icon: String, text: LocalizedStringKey) {
         self.color = color
         self.icon = icon
@@ -147,7 +147,7 @@ public struct IntroRow: View {
                 }
                 .springsIn(offset: 20, duration: 0.3)
 
-            Text.init(text)
+            Text(text)
                 .font(.system(size: 16, weight: .regular, design: .default))
                 .aligned()
         }.fullWidth()

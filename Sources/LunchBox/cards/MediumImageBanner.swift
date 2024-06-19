@@ -36,9 +36,7 @@ public struct MediumImageBanner: View {
 #Preview {
     VStack {
         HStack {
-            Button(action: {
-                
-            }, label: {
+            Button(action: {}, label: {
                 MediumImageBanner(image: ParselableImage(parentName: "Uncover", assetName: "icon-woman-reading", systemImage: "book"), title: "Get Premium", subtitle: "Read all of your files, and uncover new features")
             })
 

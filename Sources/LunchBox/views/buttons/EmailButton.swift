@@ -39,7 +39,7 @@ public struct EmailButton<Content>: View where Content: View {
     public let emailBody: String
 
     @ViewBuilder public var content: () -> Content
-    
+
     public init(email: String, subject: String, emailBody: String, content: @escaping () -> Content) {
         self.email = email
         self.subject = subject

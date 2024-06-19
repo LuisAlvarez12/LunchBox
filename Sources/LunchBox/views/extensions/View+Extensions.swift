@@ -120,9 +120,9 @@ public extension View {
 
     func pinchToZoom(onDoubleTap: (() -> Void)? = nil) -> some View {
         #if canImport(UIKit)
-        modifier(PinchToZoom(onDoubleTap: onDoubleTap))
+            modifier(PinchToZoom(onDoubleTap: onDoubleTap))
         #else
-        self
+            self
         #endif
     }
 
