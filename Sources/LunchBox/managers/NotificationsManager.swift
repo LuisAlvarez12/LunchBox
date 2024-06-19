@@ -7,29 +7,35 @@
 
 import SwiftUI
 
-@available(iOS 16.0, *)
-public class NotificationsManager: ObservableObject {
-    @Published var isShown = false
-    var notificationMessage = AlertMessage(message: "")
+@Observable
+class NotificationsManager {
+    var notificationMessage: AlertMessage? = nil
 
-    public static var shared = NotificationsManager()
+    static var shared = NotificationsManager()
 
-    var currentTask: Task<Void, Never>?
+    private var currentTask: Task<Void, Never>?
 
-    public func showMessage(_ msg: LocalizedStringKey) {
-        updateAlert(alertMessage: AlertMessage(message: msg))
+    func showMessage(_ msg: LocalizedStringKey) {
+        updateAlert(alertMessage: AlertMessage(message: msg, color: .blue))
     }
 
-    public func error(_ msg: LocalizedStringKey) {
+    func showLoading() {
+        HapticsManager.shared.onGeneral()
+
+        withAnimation(.easeIn(duration: 0.1)) {
+            notificationMessage = AlertMessage(message: "Setting up your Files", color: .blue, isLoading: true)
+        }
+    }
+
+    func error(_ msg: LocalizedStringKey) {
         updateAlert(alertMessage: AlertMessage(message: msg, color: Color.red))
     }
 
-    public func updateAlert(alertMessage: AlertMessage) {
+    func updateAlert(alertMessage: AlertMessage) {
         HapticsManager.shared.onGeneral()
 
         withAnimation(.easeIn(duration: 0.1)) {
             notificationMessage = alertMessage
-            isShown = true
         }
         currentTask?.cancel()
         currentTask = hideAlertTask()
@@ -43,34 +49,16 @@ public class NotificationsManager: ObservableObject {
             }
 
             await MainActor.run {
-                withAnimation(.easeIn(duration: 0.3)) {
-                    isShown = false
+                withAnimation(.easeIn(duration: 0.2)) {
+                    notificationMessage = nil
                 }
             }
         }
     }
 }
 
-@available(iOS 16.0, *)
-public struct AlertMessage {
-    let message: LocalizedStringKey
-    var color: Color = .LBIdealBluePrimary
-    var imageName: String = "info.circle.fill"
-}
-
-@available(iOS 16.0, *)
-public struct FloatingNotice: View {
-    @Binding var showingNotice: Bool
-    let alertMessage = NotificationsManager.shared.notificationMessage
-
-    public var body: some View {
-        SimpleNotificationView(title: alertMessage.message, image: alertMessage.imageName, color: alertMessage.color)
-    }
-}
-
-@available(iOS 16.0, *)
 private struct FloatingNoticeTestView: View {
-    @ObservedObject var notificationsHelper: NotificationsManager = .shared
+    @State var notificationsHelper: NotificationsManager = .shared
 
     var body: some View {
         VStack {
@@ -78,42 +66,43 @@ private struct FloatingNoticeTestView: View {
                 notificationsHelper.showMessage("Hello!")
             })
         }.full()
-            .overlay(alignment: .top, content: {
-                VStack {
-//                    FloatingNotice(showingNotice: $notificationsHelper.isShown)
-                    SimpleNotificationView(title: "Export Links", image: "square.and.arrow.up")
-                    Spacer()
-                }.full().opacity(notificationsHelper.isShown ? 1.0 : 0.0)
-            })
     }
 }
 
-@available(iOS 16.0, *)
 struct FloatingNotice_Previews: PreviewProvider {
     static var previews: some View {
         FloatingNoticeTestView()
     }
 }
 
-@available(iOS 16.0, *)
-public struct SimpleNotificationView: View {
+struct SimpleNotificationView: View {
     @Environment(\.colorScheme) var colorScheme
 
     let title: LocalizedStringKey
     let image: String
-    var color: Color = .LBIdealBluePrimary
+    var color: Color = .blue
+    var loading: Bool = false
 
-    public var body: some View {
+    var body: some View {
         HStack(alignment: .center) {
-            Image(systemName: image)
-                .foregroundColor(.white)
-                .font(.system(size: 12, weight: .medium, design: .rounded))
-                .padding(6)
-                .background(Circle().fill(color.gradient))
-                .vertPadding(4)
+            if loading {
+                ProgressView()
+                    .progressViewStyle(.circular)
+                    .tint(.white)
+                    .padding(6)
+                    .background(Circle().fill(color.gradient))
+                    .vertPadding(4)
+            } else {
+                Image(systemName: image)
+                    .foregroundColor(.white)
+                    .font(.system(size: 20, weight: .medium, design: .rounded))
+                    .padding(6)
+                    .background(Circle().fill(color.gradient))
+                    .vertPadding(4)
+            }
 
             Text(title)
-                .autoFit(size: 16, weight: .medium, design: .rounded)
+                .autoFit(size: 18, weight: .medium, design: .rounded)
                 .foregroundColor(Color.LBMonoScreenOffTone)
                 .vertPadding(10)
 
@@ -121,5 +110,20 @@ public struct SimpleNotificationView: View {
             Capsule().fill(Material.thin)
                 .shadow(radius: 2)
         }
+    }
+}
+
+struct AlertMessage {
+    let message: LocalizedStringKey
+    var color: Color = .blue
+    var imageName: String = "info.circle.fill"
+    var isLoading: Bool = false
+}
+
+struct FloatingNotice: View {
+    let alertMessage: AlertMessage
+
+    var body: some View {
+        SimpleNotificationView(title: alertMessage.message, image: alertMessage.imageName, color: alertMessage.color)
     }
 }

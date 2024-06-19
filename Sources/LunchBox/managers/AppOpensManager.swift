@@ -8,8 +8,7 @@
 import StoreKit
 import SwiftUI
 
-@available(iOS 16.0, *)
-public class AppOpensManager: ObservableObject {
+public class AppOpensManager {
     public static let shared = AppOpensManager()
 
     private static let TIMES_LOGGED_IN = "timesLoggedIn"
@@ -17,7 +16,6 @@ public class AppOpensManager: ObservableObject {
 
     private let timesToShowMembership = [3, 8, 12, 15, 20]
 
-    // Preferences
     @AppStorage(AppOpensManager.TIMES_LOGGED_IN) var timesLoggedIn: Int = 0
     @AppStorage(AppOpensManager.HAS_SEEN_REVIEW_PROMPT) var timesSeenReviewPrompt: Int = 0
 

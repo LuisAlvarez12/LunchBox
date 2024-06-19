@@ -8,13 +8,13 @@
 import RevenueCat
 import SwiftUI
 
-@available(iOS 16.0, *)
-public class PurchasesManager: ObservableObject {
+@Observable
+public class PurchasesManager {
     public static let shared = PurchasesManager()
 
-    @Published public var currentMembershipState: any SubscriptionResult = NoSubscriptionStatus()
-    @Published public var membershipPresented = false
-    @Published public var hasTrialAvailable = false
+    public var currentMembershipState: any SubscriptionResult = NoSubscriptionStatus()
+    public var membershipPresented = false
+    public var hasTrialAvailable = false
 
     public var preferredOffering: String? = nil
 
