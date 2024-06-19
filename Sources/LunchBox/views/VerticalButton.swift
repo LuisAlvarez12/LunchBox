@@ -1,6 +1,6 @@
 //
 //  SwiftUIView.swift
-//  
+//
 //
 //  Created by Luis Alvarez on 6/19/24.
 //
@@ -19,7 +19,7 @@ public struct VerticalButton: View {
         self.style = style
         self.onClick = onClick
     }
-    
+
     @ViewBuilder
     public var body: some View {
         if style == .Bordered {
@@ -72,11 +72,7 @@ public enum VerticalButtonStyle {
 
 #Preview {
     VStack {
-        VerticalButton(image: "folder", text: "This is a test", style: .Simple, onClick: {
-            
-        })
-        VerticalButton(image: "folder.fill", text: "This is a test", style: .Bordered, onClick: {
-            
-        })
+        VerticalButton(image: "folder", text: "This is a test", style: .Simple, onClick: {})
+        VerticalButton(image: "folder.fill", text: "This is a test", style: .Bordered, onClick: {})
     }
 }

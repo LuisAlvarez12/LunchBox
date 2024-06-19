@@ -9,12 +9,14 @@ import SwiftUI
 
 @available(iOS 16.0.0, *)
 public struct PremiumView: View {
-    var showCrown = false
+    public var size: CGFloat = 16
+    public var color: Color = .yellow
 
     @State var anim: Int = 0
 
-    public init(showCrown: Bool = false) {
-        self.showCrown = showCrown
+    public init(size: CGFloat, color: Color) {
+        self.size = size
+        self.color = color
     }
 
     private func updateAnim() {
@@ -29,74 +31,45 @@ public struct PremiumView: View {
 
     public var body: some View {
         HStack(spacing: 0) {
-            Group {
-                if showCrown {
-                    Image(systemName: "crown.fill")
-                        .onAppear {
+            Image(systemName: "crown.fill")
+                .resizable()
+                .scaledToFit()
+                .foregroundStyle(color)
+                .squareFrame(length: size)
+                .onAppear {
+                    updateAnim()
+                }
+                .onChange(of: anim, perform: { _ in
+                    Task {
+                        try? await Task.sleep(nanoseconds: 4.nano())
+                        await MainActor.run {
                             updateAnim()
                         }
-                        .onChange(of: anim, perform: { _ in
-                            Task {
-                                try? await Task.sleep(nanoseconds: 4.nano())
-                                await MainActor.run {
-                                    updateAnim()
-                                }
-                            }
-                        })
-                        .overlay(alignment: .top, content: {
-                            SparkleShape()
-                                .fill(Color.yellow)
-                                .squareFrame(length: 8)
-                                .offset(x: 4)
-                                .opacity(anim == 0 ? 1.0 : 0.0)
-                        })
-                        .background(alignment: .top, content: {
-                            HStack {
-                                SparkleShape()
-                                    .fill(Color.yellow)
-                                    .squareFrame(length: 8)
-                                    .offset(x: 2, y: 2)
-                                    .opacity(anim == 1 ? 1.0 : 0.0)
-                                Spacer()
-                                SparkleShape()
-                                    .fill(Color.yellow)
-                                    .squareFrame(length: 8)
-                                    .offset(x: 2, y: 4)
-                                    .opacity(anim == 2 ? 1.0 : 0.0)
-                            }
-                        })
-                } else {
-                    Image(systemName: "laurel.leading")
-                    Text("Premium")
-                    Image(systemName: "laurel.trailing")
-                }
-            }
+                    }
+                })
+                .overlay(alignment: .top, content: {
+                    SparkleShape()
+                        .foregroundStyle(color.opacity(0.7))
+                        .squareFrame(length: max(size * 0.2, 8))
+                        .offset(x: 4)
+                        .opacity(anim == 0 ? 1.0 : 0.0)
+                })
+                .background(alignment: .top, content: {
+                    HStack {
+                        SparkleShape()
+                            .foregroundStyle(color.opacity(0.7))
+                            .squareFrame(length: max(size * 0.3, 8))
+                            .offset(x: 2, y: 2)
+                            .opacity(anim == 1 ? 1.0 : 0.0)
+                        Spacer()
+                        SparkleShape()
+                            .foregroundStyle(color.opacity(0.7))
+                            .squareFrame(length: max(size * 0.2, 8))
+                            .offset(x: 2, y: 4)
+                            .opacity(anim == 2 ? 1.0 : 0.0)
+                    }
+                })
         }
-    }
-}
-
-public struct PremiumViewButton: View {
-    @ObservedObject var purchasesMagager = PurchasesManager.shared
-
-    var showCrown = false
-
-    public init(showCrown: Bool = false) {
-        self.showCrown = showCrown
-    }
-
-    @ViewBuilder
-    public var body: some View {
-        Button(action: {
-            if !purchasesMagager.isSubscribed() {
-                purchasesMagager.showMembershipModal()
-            }
-        }, label: {
-            if purchasesMagager.isSubscribed() {
-                EmptyView()
-            } else {
-                PremiumView(showCrown: showCrown)
-            }
-        })
     }
 }
 
@@ -104,26 +77,18 @@ public struct PremiumViewButton: View {
 struct PremiumView_PreviewProvider: PreviewProvider {
     static var previews: some View {
         VStack {
-//            PremiumView().foregroundStyle(.blue)
-            PremiumView(showCrown: true)
-                .foregroundStyle(.red.gradient)
+            PremiumView(size: 100, color: .red)
+            PremiumView(size: 50, color: .red)
+            PremiumView(size: 24, color: .red)
+            PremiumView(size: 16, color: .red)
         }
     }
 }
 
-struct SparkleShape: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        let radius = 1.0
-        path.move(to: CGPoint(x: rect.midX, y: rect.minY))
-        path.addLine(to: CGPoint(x: rect.midX - radius, y: rect.midY - radius))
-        path.addLine(to: CGPoint(x: rect.minX, y: rect.midY))
-        path.addLine(to: CGPoint(x: rect.midX - radius, y: rect.midY + radius))
-        path.addLine(to: CGPoint(x: rect.midX, y: rect.maxY))
-        path.addLine(to: CGPoint(x: rect.midX + radius, y: rect.midY + radius))
-        path.addLine(to: CGPoint(x: rect.maxX, y: rect.midY))
-        path.addLine(to: CGPoint(x: rect.midX + radius, y: rect.midY - radius))
-        path.addLine(to: CGPoint(x: rect.midX, y: rect.minY))
-        return path
+struct SparkleShape: View {
+    var body: some View {
+        Image(systemName: "sparkle")
+            .resizable()
+            .scaledToFit()
     }
 }
