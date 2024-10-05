@@ -12,7 +12,7 @@ import Observation
 public class AppThemeManager {
     public static var shared = AppThemeManager()
     
-    public var currentTheme = ColorScheme()
+    public var currentTheme = AppThemeScheme()
 }
 
 #Preview(body: {
@@ -22,9 +22,9 @@ public class AppThemeManager {
 })
 
 public struct ColorThemeReview : View {
-    public var theme: ColorScheme
+    public var theme: AppThemeScheme
 
-    public init(theme: ColorScheme = ColorScheme()) {
+    public init(theme: AppThemeScheme = AppThemeScheme()) {
         self.theme = theme
     }
     
@@ -48,7 +48,7 @@ public struct ColorThemeReview : View {
     }
 }
 
-public struct ColorScheme {
+public struct AppThemeScheme {
     public static let LBThemePrimary = Color(UIColor(named: "lbThemePrimary", in: Bundle.module, compatibleWith: nil)!)
     public static let LBThemePrimaryContainer = Color(UIColor(named: "lbThemePrimaryContainer", in: Bundle.module, compatibleWith: nil)!)
     public static let LBThemeSecondary = Color(UIColor(named: "lbThemeSecondary", in: Bundle.module, compatibleWith: nil)!)
@@ -71,7 +71,7 @@ public struct ColorScheme {
     public var surface: SurfaceScheme = SurfaceScheme()
     public var text: TextScheme = TextScheme()
     
-    public init(primary: Color = ColorScheme.LBThemePrimary, primaryContainer: Color = ColorScheme.LBThemePrimaryContainer, secondary: Color = ColorScheme.LBThemeSecondary, secondaryContainer: Color = ColorScheme.LBThemeSecondaryContainer, error: Color = ColorScheme.LBThemeError, errorContainer: Color = ColorScheme.LBThemeErrorContainer, background: Color = ColorScheme.LBThemeBackground, surface: SurfaceScheme = SurfaceScheme(), text: TextScheme = TextScheme()) {
+    public init(primary: Color = AppThemeScheme.LBThemePrimary, primaryContainer: Color = AppThemeScheme.LBThemePrimaryContainer, secondary: Color = AppThemeScheme.LBThemeSecondary, secondaryContainer: Color = AppThemeScheme.LBThemeSecondaryContainer, error: Color = AppThemeScheme.LBThemeError, errorContainer: Color = AppThemeScheme.LBThemeErrorContainer, background: Color = AppThemeScheme.LBThemeBackground, surface: SurfaceScheme = SurfaceScheme(), text: TextScheme = TextScheme()) {
         
         self.primary = primary
         self.primaryContainer = primaryContainer
