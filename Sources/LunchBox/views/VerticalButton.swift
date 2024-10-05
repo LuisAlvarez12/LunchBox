@@ -32,12 +32,12 @@ public struct VerticalButton: View {
                         .resizable()
                         .scaledToFit()
                         .squareFrame(length: 24)
-                        .foregroundStyle(AppThemeManager.shared.currentTheme.background)
+                        .foregroundStyle(AppThemeManager.shared.currentTheme.text.primary)
                     Text(text)
                         .font(.footnote)
                         .lineLimit(1, reservesSpace: true)
                         .bold()
-                        .foregroundStyle(AppThemeManager.shared.currentTheme.background)
+                        .foregroundStyle(AppThemeManager.shared.currentTheme.text.primary)
                         .padding(.top, 2)
                 }.padding(12)
                     .fullWidth().background(RoundedRectangle(cornerRadius: 12).fill(Material.thin))
@@ -60,7 +60,7 @@ public struct VerticalButton: View {
                 }
             })
             .buttonStyle(.plain)
-            .foregroundStyle(AppThemeManager.shared.currentTheme.background)
+            .foregroundStyle(AppThemeManager.shared.currentTheme.text.primary)
         }
     }
 }

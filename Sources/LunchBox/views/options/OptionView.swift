@@ -39,12 +39,12 @@ struct OptionView: View {
                 Text(title)
                     .font(.title3)
                     .bold()
-                    .foregroundStyle(AppThemeManager.shared.currentTheme.background)
+                    .foregroundStyle(AppThemeManager.shared.currentTheme.text.primary)
 
                 if let desc = bodyText {
                     Text(desc)
                         .font(.footnote)
-                        .foregroundStyle(AppThemeManager.shared.currentTheme.background)
+                        .foregroundStyle(AppThemeManager.shared.currentTheme.text.primary)
                         .multilineTextAlignment(.leading)
                 }
 
@@ -54,7 +54,7 @@ struct OptionView: View {
 
             VStack {
                 Text(price).bold()
-                    .foregroundStyle(AppThemeManager.shared.currentTheme.background)
+                    .foregroundStyle(AppThemeManager.shared.currentTheme.text.primary)
             }
         }.padding().background {
             RoundedRectangle(cornerRadius: 12)

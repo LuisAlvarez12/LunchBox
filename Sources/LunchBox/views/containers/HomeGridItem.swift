@@ -27,7 +27,7 @@ public struct HomeGridItem: View {
 
             Text(text)
                 .font(.footnote)
-                .foregroundStyle(AppThemeManager.shared.currentTheme.background)
+                .foregroundStyle(AppThemeManager.shared.currentTheme.text.primary)
         }
     }
 }

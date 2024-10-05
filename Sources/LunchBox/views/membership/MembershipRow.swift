@@ -50,7 +50,7 @@ public struct MembershipRow: View {
                     Text(membershipRow.description)
                         .font(.system(size: 16, weight: .regular, design: .default))
                         .aligned()
-                        .foregroundStyle(forceDark ? .white : AppThemeManager.shared.currentTheme.background)
+                        .foregroundStyle(forceDark ? .white : AppThemeManager.shared.currentTheme.text.primary)
                 }
             }.padding(.top, 8)
         #endif

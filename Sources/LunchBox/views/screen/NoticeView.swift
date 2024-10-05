@@ -56,7 +56,7 @@ public struct NoticeView: View {
             }
 
             Text(title).font(.system(size: 18, weight: .bold, design: .default))
-                .foregroundColor(AppThemeManager.shared.currentTheme.background)
+                .foregroundColor(AppThemeManager.shared.currentTheme.text.primary)
                 .multilineTextAlignment(.center)
 
             if let bodyText {
