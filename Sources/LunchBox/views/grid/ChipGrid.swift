@@ -92,13 +92,13 @@ public struct ChipView: View {
 //               Image(systemName: systemImage)
 //                .font(.system(size: 18)).lineLimit(1)
             Text(title).lineLimit(1)
-                .bold(isSelected)
+                .bold()
+                .foregroundColor(isSelected ? Color.white : Color.secondary)
         }
         .horPadding(12)
         .vertPadding(8)
-        .foregroundColor(isSelected ? Color.white : Color.LBMonoScreenOffTone)
         .background {
-            let bgColor = isSelected ? LunchboxThemeManager.shared.currentColor : Color.LBMonoSheetAccent
+            let bgColor = isSelected ? AppThemeManager.shared.currentTheme.primary : AppThemeManager.shared.currentTheme.surface.Bright
 
             Capsule().fill(bgColor)
         }

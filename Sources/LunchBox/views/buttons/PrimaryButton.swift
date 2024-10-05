@@ -14,7 +14,7 @@ public struct PrimaryButton: View {
     let action: () -> Void
     var disabled: Bool = false
 
-    public init(text: LocalizedStringKey, color: Color = LunchboxThemeManager.shared.currentColor, disabled: Bool = false, action: @escaping () -> Void) {
+    public init(text: LocalizedStringKey, color: Color = AppThemeManager.shared.currentTheme.primary, disabled: Bool = false, action: @escaping () -> Void) {
         self.text = text
         self.color = color
         self.action = action
@@ -31,7 +31,7 @@ public struct PrimaryButton: View {
             #if os(iOS)
                 .fullWidth()
                 .padding()
-                .background(Capsule().fill(disabled ? Color.secondary : color))
+                .background(RoundedRectangle(cornerRadius: 12).fill(disabled ? Color.secondary : color))
             #else
                 .horPadding(42)
                 .vertPadding(16)
@@ -49,7 +49,7 @@ public struct AsyncPrimaryButton: View {
     var action: () async -> Void
     var disabled: Bool = false
 
-    public init(text: LocalizedStringKey, color: Color = LunchboxThemeManager.shared.currentColor, disabled: Bool = false, action: @escaping () async -> Void) {
+    public init(text: LocalizedStringKey, color: Color = AppThemeManager.shared.currentTheme.primary, disabled: Bool = false, action: @escaping () async -> Void) {
         self.text = text
         self.color = color
         self.action = action
@@ -66,7 +66,7 @@ public struct AsyncPrimaryButton: View {
             #if os(iOS)
                 .fullWidth()
                 .padding()
-                .background(Capsule().fill(disabled ? Color.secondary : color))
+                .background(RoundedRectangle(cornerRadius: 12).fill(disabled ? Color.secondary : color))
             #else
                 .horPadding(42)
                 .vertPadding(16)
@@ -80,7 +80,7 @@ public struct AsyncPrimaryButton: View {
 @available(iOS 16.0, *)
 struct PrimaryButton_PreviewProvider: PreviewProvider {
     static var previews: some View {
-        LunchboxThemeManager.shared.setColor(Color.red)
+        
         return VStack {
             PrimaryButton(text: "Dismiss", action: {})
             AsyncPrimaryButton(text: "Dismiss", action: {})

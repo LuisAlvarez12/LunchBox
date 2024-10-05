@@ -51,7 +51,7 @@ public struct ParselableImage {
     }
 
     @ViewBuilder
-    public func createImage(width: CGFloat, height: CGFloat, contentMode _: ContentMode = .fit, color: Color = LunchboxThemeManager.shared.currentColor) -> some View {
+    public func createImage(width: CGFloat, height: CGFloat, contentMode _: ContentMode = .fit, color: Color = AppThemeManager.shared.currentTheme.primary) -> some View {
         if let _networkImage = networkImage {
             AsyncImage(url: _networkImage.url,
                        transaction: Transaction(animation: .snappy))
@@ -104,7 +104,7 @@ public struct ParselableImage {
     }
 
     @ViewBuilder
-    public func createImage(widthFrame: CGFloat? = nil, frame: CGFloat, color: Color = LunchboxThemeManager.shared.currentColor) -> some View {
+    public func createImage(widthFrame: CGFloat? = nil, frame: CGFloat, color: Color = AppThemeManager.shared.currentTheme.primary) -> some View {
         Color.clear.aspectRatio(1.1, contentMode: .fit)
             .squareFrame(length: frame)
             .background {

@@ -40,10 +40,10 @@ public struct PinView: View {
                 if hidesPin {
                     ForEach(0 ..< maxDigits, id: \.self) { index in
                         if input.count >= index + 1 {
-                            Circle().foregroundStyle(LunchboxThemeManager.shared.currentColor.gradient)
+                            Circle().foregroundStyle(AppThemeManager.shared.currentTheme.primary.gradient)
                                 .frame(minHeight: 26, idealHeight: 26, maxHeight: 26)
                         } else {
-                            Circle().stroke(LunchboxThemeManager.shared.currentColor, lineWidth: 3)
+                            Circle().stroke(AppThemeManager.shared.currentTheme.primary, lineWidth: 3)
                                 .frame(minHeight: 20, idealHeight: 20, maxHeight: 20)
                         }
                     }
@@ -57,7 +57,7 @@ public struct PinView: View {
 
                                 Text(String(indexedStr))
                                     .autoFit(size: 40)
-                                    .foregroundColor(Color.LBMonoScreenOffTone)
+                                    .foregroundColor(AppThemeManager.shared.currentTheme.text.primary)
                                     .full()
                             }
                         }.frame(minWidth: 40, idealWidth: 40, maxWidth: 40, minHeight: 40, idealHeight: 40, maxHeight: 40)
@@ -76,7 +76,7 @@ public struct PinView: View {
                             Text("\(button.identifier())")
                                 .bold()
                                 .autoFit(size: 40)
-                                .foregroundColor(Color.LBMonoScreenOffTone)
+                                .foregroundColor(AppThemeManager.shared.currentTheme.text.primary)
                                 .full()
                                 .padding(12)
                                 .background {
@@ -85,7 +85,7 @@ public struct PinView: View {
                         } else if button == .Delete {
                             Image(systemName: button.identifier())
                                 .resizable()
-                                .foregroundColor(Color.LBMonoScreenOffTone)
+                                .foregroundColor(AppThemeManager.shared.currentTheme.text.primary)
                                 .scaledToFit()
                                 .squareFrame(length: 32)
                                 .full()
@@ -95,13 +95,13 @@ public struct PinView: View {
                             if onClearEmoji != nil, let _currentEmoji = currentEmoji {
                                 Text(_currentEmoji).autoFit(size: 32).padding(12)
                                     .overlay(alignment: .bottom, content: {
-                                        Text("Reset").font(.system(size: 12, weight: .heavy, design: .rounded)).foregroundColor(Color.LBMonoScreenOffTone)
+                                        Text("Reset").font(.system(size: 12, weight: .heavy, design: .rounded)).foregroundColor(AppThemeManager.shared.currentTheme.text.primary)
                                             .horPadding(6)
                                             .background(Capsule().fill(Material.thin))
                                     })
                             } else {
                                 Text("Clear").autoFit(size: 18)
-                                    .foregroundColor(Color.LBMonoScreenOffTone)
+                                    .foregroundColor(AppThemeManager.shared.currentTheme.text.primary)
                                     .full()
                                     .padding(12)
                             }

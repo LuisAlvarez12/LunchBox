@@ -56,7 +56,7 @@ public struct LargeSectionHeader: View {
     var imageView: some View {
         Image(systemName: image)
             .bold()
-            .foregroundStyle(Color.LBMonoScreenOffTone)
+            .foregroundStyle(AppThemeManager.shared.currentTheme.background)
             .padding(6)
             .background(Circle().fill(Color.secondary.opacity(0.2)))
     }

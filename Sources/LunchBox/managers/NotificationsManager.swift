@@ -110,7 +110,7 @@ public struct SimpleNotificationView: View {
 
             Text(title)
                 .autoFit(size: 18, weight: .medium, design: .rounded)
-                .foregroundColor(Color.LBMonoScreenOffTone)
+                .foregroundColor(AppThemeManager.shared.currentTheme.background)
                 .vertPadding(10)
 
         }.horPadding(16).background {

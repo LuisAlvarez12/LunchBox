@@ -19,7 +19,7 @@ public struct PillButton: View {
     public var body: some View {
         Label(title: {
             Text(text)
-                .foregroundStyle(Color.LBMonoScreenOffTone)
+                .foregroundStyle(AppThemeManager.shared.currentTheme.background)
         }, icon: {
             image.createImage(frame: 18)
         })

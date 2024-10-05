@@ -14,7 +14,7 @@ public struct IconProperties {
     public var backgroundGradient: Bool = false
     public var iconColor: Color
 
-    public init(size: CGFloat, background: Color? = nil, backgroundGradient: Bool = false, iconColor: Color = LunchboxThemeManager.shared.currentColor) {
+    public init(size: CGFloat, background: Color? = nil, backgroundGradient: Bool = false, iconColor: Color = AppThemeManager.shared.currentTheme.primary) {
         self.size = size
         self.background = background
         self.backgroundGradient = backgroundGradient
@@ -56,7 +56,7 @@ public struct NoticeView: View {
             }
 
             Text(title).font(.system(size: 18, weight: .bold, design: .default))
-                .foregroundColor(Color.LBMonoScreenOffTone)
+                .foregroundColor(AppThemeManager.shared.currentTheme.background)
                 .multilineTextAlignment(.center)
 
             if let bodyText {

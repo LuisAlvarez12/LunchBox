@@ -74,13 +74,13 @@ public struct BottomBarHorizontalModifier: ViewModifier {
                             onSecondaryEnabledClick()
                         }, label: {
                             Text(secondaryText)
-                                .foregroundStyle(LunchboxThemeManager.shared.currentColor)
+                                .foregroundStyle(AppThemeManager.shared.currentTheme.primary)
                                 .font(.system(size: 18, weight: .medium, design: .default))
                                 .padding()
                                 .background(Capsule().fill(Color.systemSecondary))
                         }).padding(.trailing)
                     }.padding().background {
-                        LinearGradient(colors: [Color.LBMonoSchemeTone, Color.clear], startPoint: .bottom, endPoint: .top).edgesIgnoringSafeArea(.bottom)
+                        LinearGradient(colors: [AppThemeManager.shared.currentTheme.background, Color.clear], startPoint: .bottom, endPoint: .top).edgesIgnoringSafeArea(.bottom)
                     }
                 } else {
                     VStack(alignment: .center) {
@@ -93,7 +93,7 @@ public struct BottomBarHorizontalModifier: ViewModifier {
                                 onSecondaryEnabledClick()
                             }, label: {
                                 Text(secondaryText)
-                                    .foregroundStyle(LunchboxThemeManager.shared.currentColor)
+                                    .foregroundStyle(AppThemeManager.shared.currentTheme.primary)
                                     .font(.system(size: 16, weight: .regular, design: .default))
                                     .padding(8)
                             })

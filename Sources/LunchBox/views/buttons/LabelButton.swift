@@ -26,7 +26,7 @@ public struct LabelButton: View {
             onClick()
         }, label: {
             Label(title, systemImage: systemImage)
-        }).foregroundStyle(LunchboxThemeManager.shared.currentColor)
+        }).foregroundStyle(AppThemeManager.shared.currentTheme.primary)
     }
 }
 

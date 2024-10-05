@@ -140,12 +140,6 @@ public extension Color {
     static let lunchBoxColors = [
         Color.LBMonoScreenOffTone,
         Color.LBMonoSchemeTone,
-        Color.LBMonoSheetBackground,
-        Color.LBMonoSheetAccent,
-        Color.LBUtilityErrorRed,
-        Color.LBUtilityBrightYellow,
-        LunchboxThemeManager.shared.currentColor,
-        Color.LBIdealBlueSecondary,
     ]
 
     // Banner
@@ -161,14 +155,7 @@ public extension Color {
     // Mono
     static let LBMonoScreenOffTone = Color(UIColor(named: "lightOffBlackDarkOffWhite", in: Bundle.module, compatibleWith: nil)!)
     static let LBMonoSchemeTone = Color(UIColor(named: "lightWhiteDarkBlack", in: Bundle.module, compatibleWith: nil)!)
-    static let LBMonoSheetBackground = Color(UIColor(named: "sheet-background", in: Bundle.module, compatibleWith: nil)!)
-    static let LBMonoSheetAccent = Color(UIColor(named: "sheet-background-reverse", in: Bundle.module, compatibleWith: nil)!)
-
-    // Utils
-    static let LBUtilityErrorRed = Color(UIColor(named: "deep-red", in: Bundle.module, compatibleWith: nil)!)
-    static let LBUtilityBrightYellow = Color(UIColor(named: "favorite-yellow", in: Bundle.module, compatibleWith: nil)!)
 
     // Palette
-    static let LBIdealBluePrimary = Color(UIColor(named: "idealBluePrimary", in: Bundle.module, compatibleWith: nil)!)
     static let LBIdealBlueSecondary = Color(UIColor(named: "idealBlueSecondary", in: Bundle.module, compatibleWith: nil)!)
 }

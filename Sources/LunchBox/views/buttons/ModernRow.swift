@@ -33,13 +33,13 @@ public struct ModernRow: View {
                 }.padding(12)
 
             Text(text)
-                .foregroundStyle(Color.LBMonoScreenOffTone)
+                .foregroundStyle(AppThemeManager.shared.currentTheme.background)
                 .font(.title3)
                 .aligned()
                 .bold()
 
             Image(systemName: "chevron.right")
-                .foregroundStyle(Color.LBMonoScreenOffTone)
+                .foregroundStyle(AppThemeManager.shared.currentTheme.background)
                 .font(.title3)
                 .padding(.trailing)
         }

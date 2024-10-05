@@ -35,8 +35,8 @@ public struct DefaultRatingsButton: View {
 
     public init() {
         text = "Rate This App"
-        textColor = LunchboxThemeManager.shared.currentColor
-        bgColor = Color.LBIdealBlueSecondary
+        textColor = AppThemeManager.shared.currentTheme.primary
+        bgColor = AppThemeManager.shared.currentTheme.secondary
     }
 
     public init(text: LocalizedStringKey, textColor: Color, bgColor: Color) {

@@ -25,7 +25,7 @@ public struct MediumImageBanner: View {
                 .cornerRadius(20, corners: .allCorners)
 
             Text(title).font(.subheadline).bold().aligned()
-                .foregroundStyle(Color.LBMonoScreenOffTone)
+                .foregroundStyle(AppThemeManager.shared.currentTheme.background)
                 .multilineTextAlignment(.leading)
             Text(subtitle).foregroundStyle(Color.gray).font(.footnote).aligned()
                 .multilineTextAlignment(.leading)

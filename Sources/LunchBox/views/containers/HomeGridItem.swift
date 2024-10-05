@@ -18,7 +18,7 @@ public struct HomeGridItem: View {
 
     public var body: some View {
         VStack {
-            image.createImage(frame: 46, color: LunchboxThemeManager.shared.currentColor)
+            image.createImage(frame: 46, color: AppThemeManager.shared.currentTheme.primary)
                 .padding(16)
                 .background(
                     RoundedRectangle(cornerRadius: 12)
@@ -27,7 +27,7 @@ public struct HomeGridItem: View {
 
             Text(text)
                 .font(.footnote)
-                .foregroundStyle(Color.LBMonoScreenOffTone)
+                .foregroundStyle(AppThemeManager.shared.currentTheme.background)
         }
     }
 }
