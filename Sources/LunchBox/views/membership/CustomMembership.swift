@@ -19,6 +19,12 @@ public struct SubscriptionScreenContainer<Content: View>: View {
     @State var selectedChoice: SubscriptionMetadata? = nil
     
     @ViewBuilder var content: () -> Content
+    
+    public init(membershipMetaData: MembershipMetaData,
+                content: @escaping () -> Content) {
+        self.membershipMetaData = membershipMetaData
+        self.content = content
+    }
 
     var screen: some View {
         content()
