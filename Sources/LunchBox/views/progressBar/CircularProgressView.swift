@@ -7,12 +7,17 @@
 
 import SwiftUI
 
-struct CircularProgressView: View {
-    let progress: Double
-    var color: Color = .blue
-    let width: CGFloat = 6
+public struct CircularProgressView: View {
+    public let progress: Double
+    public var color: Color = .blue
+    public let width: CGFloat = 6
+    
+    public init(progress: Double, color: Color) {
+        self.progress = progress
+        self.color = color
+    }
 
-    var body: some View {
+    public var body: some View {
         ZStack {
             Circle()
                 .stroke(
