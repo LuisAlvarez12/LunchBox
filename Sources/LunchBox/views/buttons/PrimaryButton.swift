@@ -7,13 +7,24 @@
 
 import SwiftUI
 
+/// A primary styled button with customizable appearance
 @available(iOS 16.0, *)
 public struct PrimaryButton: View {
+    /// The text to display on the button
     let text: LocalizedStringKey
+    /// The button's background color
     let color: Color
+    /// The action to perform when clicked
     let action: () -> Void
+    /// Whether the button is disabled
     var disabled: Bool = false
 
+    /// Creates a new primary button
+    /// - Parameters:
+    ///   - text: The text to display on the button
+    ///   - color: The button's background color
+    ///   - disabled: Whether the button is disabled
+    ///   - action: The action to perform when clicked
     public init(text: LocalizedStringKey, color: Color = AppThemeManager.shared.currentTheme.primary, disabled: Bool = false, action: @escaping () -> Void) {
         self.text = text
         self.color = color
@@ -42,13 +53,24 @@ public struct PrimaryButton: View {
     }
 }
 
+/// A primary styled button that handles asynchronous actions
 @available(iOS 16.0, *)
 public struct AsyncPrimaryButton: View {
+    /// The text to display on the button
     let text: LocalizedStringKey
+    /// The button's background color
     let color: Color
+    /// The asynchronous action to perform
     var action: () async -> Void
+    /// Whether the button is disabled
     var disabled: Bool = false
 
+    /// Creates a new async primary button
+    /// - Parameters:
+    ///   - text: The text to display on the button
+    ///   - color: The button's background color
+    ///   - disabled: Whether the button is disabled
+    ///   - action: The asynchronous action to perform
     public init(text: LocalizedStringKey, color: Color = AppThemeManager.shared.currentTheme.primary, disabled: Bool = false, action: @escaping () async -> Void) {
         self.text = text
         self.color = color
@@ -77,10 +99,10 @@ public struct AsyncPrimaryButton: View {
     }
 }
 
+/// Preview provider for the primary buttons
 @available(iOS 16.0, *)
 struct PrimaryButton_PreviewProvider: PreviewProvider {
     static var previews: some View {
-        
         return VStack {
             PrimaryButton(text: "Dismiss", action: {})
             AsyncPrimaryButton(text: "Dismiss", action: {})

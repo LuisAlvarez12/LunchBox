@@ -7,8 +7,15 @@
 
 import SwiftUI
 
+/// Adds email button functionality to a view
 @available(iOS 16.0, *)
 public extension View {
+    /// Wraps a view in an email button that opens the mail app when tapped
+    /// - Parameters:
+    ///   - email: The recipient email address
+    ///   - subject: The subject line of the email
+    ///   - emailBody: The body content of the email
+    /// - Returns: A view that opens the mail app when tapped
     func emailButton(email: String = "team@rezonating.app", subject: String, emailBody: String) -> some View {
         EmailButton(email: email, subject: subject, emailBody: emailBody, content: {
             self
@@ -17,6 +24,11 @@ public extension View {
 }
 
 extension UIApplication {
+    /// Opens the mail app with pre-filled email content
+    /// - Parameters:
+    ///   - email: The recipient email address
+    ///   - subject: The subject line of the email
+    ///   - emailBody: The body content of the email
     func sendEmail(email: String = "team@rezonating.app", subject: String, emailBody: String) {
         let coded = "mailto:\(email)?subject=\(subject)&body=\(emailBody)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         if let emailURL = URL(string: coded!) {
@@ -32,14 +44,25 @@ extension UIApplication {
     }
 }
 
+/// A button that opens the mail app with pre-filled content when tapped
 @available(iOS 16.0, *)
 public struct EmailButton<Content>: View where Content: View {
+    /// The recipient email address
     public var email: String = "team@rezonating.app"
+    /// The subject line of the email
     public let subject: String
+    /// The body content of the email
     public let emailBody: String
 
+    /// The view builder for the button's content
     @ViewBuilder public var content: () -> Content
 
+    /// Creates a new email button
+    /// - Parameters:
+    ///   - email: The recipient email address
+    ///   - subject: The subject line of the email
+    ///   - emailBody: The body content of the email
+    ///   - content: A closure that creates the button's content view
     public init(email: String, subject: String, emailBody: String, content: @escaping () -> Content) {
         self.email = email
         self.subject = subject

@@ -7,6 +7,13 @@
 
 import SwiftUI
 
+/// A view component that displays a medium-sized banner with an image, title, and subtitle.
+/// This banner is designed for compact presentations where a full-size banner would be too large.
+///
+/// The banner includes:
+/// - A medium-sized image at the top
+/// - A title with the app's primary text color
+/// - A gray subtitle at the bottom
 public struct MediumImageBanner: View {
     public let image: ParselableImage
     public let title: LocalizedStringKey

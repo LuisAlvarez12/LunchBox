@@ -9,7 +9,10 @@ import SwiftUI
 
 @available(iOS 16.0, *)
 public extension UIApplication {
-    var keyWindow: UIWindow? {
+    /// Gets the key window of the application
+    /// - Returns: The key window of the application, or nil if not found
+    /// - Note: This property finds the first active window scene and returns its key window
+    public var keyWindow: UIWindow? {
         // Get connected scenes
         return UIApplication.shared.connectedScenes
             // Keep only active scenes, onscreen and visible to the user

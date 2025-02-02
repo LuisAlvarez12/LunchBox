@@ -9,12 +9,16 @@ import SwiftUI
 
 @available(iOS 16.0, *)
 public extension View {
+    /// Applies a specific language to the view's environment
+    /// - Parameter language: The language to apply
+    /// - Returns: A view with the specified language applied to its environment
     @available(iOS 16.0, *)
-    func withLanguage(_ language: LocalizedLanguages) -> some View {
+    public func withLanguage(_ language: LocalizedLanguages) -> some View {
         environment(\.locale, .init(identifier: language.identifier))
     }
 }
 
+/// Represents supported languages for localization
 public enum LocalizedLanguages {
     case Japanese
     case English
@@ -23,6 +27,8 @@ public enum LocalizedLanguages {
     case Korean
     case BrazilianPortuguese
 
+    /// The locale identifier for the language
+    /// - Returns: The string identifier used for localization
     public var identifier: String {
         switch self {
         case .Japanese:

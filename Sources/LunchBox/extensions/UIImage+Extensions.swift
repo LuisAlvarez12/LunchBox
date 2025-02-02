@@ -9,7 +9,10 @@ import SwiftUI
 
 @available(iOS 16.0, *)
 public extension UIImage {
-    func scalePreservingAspectRatio(targetSize: CGSize) -> UIImage {
+    /// Scales the image while preserving its aspect ratio
+    /// - Parameter targetSize: The desired size for the scaled image
+    /// - Returns: A new UIImage scaled to the target size while maintaining aspect ratio
+    public func scalePreservingAspectRatio(targetSize: CGSize) -> UIImage {
         // Determine the scale factor that preserves aspect ratio
         let widthRatio = targetSize.width / size.width
         let heightRatio = targetSize.height / size.height
@@ -38,7 +41,10 @@ public extension UIImage {
         return scaledImage
     }
 
-    func rotateCameraImageToProperOrientation(maxResolution: CGFloat = 1080)
+    /// Rotates a camera image to its proper orientation and optionally resizes it
+    /// - Parameter maxResolution: The maximum resolution for the image (default: 1080)
+    /// - Returns: The rotated and optionally resized image, or nil if the operation fails
+    public func rotateCameraImageToProperOrientation(maxResolution: CGFloat = 1080)
         -> UIImage?
     {
         guard let imgRef = cgImage else {
@@ -114,7 +120,12 @@ public extension UIImage {
         return imageCopy
     }
 
-    func resized(withPercentage percentage: CGFloat, isOpaque: Bool = true) -> UIImage? {
+    /// Resizes the image by a percentage while maintaining aspect ratio
+    /// - Parameters:
+    ///   - percentage: The percentage to scale the image (1.0 = 100%)
+    ///   - isOpaque: Whether the resulting image should be opaque (default: true)
+    /// - Returns: The resized image, or nil if the operation fails
+    public func resized(withPercentage percentage: CGFloat, isOpaque: Bool = true) -> UIImage? {
         let canvas = CGSize(width: size.width * percentage, height: size.height * percentage)
         let format = imageRendererFormat
         format.opaque = isOpaque
@@ -123,7 +134,12 @@ public extension UIImage {
         }
     }
 
-    func resized(toWidth width: CGFloat, isOpaque: Bool = true) -> UIImage? {
+    /// Resizes the image to a specific width while maintaining aspect ratio
+    /// - Parameters:
+    ///   - width: The target width
+    ///   - isOpaque: Whether the resulting image should be opaque (default: true)
+    /// - Returns: The resized image, or nil if the operation fails
+    public func resized(toWidth width: CGFloat, isOpaque: Bool = true) -> UIImage? {
         let canvas = CGSize(width: width, height: CGFloat(ceil(width / size.width * size.height)))
         let format = imageRendererFormat
         format.opaque = isOpaque
@@ -135,7 +151,10 @@ public extension UIImage {
 
 @available(iOS 16.0, *)
 public extension Image {
-    func centerCropped(maxHeight: CGFloat) -> some View {
+    /// Centers and crops the image to a specified maximum height
+    /// - Parameter maxHeight: The maximum height for the cropped image
+    /// - Returns: A view with the centered and cropped image
+    public func centerCropped(maxHeight: CGFloat) -> some View {
         Color.clear
             .overlay(
                 resizable()

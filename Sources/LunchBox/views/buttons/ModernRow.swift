@@ -7,11 +7,20 @@
 
 import SwiftUI
 
+/// A modern-styled row view with an icon, text, and chevron
 public struct ModernRow: View {
+    /// The text to display in the row
     public let text: LocalizedStringKey
+    /// The system image name for the row's icon
     public let image: String
+    /// The background color for the icon
     public var color: Color
 
+    /// Creates a new modern row
+    /// - Parameters:
+    ///   - text: The text to display in the row
+    ///   - image: The system image name for the row's icon
+    ///   - color: The background color for the icon
     public init(text: LocalizedStringKey, image: String, color: Color) {
         self.text = text
         self.image = image

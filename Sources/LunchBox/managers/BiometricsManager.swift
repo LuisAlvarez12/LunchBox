@@ -8,10 +8,14 @@
 import LocalAuthentication
 import SwiftUI
 
+/// Manager for handling biometric authentication (e.g., Face ID)
 @available(iOS 16, *)
 public struct BiometricsManager {
+    /// Shared instance of the biometrics manager
     public static let shared = BiometricsManager()
 
+    /// Attempts to authenticate the user using Face ID
+    /// - Returns: An AuthResult indicating success or failure of the authentication
     public func faceIDCheck() async -> AuthResult {
         let context = LAContext()
         var error: NSError?
@@ -33,10 +37,14 @@ public struct BiometricsManager {
     }
 }
 
+/// Protocol representing the result of an authentication attempt
 public protocol AuthResult {}
 
+/// Represents a successful authentication
 public struct AuthSuccess: AuthResult {}
 
+/// Represents a failed authentication with an error message
 public struct AuthError: AuthResult {
-    var errorMessage = "Login Failed"
+    /// The error message describing why authentication failed
+    public var errorMessage = "Login Failed"
 }

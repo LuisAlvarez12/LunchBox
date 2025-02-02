@@ -7,6 +7,13 @@
 
 import SwiftUI
 
+/// A view component that displays a large banner with an image, title, and subtitle.
+/// This banner is typically used for prominent displays or featured content.
+///
+/// The banner consists of:
+/// - A large image at the top
+/// - A title below the image with customizable color
+/// - A subtitle at the bottom
 public struct LargeImageBanner: View {
     public let image: ParselableImage
     public let title: LocalizedStringKey

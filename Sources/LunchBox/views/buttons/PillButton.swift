@@ -7,10 +7,17 @@
 
 import SwiftUI
 
+/// A pill-shaped button with an icon and text
 public struct PillButton: View {
+    /// The text to display in the button
     public let text: LocalizedStringKey
+    /// The image to display in the button
     public let image: ParselableImage
 
+    /// Creates a new pill button
+    /// - Parameters:
+    ///   - text: The text to display in the button
+    ///   - image: The image to display in the button
     public init(text: LocalizedStringKey, image: ParselableImage) {
         self.text = text
         self.image = image

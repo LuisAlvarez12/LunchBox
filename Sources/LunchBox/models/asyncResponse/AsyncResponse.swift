@@ -7,15 +7,21 @@
 
 import SwiftUI
 
+/// Protocol representing the result of an asynchronous operation
 @available(iOS 16.0, *)
 public protocol AsyncResponse {}
 
+/// Represents a successful asynchronous operation
 public struct AsyncSuccess: AsyncResponse {}
 
+/// Represents a failed asynchronous operation with optional error details
 public struct AsyncFailure: AsyncResponse, Error {
-    var error: ErrorDetails? = nil
+    /// Optional details about the error that occurred
+    public var error: ErrorDetails? = nil
 }
 
+/// Contains detailed information about an error
 public struct ErrorDetails {
-    let message: String
+    /// A message describing the error
+    public let message: String
 }

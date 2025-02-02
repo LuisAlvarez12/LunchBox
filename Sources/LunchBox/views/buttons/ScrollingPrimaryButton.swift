@@ -7,13 +7,26 @@
 
 import SwiftUI
 
+/// A primary button that can expand and collapse in a scrolling view
 public struct ScrollingPrimaryButton: View {
+    /// Whether the button is expanded to show text
     public var expanded = true
+    /// The title text to display when expanded
     public var title: String
+    /// The system image name for the button's icon
     public var icon: String
+    /// The background color of the button
     public var color: Color
+    /// The color of the button's text and icon
     public var textColor: Color = .white
 
+    /// Creates a new scrolling primary button
+    /// - Parameters:
+    ///   - expanded: Whether the button is expanded to show text
+    ///   - title: The title text to display when expanded
+    ///   - icon: The system image name for the button's icon
+    ///   - color: The background color of the button
+    ///   - textColor: The color of the button's text and icon
     public init(expanded: Bool = true, title: String, icon: String, color: Color, textColor: Color) {
         self.expanded = expanded
         self.title = title

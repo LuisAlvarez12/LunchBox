@@ -1,50 +1,35 @@
 //
 //  CircularProgressView.swift
+//  UnderCovers
 //
-//
-//  Created by Luis Alvarez on 9/13/23.
+//  Created by Luis Alvarez on 12/7/24.
 //
 
 import SwiftUI
 
-@available(iOS 16.0, *)
-public struct CircularProgressView: View {
+struct CircularProgressView: View {
     let progress: Double
+    var color: Color = .blue
+    let width: CGFloat = 6
 
-    public init(progress: Double) {
-        self.progress = progress
-    }
-
-    public var body: some View {
+    var body: some View {
         ZStack {
             Circle()
                 .stroke(
-                    AppThemeManager.shared.currentTheme.primary.opacity(0.5),
-                    lineWidth: 24
+                    color.opacity(0.4),
+                    lineWidth: width
                 )
             Circle()
+                // 2
                 .trim(from: 0, to: progress)
                 .stroke(
-                    AppThemeManager.shared.currentTheme.primary,
+                    color,
                     style: StrokeStyle(
-                        lineWidth: 24,
+                        lineWidth: width,
                         lineCap: .round
                     )
                 )
                 .rotationEffect(.degrees(-90))
-                .animation(.easeOut, value: progress)
-        }
-    }
-}
-
-@available(iOS 16.0, *)
-struct CircularProgressBar_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack(spacing: 50) {
-            CircularProgressView(progress: 0.25)
-                .squareFrame(length: 100)
-            CircularProgressView(progress: 0.5)
-                .squareFrame(length: 200)
         }
     }
 }
